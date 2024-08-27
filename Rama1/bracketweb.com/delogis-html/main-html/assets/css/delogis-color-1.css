@@ -1,0 +1,22 @@
+/*--------------------------------------------------------------
+# Common
+--------------------------------------------------------------*/
+:root {
+  --delogis-font: "Lexend", sans-serif;
+  --delogis-font-two: "Castoro", serif;
+  --delogis-font-three: "alagamberegular";
+  --delogis-gray: #00394f;
+  --delogis-gray-rgb: 138, 150, 158;
+  --delogis-white: #ffffff;
+  --delogis-white-rgb: 255, 255, 255;
+  --delogis-base: #AE005F;
+  --delogis-base-rgb: 185, 144, 93;
+  --delogis-black: #f8f9fa;
+  --delogis-black-rgb: 41, 59, 70;
+  --delogis-primary: #009BDB;
+  --delogis-primary-rgb: 230, 230, 250;
+  --delogis-bdr-color: #AE005F;
+  --delogis-bdr-color-rgb: 235, 226, 216;
+  --delogis-extra: #E6E6FA;
+  --delogis-extra-rgb: 246, 242, 237;
+}
