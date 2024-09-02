@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <!-- favicons Icons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
+        <link rel="manifest" href="assets/images/favicons/site.webmanifest" />
+        <meta name="description" content="delogis HTML 5 Template " />
+    
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+    
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    
+        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+            rel="stylesheet">
+    
+        <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="assets/vendors/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="assets/vendors/animate/animate.min.css" />
+        <link rel="stylesheet" href="assets/vendors/animate/custom-animate.css" />
+        <link rel="stylesheet" href="assets/vendors/fontawesome/css/all.min.css" />
+        <link rel="stylesheet" href="assets/vendors/jarallax/jarallax.css" />
+        <link rel="stylesheet" href="assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css" />
+        <link rel="stylesheet" href="assets/vendors/nouislider/nouislider.min.css" />
+        <link rel="stylesheet" href="assets/vendors/nouislider/nouislider.pips.css" />
+        <link rel="stylesheet" href="assets/vendors/odometer/odometer.min.css" />
+        <link rel="stylesheet" href="assets/vendors/swiper/swiper.min.css" />
+        <link rel="stylesheet" href="assets/vendors/delogis-icons/style.css">
+        <link rel="stylesheet" href="assets/vendors/tiny-slider/tiny-slider.min.css" />
+        <link rel="stylesheet" href="assets/vendors/reey-font/stylesheet.css" />
+        <link rel="stylesheet" href="assets/vendors/alagambe-font/stylesheet.css" />
+        <link rel="stylesheet" href="assets/vendors/owl-carousel/owl.carousel.min.css" />
+        <link rel="stylesheet" href="assets/vendors/owl-carousel/owl.theme.default.min.css" />
+        <link rel="stylesheet" href="assets/vendors/bxslider/jquery.bxslider.css" />
+        <link rel="stylesheet" href="assets/vendors/bootstrap-select/css/bootstrap-select.min.css" />
+        <link rel="stylesheet" href="assets/vendors/vegas/vegas.min.css" />
+        <link rel="stylesheet" href="assets/vendors/jquery-ui/jquery-ui.css" />
+        <link rel="stylesheet" href="assets/vendors/timepicker/timePicker.css" />
+    
+        <!-- template styles -->
+        <link rel="stylesheet" href="assets/css/delogis.css" />
+        <link rel="stylesheet" href="assets/css/delogis-color-1.css" />
+</head>
+<style>/* General Styles */
+  
+
+    
+  .chat-platform {
+    padding: 60px 0;
+  
+}
+
+.chat-platform__main {
+    background: var(--delogis-white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(var(--delogis-black-rgb), 0.1);
+}
+
+.chat-platform__title {
+    font-size: 28px;
+    font-family: var(--delogis-font);
+   
+    margin-bottom: 20px;
+}
+
+.chat-platform__text {
+    font-size: 16px;
+    font-family: var(--delogis-font);
+    color: var(--delogis-gray);
+    margin-bottom: 20px;
+}
+
+.chat-platform__box {
+    border: 1px solid var(--delogis-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--delogis-white);
+    box-shadow: 0 2px 5px rgba(var(--delogis-black-rgb), 0.1);
+}
+
+.chat-platform__messages {
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    border-bottom: 1px solid var(--delogis-gray);
+}
+
+.chat-platform__message {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-family: "Arial", sans-serif; /* استخدام خط واضح */
+    color: var(--delogis-black);
+    font-size: 16px; /* يمكنك تعديل الحجم إذا أردت */
+}
+
+
+.chat-platform__message--user {
+    background: rgba(var(--delogis-primary-rgb), 0.2);
+    text-align: left;
+    color: var(--delogis-primary);
+}
+
+.chat-platform__message--response {
+    background: rgba(var(--delogis-base-rgb), 0.2);
+    text-align: right;
+    color: var(--delogis-base);
+}
+
+.chat-platform__form {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid var(--delogis-gray);
+}
+
+.chat-platform__input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--delogis-gray);
+    border-radius: 4px;
+    margin-right: 10px;
+    font-family: var(--delogis-font);
+    color: var(--delogis-gray);
+    background-color: var(--delogis-white);
+}
+
+.chat-platform__send-btn {
+    background: var(--delogis-primary);
+    color: var(--delogis-white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--delogis-font-two);
+}
+
+.chat-platform__send-btn:hover {
+    background: var(--delogis-base);
+}
+
+
+
+    </style>
+<body>
+  <!--Page Header Start-->
+  <section class="page-header">
+    <div class="page-header-bg" style="background-image: url(assets/images/backgrounds/page-header-bg.jpg)">
+    </div>
+    <div class="container">
+        <div class="page-header__inner">
+            <h2>About</h2>
+            <ul class="thm-breadcrumb list-unstyled">
+                <li><a href="index.html">Home</a></li>
+                <li><span>/</span></li>
+                <li>Parent Platform</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!--Page Header End-->
+
+    <!--Chat Platform Start-->
+    <section class="chat-platform">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-7">
+                    <div class="chat-platform__main">
+                        <h3 class="chat-platform__title">Connect with Other Parents</h3>
+                        <p class="chat-platform__text">Join live conversations with parents who share similar concerns and interests about reducing screen time for your children. Here you can share experiences, get tips, and exchange ideas.</p>
+
+                        <!--Chat Box Start-->
+                        <div class="chat-platform__box">
+                            <div class="chat-platform__messages">
+                                <!-- Example Messages -->
+                                <div class="chat-platform__message chat-platform__message--user">
+                                    <p><strong>Ahamd:</strong> What activities do you use to reduce screen time for your children?</p>
+                                </div>
+                                <div class="chat-platform__message chat-platform__message--response">
+                                    <p><strong>Fatima:</strong> We use educational games like puzzles and interactive books.</p>
+                                </div>
+                            </div>
+                            <form class="chat-platform__form">
+                                <input type="text" placeholder="Type your message here..." class="chat-platform__input">
+                                <button type="submit" class="chat-platform__send-btn">Send</button>
+                            </form>
+                        </div>
+                        <!--Chat Box End-->
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="sidebar__single sidebar__comments chat-platform__sidebar">
+                        <h3 class="sidebar__title chat-platform__sidebar-title">Tips and Ideas</h3>
+                        <ul class="sidebar__comments-list chat-platform__tips list-unstyled">
+                            <li class="sidebar__comments-item">
+                                <div class="sidebar__comments-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="sidebar__comments-text-box">
+                                    <p>Use outdoor activities like family trips to reduce screen time.</p>
+                                </div>
+                            </li>
+                            <li class="sidebar__comments-item">
+                                <div class="sidebar__comments-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="sidebar__comments-text-box">
+                                    <p>Set a specific schedule for electronic device use.</p>
+                                </div>
+                            </li>
+                            <li class="sidebar__comments-item">
+                                <div class="sidebar__comments-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="sidebar__comments-text-box">
+                                    <p>Offer small rewards to children for sticking to the screen time limits.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!--Chat Platform End-->
+    <script src="assets/vendors/jquery/jquery-3.6.0.min.js"></script>
+    <script src="assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendors/jarallax/jarallax.min.js"></script>
+    <script src="assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
+    <script src="assets/vendors/jquery-appear/jquery.appear.min.js"></script>
+    <script src="assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js"></script>
+    <script src="assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="assets/vendors/jquery-validate/jquery.validate.min.js"></script>
+    <script src="assets/vendors/nouislider/nouislider.min.js"></script>
+    <script src="assets/vendors/odometer/odometer.min.js"></script>
+    <script src="assets/vendors/swiper/swiper.min.js"></script>
+    <script src="assets/vendors/tiny-slider/tiny-slider.min.js"></script>
+    <script src="assets/vendors/wnumb/wNumb.min.js"></script>
+    <script src="assets/vendors/wow/wow.js"></script>
+    <script src="assets/vendors/isotope/isotope.js"></script>
+    <script src="assets/vendors/countdown/countdown.min.js"></script>
+    <script src="assets/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="assets/vendors/bxslider/jquery.bxslider.min.js"></script>
+    <script src="assets/vendors/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="assets/vendors/vegas/vegas.min.js"></script>
+    <script src="assets/vendors/jquery-ui/jquery-ui.js"></script>
+    <script src="assets/vendors/timepicker/timePicker.js"></script>
+    <script src="assets/vendors/circleType/jquery.circleType.js"></script>
+    <script src="assets/vendors/circleType/jquery.lettering.min.js"></script>
+
+
+
+
+    <!-- template js -->
+    <script src="assets/js/delogis.js"></script>
+</body>
+</html>

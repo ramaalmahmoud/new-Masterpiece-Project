@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Details - Ice Cream in a Bag</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="assets/images/favicons/site.webmanifest" />
+    <meta name="description" content="delogis HTML 5 Template " />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/vendors/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendors/animate/animate.min.css" />
+    <link rel="stylesheet" href="assets/vendors/animate/custom-animate.css" />
+    <link rel="stylesheet" href="assets/vendors/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="assets/vendors/jarallax/jarallax.css" />
+    <link rel="stylesheet" href="assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css" />
+    <link rel="stylesheet" href="assets/vendors/nouislider/nouislider.min.css" />
+    <link rel="stylesheet" href="assets/vendors/nouislider/nouislider.pips.css" />
+    <link rel="stylesheet" href="assets/vendors/odometer/odometer.min.css" />
+    <link rel="stylesheet" href="assets/vendors/swiper/swiper.min.css" />
+    <link rel="stylesheet" href="assets/vendors/delogis-icons/style.css">
+    <link rel="stylesheet" href="assets/vendors/tiny-slider/tiny-slider.min.css" />
+    <link rel="stylesheet" href="assets/vendors/reey-font/stylesheet.css" />
+    <link rel="stylesheet" href="assets/vendors/alagambe-font/stylesheet.css" />
+    <link rel="stylesheet" href="assets/vendors/owl-carousel/owl.carousel.min.css" />
+    <link rel="stylesheet" href="assets/vendors/owl-carousel/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="assets/vendors/bxslider/jquery.bxslider.css" />
+    <link rel="stylesheet" href="assets/vendors/bootstrap-select/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="assets/vendors/vegas/vegas.min.css" />
+    <link rel="stylesheet" href="assets/vendors/jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" href="assets/vendors/timepicker/timePicker.css" />
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="assets/css/delogis.css" />
+    <link rel="stylesheet" href="assets/css/delogis-color-1.css" />
+<style>
+ .activity-details {
+    font-family: var(--delogis-font);
+    background-color: var(--delogis-white);
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 35px 62px 82px rgba(5, 4, 3, .3);
+}
+
+.activity-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.activity-title {
+    font-family: var(--delogis-font-two);
+    color: var(--delogis-base);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.activity-meta {
+    color: var(--delogis-gray);
+    font-size: 1rem;
+}
+
+.activity-toolbar {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: var(--delogis-primary);
+    color: var(--delogis-white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--delogis-primary-dark);
+}
+
+.activity-intro {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.activity-image {
+    max-width: 70%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.activity-description {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.activity-content {
+    margin-top: 20px;
+}
+
+.section-title {
+    font-family: var(--delogis-font-three);
+    color: var(--delogis-base);
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    font-size: 1.8rem;
+    color: var(--delogis-base);
+    margin-bottom: 10px;
+}
+
+.ingredients-list,
+.instructions-list,
+.tips-list {
+    margin-left: 20px;
+    font-size: 1.1rem;
+}
+
+.step-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.activity-timer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.time-input {
+    font-size: 1.2rem;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#timer-display {
+    font-size: 1.5rem;
+    color: var(--delogis-primary);
+    margin-top: 10px;
+}
+
+.ingredients-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ingredients-checklist li {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.ingredients-checklist input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.instructions-list img.step-image {
+    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 5px;
+}
+#immmage{
+    
+    margin-top: 10px;
+    max-width: 70.70%;
+    height: auto;
+    border-radius: 9px;
+
+}
+
+
+
+</style>
+</head>
+
+
+<body>
+    <header class="header">
+        <!-- Include your header navigation here -->
+    </header>
+
+    <div class="activity-details">
+        <div class="activity-header">
+            <h1 class="activity-title"><i class="fas fa-ice-cream"></i> Ice Cream in a Bag</h1>
+            <div class="activity-meta">
+                <p><i class="fas fa-user"></i> By <span class="author">Jane Doe</span> | <i class="fas fa-calendar-alt"></i> <span class="date">August 31, 2024</span></p>
+            </div>
+        </div>
+    
+        <div class="activity-toolbar">
+            <button class="btn save-activity" onclick="saveActivity()"><i class="fas fa-save"></i> Save Activity</button>
+            <button class="btn print-activity" onclick="window.print()"><i class="fas fa-print"></i> Print Activity</button>
+            <button class="btn add-timer" onclick="addTimer()"><i class="fas fa-clock"></i> Set Preparation Time</button>
+        </div>
+        
+        <div class="activity-intro">
+            <img src="assets/images/activities/ice-cream.png" alt="Ice Cream in a Bag" class="activity-image">
+            <p class="activity-description"><i class="fas fa-info-circle"></i> This fun and easy activity lets kids make their own ice cream using simple ingredients and a little bit of science!</p>
+        </div>
+        
+        <div class="activity-content">
+            <h2 class="section-title"><i class="fas fa-book-open"></i> How to Make Ice Cream in a Bag</h2>
+            <p>This is a great way to teach kids about the science behind ice cream making, and the best part is they get to enjoy a tasty treat at the end!</p>
+            
+            <h3 class="section-subtitle"><i class="fas fa-list-alt"></i> Ingredients</h3>
+            <ul class="ingredients-checklist">
+                <li><input type="checkbox" id="milk"><label for="milk"><i class="fas fa-cube"></i> 1/2 cup whole milk</label></li>
+                <li><input type="checkbox" id="sugar"><label for="sugar"><i class="fas fa-spoon"></i> 1 tablespoon sugar</label></li>
+                <li><input type="checkbox" id="vanilla"><label for="vanilla"><i class="fas fa-seedling"></i> 1/2 teaspoon vanilla extract</label></li>
+                <li><input type="checkbox" id="ice"><label for="ice"><i class="fas fa-snowflake"></i> Ice</label></li>
+                <li><input type="checkbox" id="salt"><label for="salt"><i class="fas fa-salt-shaker"></i> 1/4 cup salt</label></li>
+                <li><input type="checkbox" id="ziploc"><label for="ziploc"><i class="fas fa-bag"></i> Ziploc bags</label></li>
+            </ul>
+    
+            <h3 class="section-subtitle"><i class="fas fa-hands-helping"></i> Instructions</h3>
+            <ol class="instructions-list">
+                <li>
+                    <i class="fas fa-hand-holding"></i> Add milk, sugar, and vanilla to a small Ziploc bag.
+                    <img src="assets/images/activities/deatails/Add-Half-and-Half-into-Bag-500x333.webp" alt="Step 1" class="step-image">
+                </li>
+                <li>
+                    <i class="fas fa-times-circle"></i> Seal the bag tightly, making sure there's no air inside.
+                    <img src="assets/images/activities/deatails/Seal-Bag-for-Homemade-Ice-Cream-500x333.webp" alt="Seal the bag" class="step-image">
+                </li>
+                <li>
+                    <i class="fas fa-ice-cube"></i> Fill a larger Ziploc bag with ice and add salt.
+                    <img src="assets/images/activities/deatails/Add-Ice-to-Bag-500x333.webp" alt="Add ice and salt" class="step-image">
+                </li>
+                <li>
+                    <i class="fas fa-box"></i> Place the small bag inside the larger bag and seal.
+                    <img src="assets/images/activities/deatails/Add-Ice-Cream-Bag-and-Ice-500x333.webp" alt="Seal the larger bag" class="step-image">
+                </li>
+                <li>
+                    <i class="fas fa-child"></i> Shake the bags for 5-10 minutes until the mixture turns into ice cream.
+                    <img src="assets/images/activities/deatails/Shake-Bag-with-Gloves-500x333.webp"Shake the bag" class="step-image">
+                </li>
+                <li>
+                    <i class="fas fa-utensils"></i> Remove the small bag, rinse off the salt, and enjoy your ice cream!
+                    <img src="assets/images/activities/deatails/ice-cream.png" alt="Enjoy your ice cream" class="step-image"id=immmage>
+                </li>
+            </ol>
+            
+            <h3 class="section-subtitle"><i class="fas fa-lightbulb"></i> Tips and Ideas</h3>
+            <ul class="tips-list">
+                <li><i class="fas fa-flask"></i> Try using different flavors like chocolate syrup or fruit.</li>
+                <li><i class="fas fa-star"></i> Let kids choose their own toppings to make it even more fun.</li>
+            </ul>
+        </div>
+        
+        <div class="activity-timer">
+            <h3><i class="fas fa-hourglass-start"></i> Preparation Time</h3>
+            <input type="time" id="prep-time" class="time-input">
+            <button class="btn start-timer" onclick="startTimer()"><i class="fas fa-play"></i> Start Timer</button>
+            <div id="timer-display"></div>
+        </div>
+    </div>
+    
+    
+    
+
+    <footer class="footer">
+        <!-- Include your footer content here -->
+    </footer>
+
+    <script src="path/to/bootstrap.js"></script>
+    <script src="path/to/your-scripts.js"></script>
+</body>
+</html>

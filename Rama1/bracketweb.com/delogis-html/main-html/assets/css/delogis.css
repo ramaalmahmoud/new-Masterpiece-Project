@@ -37,6 +37,7 @@
 
 .row {
   --bs-gutter-x: 30px;
+  margin-top: 45px;
 }
 
 .gutter-y-30 {
@@ -506,7 +507,7 @@ ul {
   bottom: 1px;
   left: 300px;
   right: 0;
-  background-color: #5b4034;
+  background-color: #00394f;
   border-radius: var(--delogis-bdr-radius);
   z-index: -1;
 }
@@ -553,7 +554,7 @@ ul {
   top: 0;
   bottom: 0;
   right: 0;
-  background-color: #5b4034;
+  background-color: #00394f;
   text-align: center;
   display: flex;
   align-items: center;
@@ -2287,7 +2288,7 @@ ul {
 
 .main-slider__btn-two {
   margin-left: 10px;
-  background-color: #5b4034;
+  background-color: #00394f;
 }
 
 .active .main-slider__title,
@@ -2522,7 +2523,7 @@ ul {
 
 .main-slider-two__btn-two {
   margin-left: 10px;
-  background-color: #5b4034;
+  background-color: #00394f;
 }
 
 .active .main-slider-two__title,
@@ -3226,7 +3227,7 @@ ul {
   width: 123px;
   height: 123px;
   border-radius: 50%;
-  background-color: #5b4034;
+  background-color: #00394f;
   transform: translateX(-50%);
 }
 
@@ -4583,7 +4584,7 @@ ul {
   bottom: -94px;
   width: 377px;
   height: 377px;
-  background-color: #5b4034;
+  background-color: #00394f;
   border-radius: 50%;
   -webkit-transition-delay: 0.1s;
   transition-delay: 0.1s;
@@ -5711,7 +5712,7 @@ ul {
 
 .footer-widget__subscribe-btn {
   border: none;
-  background-color: #5b4034;
+  background-color: #00394f;
   width: 100%;
 }
 
@@ -5870,7 +5871,7 @@ ul {
   font-size: 20px;
   font-weight: 400;
   line-height: 30px;
-  color: #5b4034;
+  color: #00394f;
 }
 
 .about-two__text-2 {
@@ -6144,7 +6145,7 @@ ul {
 .services-two__content {
   position: relative;
   display: block;
-  background-color: #925f45;
+  /* background-color: #925f45; */
   border-bottom-left-radius: var(--delogis-bdr-radius);
   border-bottom-right-radius: var(--delogis-bdr-radius);
   z-index: 1;
@@ -6177,7 +6178,7 @@ ul {
   left: 5px;
   right: 5px;
   height: 1px;
-  background-color: var(--delogis-bdr-color);
+  /* background-color: var(--delogis-bdr-color); */
 }
 
 .services-two__title {
@@ -6187,7 +6188,7 @@ ul {
 }
 
 .services-two__title a {
-  color: var(--delogis-black);
+  color: var(--delogis-base);
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
@@ -6455,7 +6456,7 @@ ul {
   top: 87px;
   width: 84px;
   height: 84px;
-  background-color: #5b4034;
+  background-color: #00394f;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -6684,7 +6685,7 @@ ul {
   position: relative;
   display: inline-block;
   font-size: 10px;
-  color: #5b4034;
+  color:#00394f;
 }
 
 .tabs-one__points li .text {
@@ -6744,7 +6745,7 @@ ul {
   height: 38px;
   background-color: #f1ece9;
   font-size: 14px;
-  color: #5b4034;
+  color: #00394f;
   border-radius: var(--delogis-bdr-radius);
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
@@ -7666,7 +7667,7 @@ ul {
   left: 40px;
   width: 78px;
   height: 78px;
-  background-color: #5b4034;
+  background-color: #00394f;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -8017,7 +8018,7 @@ ul {
   text-align: center;
   font-size: 24px;
   color: var(--delogis-white);
-  background-color: #5b4034;
+  background-color: #00394f;
   border-radius: 50%;
   transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -8464,7 +8465,7 @@ ul {
 .counter-two {
   position: relative;
   display: block;
-  background-color: #5b4034;
+  background-color: #00394f;
   padding: 120px 0 90px;
   overflow: hidden;
   z-index: 1;
@@ -8678,7 +8679,7 @@ ul {
 .pricing-one__single {
   position: relative;
   display: block;
-  background-color: #f0ebe8;
+  background-color: #E6E6FA;
   padding: 60px 60px 30px;
   border-radius: var(--delogis-bdr-radius);
   margin-bottom: 30px;
@@ -8690,13 +8691,15 @@ ul {
   top: 10px;
   left: 10px;
   right: 10px;
-  bottom: 120px;
+  bottom: 69px;
   border-radius: var(--delogis-bdr-radius);
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 10px 60px 0px rgba(0, 0, 0, 0.05);
   z-index: -1;
 }
-
+a.thm-btn.pricing-one__btn {
+  padding: 0 12px;
+}
 .pricing-one__shape-2::before {
   content: "";
   position: absolute;
@@ -8790,7 +8793,7 @@ ul {
 }
 
 .pricing-one__btn {
-  background-color: #5b4034;
+  background-color: #00394f;
 }
 
 .pricing-one__btn::before {
@@ -9118,7 +9121,7 @@ ul {
   position: absolute;
   bottom: 60px;
   right: -40px;
-  background-color: #5b4034;
+  background-color: #00394f;
   max-width: 199px;
   width: 100%;
   padding: 36px 40px 40px;
@@ -9596,7 +9599,7 @@ ul {
 .product {
   position: relative;
   display: block;
-  padding: 120px 0 90px;
+
 }
 
 .product__sidebar {
@@ -10215,7 +10218,7 @@ ul {
 
 .product-details__quantity-title {
   margin: 0;
-  color: var(--delogis-black);
+  
   font-size: 18px;
   line-height: 30px;
   font-weight: 400;
@@ -10284,7 +10287,7 @@ ul {
 }
 
 .product-details__buttons-1 .thm-btn {
-  background-color: #5b4034;
+  background-color: #00394f;
   color: var(--delogis-white);
 }
 
@@ -10307,7 +10310,7 @@ ul {
 }
 
 .product-details__buttons-2 .thm-btn:before {
-  background-color: #5b4034;
+  background-color: #00394f;
 }
 
 .product-details__social {
@@ -10322,7 +10325,7 @@ ul {
 }
 
 .product-details__social .title h3 {
-  color: var(--delogis-black);
+ 
   font-size: 18px;
   line-height: 18px;
   font-weight: 400;
@@ -10405,7 +10408,7 @@ ul {
 }
 
 .product-description__list ul li p {
-  color: var(--delogis-black);
+  color: var(--delogis-gray);
   margin: 0;
   font-weight: 400;
   font-size: 16px;
@@ -10606,7 +10609,7 @@ ul {
   color: var(--delogis-gray);
   height: 190px;
   width: 100%;
-  background-color: var(--delogis-primary);
+  background-color: var(--delogis-extra);
   padding: 20px 30px 30px;
   border: none;
   outline: none;
@@ -10630,7 +10633,7 @@ ul {
   height: 60px;
   width: 100%;
   border: none;
-  background-color: var(--delogis-primary);
+  background-color: var(--delogis-extra);
   padding-left: 30px;
   padding-right: 30px;
   outline: none;
@@ -10673,7 +10676,7 @@ ul {
 }
 
 .cart-table thead th {
-  color: var(--delogis-black);
+ 
   font-size: 22px;
   line-height: 30px;
   font-weight: 400;
@@ -10742,7 +10745,7 @@ ul {
 }
 
 .cart-table h3 a {
-  color: var(--delogis-black);
+  color: var(--delogis-base);
   transition: all 200ms linear;
   transition-delay: 0.1s;
 }
@@ -10807,7 +10810,7 @@ ul {
 .cart-table .cross-icon i:before {
   position: relative;
   display: inline-block;
-  color: var(--delogis-black);
+
   font-size: 16px;
 }
 
@@ -10869,7 +10872,7 @@ ul {
 
 .cart-total li span:first-child {
   display: block;
-  color: var(--delogis-black);
+
   font-size: 20px;
   margin-right: 75px;
   font-weight: 400;
@@ -10901,7 +10904,7 @@ ul {
 }
 
 .cart-page__buttons-1 .thm-btn {
-  background-color: #5b4034;
+  background-color: #00394f;
   color: var(--delogis-white);
 }
 
@@ -10920,7 +10923,7 @@ ul {
 }
 
 .cart-page__buttons-2 .thm-btn:before {
-  background-color: #5b4034;
+  background-color: #00394f;
 }
 
 /*--------------------------------------------------------------
@@ -10989,7 +10992,7 @@ ul {
   height: 60px;
   width: 100%;
   border: none;
-  background-color: var(--delogis-primary);
+  background-color: var(--delogis-extra);
   padding-left: 30px;
   padding-right: 30px;
   outline: none;
@@ -11103,7 +11106,7 @@ ul {
   color: var(--delogis-gray);
   height: 122px;
   width: 100%;
-  background-color: var(--delogis-primary);
+  background-color: var(--delogis-extra);
   padding: 15px 30px 20px;
   border: none;
   outline: none;
@@ -11129,7 +11132,7 @@ ul {
   outline: none !important;
   border: 0;
   border-radius: var(--delogis-bdr-radius);
-  background-color: var(--delogis-primary) !important;
+  background-color: var(--delogis-extra) !important;
   margin: 0;
   padding: 0;
   padding-left: 30px;
@@ -11195,7 +11198,7 @@ ul {
 
 .order_table_head th {
   font-size: 20px;
-  color: var(--delogis-black);
+
   font-weight: 400;
   margin: 0;
   padding: 22px 0 22px;
@@ -11228,7 +11231,7 @@ ul {
 }
 
 .checkout__payment {
-  background-color: var(--delogis-primary);
+  background-color: var(--delogis-extra);
   padding: 52px 50px 17px;
   margin-bottom: 20px;
   border-radius: var(--delogis-bdr-radius);
@@ -11240,7 +11243,7 @@ ul {
 
 .checkout__payment__title {
   display: flex;
-  color: var(--delogis-black);
+  color: var(--delogis-gray);
   font-size: 18px;
   font-weight: 400;
   margin: 0;
@@ -11424,7 +11427,7 @@ ul {
   height: 60px;
   width: 100%;
   border: none;
-  background-color: var(--delogis-primary);
+  background-color: var(--delogis-extra);
   padding-left: 30px;
   padding-right: 30px;
   outline: none;
@@ -11452,7 +11455,7 @@ ul {
 
 .contact-page__form-input-box .bootstrap-select > .dropdown-toggle {
   position: relative;
-  background-color: var(--delogis-primary) !important;
+  background-color: var(--delogis-extra) !important;
   border-radius: 0;
   color: var(--delogis-gray) !important;
   font-size: 13px;
@@ -11491,7 +11494,7 @@ ul {
   font-weight: 400;
   height: 168px;
   width: 100%;
-  background-color: var(--delogis-primary);
+  background-color: var(--delogis-extra);
   padding: 20px 30px 30px;
   border: none;
   outline: none;
@@ -11534,7 +11537,7 @@ ul {
   position: relative;
   display: block;
   overflow: hidden;
-  background-color: #5b4034;
+  background-color: #00394f;
   border-radius: var(--delogis-bdr-radius);
   padding: 61px 60px 56px;
   z-index: 1;
@@ -11740,7 +11743,7 @@ ul {
   height: 60px;
   width: 100%;
   border: none;
-  background-color: var(--delogis-primary);
+  background-color: var(--delogis-extra);
   padding-left: 30px;
   padding-right: 30px;
   outline: none;
@@ -11768,7 +11771,7 @@ ul {
 
 .make-appointment__form-input-box .bootstrap-select > .dropdown-toggle {
   position: relative;
-  background-color: var(--delogis-primary) !important;
+  background-color: var(--delogis-extra) !important;
   border-radius: 0;
   color: var(--delogis-gray) !important;
   font-size: 13px;
@@ -11807,7 +11810,7 @@ ul {
   font-weight: 400;
   height: 130px;
   width: 100%;
-  background-color: var(--delogis-primary);
+  background-color: var(--delogis-extra);
   padding: 20px 30px 30px;
   border: none;
   outline: none;
@@ -12123,7 +12126,7 @@ ul {
 .faq-page__content {
   position: relative;
   display: block;
-  background-color: #5b4034;
+  background-color: #00394f;
   border-radius: var(--delogis-bdr-radius);
   padding: 50px 50px 49px;
   padding-right: 40px;
@@ -13213,7 +13216,7 @@ ul {
   width: 44px;
   border-radius: 50%;
   font-size: 15px;
-  color: var(--delogis-black);
+ 
   background-color: var(--delogis-white);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -13543,7 +13546,7 @@ ul {
 .banner-one {
   position: relative;
   display: block;
-  background-color: #5b4034;
+  background-color: #00394f;
   padding: 45px 40px 50px;
   border-radius: var(--delogis-bdr-radius);
   margin-bottom: 30px;
@@ -14334,7 +14337,7 @@ ul {
 
 .case-details__pagination li a:hover i {
   color: var(--delogis-white);
-  background-color: #5b4034;
+  background-color: #00394f;
 }
 
 /*--------------------------------------------------------------
@@ -19118,7 +19121,7 @@ body.megamenu-popup-active .mobile-nav__content {
 }
 .services-four__single__rm {
   display: inline-block;
-  background-color: var(--delogis-white);
+  background-color: var(--delogis-primary);
   transition: all 500ms ease;
   border-radius: 59px;
   font-size: 14px;
@@ -22295,3 +22298,9 @@ body.megamenu-popup-active .mobile-nav__content {
 /*--------------------------------------------------------------
 # 
 --------------------------------------------------------------*/
+#unicorn-color-by-number{
+
+  border-color: red;
+
+
+}
