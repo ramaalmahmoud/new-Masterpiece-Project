@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Charts - Kaiadmin Bootstrap 5 Admin Dashboard</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link
+      rel="icon"
+      href="../Kiddie.png"
+      type="image/x-icon"
+    />
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["../assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+   <!-- Sidebar -->
+<div class="sidebar" data-background-color="dark">
+  <div class="sidebar-logo">
+    <!-- Logo Header -->
+    <div class="logo-header" data-background-color="dark">
+      <a href="../index.html" class="logo">
+        <img src="../Kiddie.png" alt="navbar brand" class="navbar-brand" height="20" />
+      </a>
+      <div class="nav-toggle">
+        <button class="btn btn-toggle toggle-sidebar">
+          <i class="gg-menu-right"></i>
+        </button>
+        <button class="btn btn-toggle sidenav-toggler">
+          <i class="gg-menu-left"></i>
+        </button>
+      </div>
+      <button class="topbar-toggler more">
+        <i class="gg-more-vertical-alt"></i>
+      </button>
+    </div>
+    <!-- End Logo Header -->
+  </div>
+
+  <div class="sidebar-wrapper scrollbar scrollbar-inner">
+    <div class="sidebar-content">
+      <ul class="nav nav-secondary">
+        
+        <!-- Dashboard -->
+        <li class="nav-item">
+          <a href="../admin/dashboard.html">
+            <i class="fas fa-home"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+
+        <!-- User Management -->
+        <li class="nav-item">
+          <a href="../admin/users.html">
+            <i class="fas fa-users"></i>
+            <p>User Management</p>
+          </a>
+        </li>
+
+        <!-- Blog Management -->
+        <li class="nav-item">
+          <a href="../admin/blogs.html">
+            <i class="fas fa-newspaper"></i> <!-- Changed Icon -->
+            <p>Blog Management</p>
+          </a>
+        </li>
+
+        <!-- Volunteer & Doctor Management -->
+        <li class="nav-item">
+          <a href="../admin/volunteers.html">
+            <i class="fas fa-user-md"></i> <!-- Changed Icon -->
+            <p>Volunteers & Doctors</p>
+          </a>
+        </li>
+
+        <!-- Activity Management -->
+        <li class="nav-item">
+          <a href="../admin/activities.html">
+            <i class="fas fa-futbol"></i>
+            <p>Activity Management</p>
+          </a>
+        </li>
+
+        <!-- Appointment Management -->
+        <li class="nav-item">
+          <a href="../admin/appointments.html">
+            <i class="fas fa-calendar-alt"></i>
+            <p>Appointments</p>
+          </a>
+        </li>
+
+        <!-- Feedback & Rating Management -->
+        <li class="nav-item">
+          <a href="../admin/feedback.html">
+            <i class="fas fa-comments"></i>
+            <p>Feedback & Ratings</p>
+          </a>
+        </li>
+
+        <!-- Chat Management -->
+        <li class="nav-item">
+          <a href="../admin/chat.html">
+            <i class="fas fa-comments"></i>
+            <p>Chat Management</p>
+          </a>
+        </li>
+
+        <!-- Shop Management -->
+        <li class="nav-item">
+          <a href="../admin/products.html">
+            <i class="fas fa-box"></i> <!-- Icon for Products -->
+            <p>Products</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../admin/categories.html">
+            <i class="fas fa-tags"></i> <!-- Icon for Categories -->
+            <p>Categories</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../admin/orders.html">
+            <i class="fas fa-shopping-cart"></i> <!-- Icon for Orders -->
+            <p>Orders</p>
+          </a>
+        </li>
+
+        <!-- System Settings -->
+        <li class="nav-item">
+          <a href="../admin/settings.html">
+            <i class="fas fa-cogs"></i>
+            <p>System Settings</p>
+          </a>
+        </li>
+
+        <!-- Analytics -->
+        <li class="nav-item">
+          <a href="../admin/analytics.html">
+            <i class="fas fa-chart-line"></i>
+            <p>Analytics</p>
+          </a>
+        </li>
+
+        <!-- Security & Backup -->
+        <li class="nav-item">
+          <a href="../admin/security.html">
+            <i class="fas fa-shield-alt"></i>
+            <p>Security & Backup</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- End Sidebar -->
+
+
+       <!-- Main Content -->
+    <div class="main-content">
+        <div class="container mt-5">
+            <div class="page-inner">
+              <h3 class="fw-bold mb-3">Admin Settings</h3>
+              <div class="page-category">
+                Manage and configure system security and backup settings.
+              </div>
+              <div class="row">
+                <!-- Security Settings -->
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Security Settings</div>
+                    </div>
+                    <div class="card-body">
+                      <!-- User Permissions and Roles -->
+                      <div class="mb-3">
+                        <h5>User Permissions and Roles</h5>
+                        <p>Configure user roles and permissions.</p>
+                        <!-- Form or table for user roles -->
+                      </div>
+                      
+                      <!-- Password Policies -->
+                      <div class="mb-3">
+                        <h5>Password Policies</h5>
+                        <p>Set and enforce password requirements.</p>
+                        <!-- Form to update password policies -->
+                      </div>
+                      
+                      <!-- Two-Factor Authentication -->
+                      <div class="mb-3">
+                        <h5>Two-Factor Authentication (2FA)</h5>
+                        <p>Enable or manage 2FA settings.</p>
+                        <!-- Toggle switch or settings for 2FA -->
+                      </div>
+                      
+                      <!-- Encryption Settings -->
+                      <div class="mb-3">
+                        <h5>Encryption Settings</h5>
+                        <p>Manage encryption protocols and SSL/TLS settings.</p>
+                        <!-- Form to configure encryption settings -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+                <!-- Backup Settings -->
+                <div class="col-md-12 mt-4">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Backup Settings</div>
+                    </div>
+                    <div class="card-body">
+                      <!-- Automated Backups -->
+                      <div class="mb-3">
+                        <h5>Automated Backups</h5>
+                        <p>Set up and schedule automated backups.</p>
+                        <!-- Form to configure automated backup schedules -->
+                      </div>
+                      
+                      <!-- Manual Backup Options -->
+                      <div class="mb-3">
+                        <h5>Manual Backup Options</h5>
+                        <p>Initiate manual backups as needed.</p>
+                        <!-- Button to trigger manual backup -->
+                      </div>
+                      
+                      <!-- Backup Storage Locations -->
+                      <div class="mb-3">
+                        <h5>Backup Storage Locations</h5>
+                        <p>Configure where backups are stored.</p>
+                        <!-- Form to configure backup storage locations -->
+                      </div>
+                      
+                      <!-- Backup History -->
+                      <div class="mb-3">
+                        <h5>Backup History</h5>
+                        <p>View and manage recent backup records.</p>
+                        <!-- Table or list of recent backups -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+  </div>
+  <!-- End Main Content -->
+
+     
+    </div>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <!-- Chart JS -->
+    <script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+    <!-- jQuery Scrollbar -->
+    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <!-- Kaiadmin JS -->
+    <script src="../assets/js/kaiadmin.min.js"></script>
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="../assets/js/setting-demo2.js"></script>
+  
+  </body>
+</html>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\master-piece-project.props" />
+</Project>

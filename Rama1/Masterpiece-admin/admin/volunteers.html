@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Charts - Kaiadmin Bootstrap 5 Admin Dashboard</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link
+    rel="icon"
+    href="../Kiddie.png"
+    type="image/x-icon"
+  />
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["../assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+   <!-- Sidebar -->
+<div class="sidebar" data-background-color="dark">
+    <div class="sidebar-logo">
+      <!-- Logo Header -->
+      <div class="logo-header" data-background-color="dark">
+        <a href="../index.html" class="logo">
+          <img src="../Kiddie.png" alt="navbar brand" class="navbar-brand" height="20" />
+        </a>
+        <div class="nav-toggle">
+          <button class="btn btn-toggle toggle-sidebar">
+            <i class="gg-menu-right"></i>
+          </button>
+          <button class="btn btn-toggle sidenav-toggler">
+            <i class="gg-menu-left"></i>
+          </button>
+        </div>
+        <button class="topbar-toggler more">
+          <i class="gg-more-vertical-alt"></i>
+        </button>
+      </div>
+      <!-- End Logo Header -->
+    </div>
+  
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+      <div class="sidebar-content">
+        <ul class="nav nav-secondary">
+          
+          <!-- Dashboard -->
+          <li class="nav-item">
+            <a href="../admin/dashboard.html">
+              <i class="fas fa-home"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+  
+          <!-- User Management -->
+          <li class="nav-item">
+            <a href="../admin/users.html">
+              <i class="fas fa-users"></i>
+              <p>User Management</p>
+            </a>
+          </li>
+  
+          <!-- Blog Management -->
+          <li class="nav-item">
+            <a href="../admin/blogs.html">
+              <i class="fas fa-newspaper"></i> <!-- Changed Icon -->
+              <p>Blog Management</p>
+            </a>
+          </li>
+  
+          <!-- Volunteer & Doctor Management -->
+          <li class="nav-item">
+            <a href="../admin/volunteers.html">
+              <i class="fas fa-user-md"></i> <!-- Changed Icon -->
+              <p>Volunteers & Doctors</p>
+            </a>
+          </li>
+  
+          <!-- Activity Management -->
+          <li class="nav-item">
+            <a href="../admin/activities.html">
+              <i class="fas fa-futbol"></i>
+              <p>Activity Management</p>
+            </a>
+          </li>
+  
+          <!-- Appointment Management -->
+          <li class="nav-item">
+            <a href="../admin/appointments.html">
+              <i class="fas fa-calendar-alt"></i>
+              <p>Appointments</p>
+            </a>
+          </li>
+  
+          <!-- Feedback & Rating Management -->
+          <li class="nav-item">
+            <a href="../admin/feedback.html">
+              <i class="fas fa-comments"></i>
+              <p>Feedback & Ratings</p>
+            </a>
+          </li>
+  
+          <!-- Chat Management -->
+          <li class="nav-item">
+            <a href="../admin/chat.html">
+              <i class="fas fa-comments"></i>
+              <p>Chat Management</p>
+            </a>
+          </li>
+  
+          <!-- Shop Management -->
+          <li class="nav-item">
+            <a href="../admin/products.html">
+              <i class="fas fa-box"></i> <!-- Icon for Products -->
+              <p>Products</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../admin/categories.html">
+              <i class="fas fa-tags"></i> <!-- Icon for Categories -->
+              <p>Categories</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../admin/orders.html">
+              <i class="fas fa-shopping-cart"></i> <!-- Icon for Orders -->
+              <p>Orders</p>
+            </a>
+          </li>
+  
+          <!-- System Settings -->
+          <li class="nav-item">
+            <a href="../admin/settings.html">
+              <i class="fas fa-cogs"></i>
+              <p>System Settings</p>
+            </a>
+          </li>
+  
+          <!-- Analytics -->
+          <li class="nav-item">
+            <a href="../admin/analytics.html">
+              <i class="fas fa-chart-line"></i>
+              <p>Analytics</p>
+            </a>
+          </li>
+  
+          <!-- Security & Backup -->
+          <li class="nav-item">
+            <a href="../admin/security.html">
+              <i class="fas fa-shield-alt"></i>
+              <p>Security & Backup</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End Sidebar -->
+  
+
+
+   <!-- Main Content -->
+   <div class="main-content">
+    <div class="container-fluid">
+        <h2>Volunteer and Doctor Management</h2>
+        
+        <!-- Search and Filter -->
+        <div class="search-filter">
+            <input type="text" id="search-volunteers" placeholder="Search Volunteers..."/>
+            <input type="text" id="search-doctors" placeholder="Search Doctors..."/>
+            <button id="filter-btn" class="btn btn-success" >Filter</button>
+        </div>
+        
+        <!-- Volunteer List -->
+        <h3>Volunteers</h3>
+        <table class="table" id="volunteer-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Availability</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="volunteer-list">
+                <!-- Volunteer rows will be populated here -->
+            </tbody>
+        </table>
+ <!-- Modal for reviewing and updating volunteer details -->
+ <div id="review-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>Review Volunteer Details</h3>
+        <form id="review-form">
+            <div class="form-group">
+                <label for="volunteer-name">Name:</label>
+                <input type="text" id="volunteer-name" name="volunteer-name" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="volunteer-email">Email:</label>
+                <input type="email" id="volunteer-email" name="volunteer-email" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="volunteer-phone">Phone:</label>
+                <input type="tel" id="volunteer-phone" name="volunteer-phone" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="volunteer-role">Role:</label>
+                <input type="text" id="volunteer-role" name="volunteer-role" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="volunteer-availability">Availability:</label>
+                <input type="text" id="volunteer-availability" name="volunteer-availability" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="volunteer-resume">Resume:</label>
+                <a id="volunteer-resume" href="#" target="_blank">View Resume</a>
+            </div>
+            <div class="form-group">
+                <label for="volunteer-certificates">Certificates:</label>
+                <a id="volunteer-certificates" href="#" target="_blank">View Certificates</a>
+            </div>
+            <div class="form-group">
+                <label for="volunteer-why">Why Volunteer:</label>
+                <textarea id="volunteer-why" name="volunteer-why" readonly></textarea>
+            </div>
+            <div class="form-group">
+                <label for="volunteer-status">Status:</label>
+                <select id="volunteer-status" name="volunteer-status">
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="additional-info">Additional Information:</label>
+                <textarea id="additional-info" name="additional-info"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        </form>
+    </div>
+</div>
+<!-- End Modal --
+        <!-- Doctor List -->
+        <h3>Doctors</h3>
+        <button id="add-doctor-btn" class="btn btn-primary">Add New Doctor</button>
+        <table class="table" id="doctor-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Specialization</th>
+                    <th>Experience</th>
+                    <th>Clinic Address</th>
+                    <th>Available for Volunteering</th>
+                    <th>Consultation Fee</th>
+                    <th>Available Times</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="doctor-list">
+                <!-- Doctor rows will be populated here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- End Main Content -->
+
+<!-- Modal for adding new doctor -->
+<div id="add-doctor-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>Add New Doctor</h3>
+        <form id="add-doctor-form">
+            <div class="form-group">
+                <label for="doctor-name">Name:</label>
+                <input type="text" id="doctor-name" name="doctor-name" required />
+            </div>
+            <div class="form-group">
+                <label for="doctor-email">Email:</label>
+                <input type="email" id="doctor-email" name="doctor-email" required />
+            </div>
+            <div class="form-group">
+                <label for="doctor-phone">Phone:</label>
+                <input type="tel" id="doctor-phone" name="doctor-phone" required />
+            </div>
+            <div class="form-group">
+                <label for="doctor-specialization">Specialization:</label>
+                <input type="text" id="doctor-specialization" name="doctor-specialization" required />
+            </div>
+            <div class="form-group">
+                <label for="doctor-experience">Experience (Years):</label>
+                <input type="number" id="doctor-experience" name="doctor-experience" required />
+            </div>
+            <div class="form-group">
+                <label for="doctor-address">Clinic Address:</label>
+                <input type="text" id="doctor-address" name="doctor-address" required />
+            </div>
+            <div class="form-group">
+                <label for="doctor-volunteering">Available for Volunteering:</label>
+                <select id="doctor-volunteering" name="doctor-volunteering" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="doctor-fee">Consultation Fee:</label>
+                <input type="number" id="doctor-fee" name="doctor-fee" required />
+            </div>
+            <div class="form-group">
+                <label for="doctor-times">Available Times:</label>
+                <input type="text" id="doctor-times" name="doctor-times" required />
+            </div>
+            <button type="submit">Add Doctor</button>
+        </form>
+    </div>
+</div>
+     
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const addDoctorModal = document.getElementById('add-doctor-modal');
+    const closeModalBtn = document.querySelector('.close-btn');
+    const addDoctorBtn = document.getElementById('add-doctor-btn');
+    const addDoctorForm = document.getElementById('add-doctor-form');
+
+    // Open the modal to add a new doctor
+    addDoctorBtn.onclick = function () {
+        addDoctorModal.style.display = 'block';
+    }
+
+    // Close the modal
+    closeModalBtn.onclick = function () {
+        addDoctorModal.style.display = 'none';
+    }
+
+    // Close the modal when clicking outside of it
+    window.onclick = function (event) {
+        if (event.target === addDoctorModal) {
+            addDoctorModal.style.display = 'none';
+        }
+    }
+
+    // Handle form submission for adding a new doctor
+    addDoctorForm.onsubmit = function (event) {
+        event.preventDefault();
+        
+        // Get form values
+        const doctorName = document.getElementById('doctor-name').value;
+        const doctorEmail = document.getElementById('doctor-email').value;
+        const doctorPhone = document.getElementById('doctor-phone').value;
+        const doctorSpecialization = document.getElementById('doctor-specialization').value;
+        const doctorExperience = document.getElementById('doctor-experience').value;
+        const doctorAddress = document.getElementById('doctor-address').value;
+        const doctorVolunteering = document.getElementById('doctor-volunteering').value;
+        const doctorFee = document.getElementById('doctor-fee').value;
+        const doctorTimes = document.getElementById('doctor-times').value;
+
+        // Add new doctor to the table (in a real-world app, you'd also submit this data to the server)
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>${doctorName}</td>
+            <td>${doctorSpecialization}</td>
+            <td>${doctorExperience}</td>
+            <td>${doctorAddress}</td>
+            <td>${doctorVolunteering}</td>
+            <td>${doctorFee}</td>
+            <td>${doctorTimes}</td>
+            <td>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </td>
+        `;
+        document.getElementById('doctor-list').appendChild(newRow);
+
+        // Close modal and reset form
+        addDoctorModal.style.display = 'none';
+        addDoctorForm.reset();
+    }
+});
+document.addEventListener('DOMContentLoaded', function () {
+    // Event listener for the review modal
+    const reviewModal = document.getElementById('review-modal');
+    const closeModalBtn = document.querySelector('.close-btn');
+    const reviewForm = document.getElementById('review-form');
+
+    // Function to open the modal and populate with selected volunteer details
+    function openReviewModal(volunteer) {
+        document.getElementById('volunteer-name').value = volunteer.name;
+        document.getElementById('volunteer-email').value = volunteer.email;
+        document.getElementById('volunteer-phone').value = volunteer.phone;
+        document.getElementById('volunteer-role').value = volunteer.role;
+        document.getElementById('volunteer-availability').value = volunteer.availability;
+        document.getElementById('volunteer-resume').href = volunteer.resumeUrl;
+        document.getElementById('volunteer-certificates').href = volunteer.certificatesUrl;
+        document.getElementById('volunteer-why').value = volunteer.whyVolunteer;
+        document.getElementById('volunteer-status').value = volunteer.status;
+        document.getElementById('additional-info').value = volunteer.additionalInfo;
+        reviewModal.style.display = 'block';
+    }
+
+    // Close modal event
+    closeModalBtn.addEventListener('click', function () {
+        reviewModal.style.display = 'none';
+    });
+
+    // Form submission event
+    reviewForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Handle form submission logic here
+        reviewModal.style.display = 'none';
+    });
+
+    // Example data - replace with real data from your API
+    const volunteers = [
+        { name: 'John Doe', email: 'john@example.com', phone: '123-456-7890', role: 'Counselor', availability: 'Weekends', resumeUrl: '#', certificatesUrl: '#', whyVolunteer: 'To help children', status: 'pending', additionalInfo: '' },
+        // Add more volunteers here
+    ];
+
+    // Populate table with volunteer data
+    const volunteerList = document.getElementById('volunteer-list');
+    volunteers.forEach(volunteer => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${volunteer.name}</td>
+            <td>${volunteer.email}</td>
+            <td>${volunteer.phone}</td>
+            <td>${volunteer.role}</td>
+            <td>${volunteer.availability}</td>
+            <td>
+                <button  class="review-btn btn btn-success" data-volunteer='${JSON.stringify(volunteer)}'>Review</button>
+            </td>
+        `;
+        volunteerList.appendChild(row);
+    });
+
+    // Event listener for review buttons
+    volunteerList.addEventListener('click', function (event) {
+        if (event.target.classList.contains('review-btn')) {
+            const volunteer = JSON.parse(event.target.getAttribute('data-volunteer'));
+            openReviewModal(volunteer);
+        }
+    });
+});
+
+    </script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <!-- Chart JS -->
+    <script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+    <!-- jQuery Scrollbar -->
+    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <!-- Kaiadmin JS -->
+    <script src="../assets/js/kaiadmin.min.js"></script>
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="../assets/js/setting-demo2.js"></script>
+   
+  </body>
+</html>
