@@ -301,44 +301,52 @@
         <form id="add-doctor-form">
             <div class="form-group">
                 <label for="doctor-name">Name:</label>
-                <input type="text" id="doctor-name" name="doctor-name" required />
+                <input type="text" id="doctor-name" name="FullName" required />
             </div>
+            <div class="form-group">
+              <label for="doctor-phone">Phone:</label>
+              <input type="tel" id="doctor-phone" name="PhoneNumber" required />
+          </div>
+          <div class="form-group">
+            <label for="doctor-specialization">Specialization:</label>
+            <input type="text" id="doctor-specialization" name="Specialization" required />
+        </div>
+        <div class="form-group">
+          <label for="doctor-experience">Experience (Years):</label>
+          <input type="number" id="doctor-experience" name="ExperienceYears" required />
+      </div>
             <div class="form-group">
                 <label for="doctor-email">Email:</label>
-                <input type="email" id="doctor-email" name="doctor-email" required />
+                <input type="email" id="doctor-email" name="Email" required />
             </div>
-            <div class="form-group">
-                <label for="doctor-phone">Phone:</label>
-                <input type="tel" id="doctor-phone" name="doctor-phone" required />
-            </div>
-            <div class="form-group">
-                <label for="doctor-specialization">Specialization:</label>
-                <input type="text" id="doctor-specialization" name="doctor-specialization" required />
-            </div>
-            <div class="form-group">
-                <label for="doctor-experience">Experience (Years):</label>
-                <input type="number" id="doctor-experience" name="doctor-experience" required />
-            </div>
+           
+            
+         
             <div class="form-group">
                 <label for="doctor-address">Clinic Address:</label>
-                <input type="text" id="doctor-address" name="doctor-address" required />
+                <input type="text" id="doctor-address" name="ClinicAddress" required />
             </div>
             <div class="form-group">
                 <label for="doctor-volunteering">Available for Volunteering:</label>
-                <select id="doctor-volunteering" name="doctor-volunteering" required>
+                <select id="doctor-volunteering" name="AvailableForVolunteering" required>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="doctor-fee">Consultation Fee:</label>
-                <input type="number" id="doctor-fee" name="doctor-fee" required />
+                <input type="number" id="doctor-fee" name="ConsultationFee" required />
             </div>
             <div class="form-group">
                 <label for="doctor-times">Available Times:</label>
-                <input type="text" id="doctor-times" name="doctor-times" required />
+                <input type="text" id="doctor-times" name="AvailableTimes" required />
             </div>
-            <button type="submit">Add Doctor</button>
+            <div class="form-group">
+              <label for="doctor-picture">Upload Image:</label>
+              <input type="file" id="doctor-picture" name="ProfilePicture" required />
+          </div>
+
+            <button  type="submit">Add Doctor</button>
         </form>
     </div>
 </div>
@@ -369,41 +377,41 @@
     }
 
     // Handle form submission for adding a new doctor
-    addDoctorForm.onsubmit = function (event) {
-        event.preventDefault();
+    // addDoctorForm.onsubmit = function (event) {
+    //     event.preventDefault();
         
-        // Get form values
-        const doctorName = document.getElementById('doctor-name').value;
-        const doctorEmail = document.getElementById('doctor-email').value;
-        const doctorPhone = document.getElementById('doctor-phone').value;
-        const doctorSpecialization = document.getElementById('doctor-specialization').value;
-        const doctorExperience = document.getElementById('doctor-experience').value;
-        const doctorAddress = document.getElementById('doctor-address').value;
-        const doctorVolunteering = document.getElementById('doctor-volunteering').value;
-        const doctorFee = document.getElementById('doctor-fee').value;
-        const doctorTimes = document.getElementById('doctor-times').value;
+    //     // Get form values
+    //     const doctorName = document.getElementById('doctor-name').value;
+    //     const doctorEmail = document.getElementById('doctor-email').value;
+    //     const doctorPhone = document.getElementById('doctor-phone').value;
+    //     const doctorSpecialization = document.getElementById('doctor-specialization').value;
+    //     const doctorExperience = document.getElementById('doctor-experience').value;
+    //     const doctorAddress = document.getElementById('doctor-address').value;
+    //     const doctorVolunteering = document.getElementById('doctor-volunteering').value;
+    //     const doctorFee = document.getElementById('doctor-fee').value;
+    //     const doctorTimes = document.getElementById('doctor-times').value;
 
-        // Add new doctor to the table (in a real-world app, you'd also submit this data to the server)
-        const newRow = document.createElement('tr');
-        newRow.innerHTML = `
-            <td>${doctorName}</td>
-            <td>${doctorSpecialization}</td>
-            <td>${doctorExperience}</td>
-            <td>${doctorAddress}</td>
-            <td>${doctorVolunteering}</td>
-            <td>${doctorFee}</td>
-            <td>${doctorTimes}</td>
-            <td>
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
-            </td>
-        `;
-        document.getElementById('doctor-list').appendChild(newRow);
+    //     // Add new doctor to the table (in a real-world app, you'd also submit this data to the server)
+    //     const newRow = document.createElement('tr');
+    //     newRow.innerHTML = `
+    //         <td>${doctorName}</td>
+    //         <td>${doctorSpecialization}</td>
+    //         <td>${doctorExperience}</td>
+    //         <td>${doctorAddress}</td>
+    //         <td>${doctorVolunteering}</td>
+    //         <td>${doctorFee}</td>
+    //         <td>${doctorTimes}</td>
+    //         <td>
+    //             <button class="edit-btn">Edit</button>
+    //             <button class="delete-btn">Delete</button>
+    //         </td>
+    //     `;
+    //     document.getElementById('doctor-list').appendChild(newRow);
 
-        // Close modal and reset form
-        addDoctorModal.style.display = 'none';
-        addDoctorForm.reset();
-    }
+    //     // Close modal and reset form
+    //     addDoctorModal.style.display = 'none';
+    //     addDoctorForm.reset();
+    // }
 });
 document.addEventListener('DOMContentLoaded', function () {
     // Event listener for the review modal
@@ -471,6 +479,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
     </script>
+    <script src="../API-JS/doctor.js"></script>
     <!--   Core JS Files   -->
     <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
     <script src="../assets/js/core/popper.min.js"></script>

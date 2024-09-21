@@ -39,5 +39,6 @@ namespace master_piece_project.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+
     }
 }

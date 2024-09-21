@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/resources/Kiddie.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/resources/Kiddie.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/resources/Kiddie.png />
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
 
@@ -25,6 +28,7 @@
     <link rel="stylesheet" href="assets/vendors/odometer/odometer.min.css" />
     <link rel="stylesheet" href="assets/vendors/swiper/swiper.min.css" />
     <link rel="stylesheet" href="assets/vendors/delogis-icons/style.css">
+    <link rel="stylesheet" href="assets/vendors/delogis-icons-two/style.css">
     <link rel="stylesheet" href="assets/vendors/tiny-slider/tiny-slider.min.css" />
     <link rel="stylesheet" href="assets/vendors/reey-font/stylesheet.css" />
     <link rel="stylesheet" href="assets/vendors/alagambe-font/stylesheet.css" />
@@ -39,83 +43,396 @@
     <!-- template styles -->
     <link rel="stylesheet" href="assets/css/delogis.css" />
     <link rel="stylesheet" href="assets/css/delogis-color-1.css" />
+    <style>
+        h2, h3 {
+        color: var(--delogis-base);
+       
+    }
+
+    a {
+        color: var(--delogis-primary);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--delogis-base);
+    }
+
+    .profile__img img {
+        border: 5px solid var(--delogis-bdr-color);
+        border-radius: 50%;
+    }
+
+    
+
+    .profile__section {
+        background-color: var(--delogis-extra);
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+
+    .profile__link {
+      
+        font-weight: bold;
+    }
+
+    .status.upcoming {
+        color: var(--delogis-primary);
+    }
+
+    .status.completed {
+        color: var(--delogis-gray);
+    }
+    </style>
 </head>
 <body>
-    <div class="profile-container">
-        <h1>Welcome, [UserName]</h1>
-    
-        <!-- Basic User Info -->
-        <section class="user-info">
-            <img src="[ProfileImageURL]" alt="Profile Picture">
-            <p>Email: [UserEmail]</p>
-            <p>Member Since: [JoinDate]</p>
-            <a href="/settings">Edit Profile</a>
-        </section>
-    
-        <!-- Blog Section -->
-        <section class="user-blog">
-            <h2>Your Blog Posts</h2>
-            <ul>
-                <li><a href="/blog/post1">Post Title 1</a></li>
-                <li><a href="/blog/post2">Post Title 2</a></li>
+    <section class="main-header-topbar">
+        <div class="container">
+            <div class="main-header-topbar__wrapper">
+                <ul class="main-header-topbar__info">
+                    <li>
+                        <span class="main-header-topbar__info__icon"><i class="fas fa-map-marker-alt"></i></span>
+                        <a href="https://www.google.com/maps">Irbid, Jordan</a>
+                    </li>
+                    <li>
+                        <span class="main-header-topbar__info__icon"><i class="fas fa-envelope"></i></span>
+                        <a href="mailto:needhelp@company.com">needhelp@Screenless.com</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-header-topbar__right">
+            <ul class="list-unstyled main-header-topbar__menu">
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html">Faqs</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
-            <a href="/blog">View All Blog Posts</a>
-        </section>
-    
-        <!-- Activities Section -->
-        <section class="user-activities">
-            <h2>Your Activities</h2>
-            <ul>
-                <li>
-                    <a href="/activities/activity1">
-                        <h3>Activity Title 1</h3>
-                        <p>Steps: [Brief description of steps]</p>
-                        <p>Materials: [List of materials]</p>
+            <div class="main-header-topbar__call">
+                <span class="main-header-topbar__call__icon"><i class="delogis-icons-two-telephone-call"></i></span>
+                <a href="tel:3035550105">(303) 555-0105</a>
+            </div>
+        </div>
+    </section>
+    <header class="main-header-four">
+        <nav class="main-menu">
+            <div class="container">
+                <div class="main-menu__wrapper clearfix">
+                    <div class="main-header-four__logo">
+                        <a href="index.html"><img src="assets/images/resources/Kiddie.png" alt="delogis" width="140"></a>
+                    </div>
+                    <div class="main-menu__main-menu-box">
+                        <ul class="main-menu__list">
+                            <li class="megamenu dropdown current megamenu-clickable megamenu-clickable--toggler">
+                                <a href="index.html">Home</a>
+                              
+                            </li>
+                            <li>
+                                <a href="about.html">About</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#">Services</a>
+                                <ul class="sub-menu">
+                                 
+                                    <li><a href="blog.html">Screen Risks</a></li>
+                                    <li><a href="activities.html">Activities</a></li>
+                                    <li><a href="parent-paltform.html">Parent Platform</a></li>
+                                    <li><a href="family-psycology.html">Psychological Support</a></li>
+                                   
+                                </ul>
+                            </li>
+                           
+                           
+                            <li >
+                                <a href="products.html">Shop</a>
+                              
+                            </li>
+                          
+                            <li>
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main-header-four__right">
+                <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
+                <a class="thm-btn thm-btn--two" href="login.html">Sign up</a>
+                <div class="main-header-four__right__btn">
+                    <a href="profile.html" class="login-toggler"><i class="fas fa-sign-in-alt"></i></a>
+                    <a href="#" class="search-toggler"><i class="icon-magnifying-glass"></i></a>
+                   
+
+                    <a href="cart.html" class="main-menu__cart"><i class="icon-shopping-cart"></i></a>
+                </div>
+                <div class="main-header-four__social">
+                    <a href="https://facebook.com/">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        <span class="sr-only">Facebook</span>
                     </a>
-                </li>
-                <li>
-                    <a href="/activities/activity2">
-                        <h3>Activity Title 2</h3>
-                        <p>Steps: [Brief description of steps]</p>
-                        <p>Materials: [List of materials]</p>
+                    <a href="https://twitter.com/">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sr-only">Twitter</span>
                     </a>
-                </li>
-            </ul>
-            <a href="/activities">View All Activities</a>
-            <a href="/activities/new">Add New Activity</a>
-        </section>
-    
-        <!-- Parent Chat Section -->
-        <section class="parent-chat">
-            <h2>Your Chats</h2>
-            <ul>
-                <li><a href="/chat/1">Chat with [ParentName1]</a></li>
-                <li><a href="/chat/2">Chat with [ParentName2]</a></li>
-            </ul>
-            <a href="/chat">Start a New Chat</a>
-        </section>
-    
-        <!-- Psychological Sessions Section -->
-        <section class="psych-sessions">
-            <h2>Your Sessions</h2>
-            <ul>
-                <li>Session with [PsychologistName] - <span>Upcoming</span></li>
-                <li>Session with [PsychologistName] - <span>Completed</span></li>
-            </ul>
-            <a href="/sessions">View All Sessions</a>
-            <a href="/sessions/new">Book New Session</a>
-        </section>
-    
-        <!-- Orders Section -->
-        <section class="user-orders">
-            <h2>Your Orders</h2>
-            <ul>
-                <li>Order #123 - <span>In Progress</span></li>
-                <li>Order #124 - <span>Completed</span></li>
-            </ul>
-            <a href="/orders">View All Orders</a>
-        </section>
+                    <a href="https://pinterest.com/">
+                        <i class="fab fa-pinterest-p" aria-hidden="true"></i>
+                        <span class="sr-only">Pinterest</span>
+                    </a>
+                    <a href="https://instagram.com/">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                        <span class="sr-only">Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="stricky-header stricked-menu main-menu main-header-four">
+        <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+    </div><!-- /.stricky-header -->
+       <!--Page Header Start-->
+       <section class="page-header">
+        <div class="page-header-bg" style="background-image: url(assets/images/backgrounds/page-header-bg.jpg)">
+        </div>
+        <div class="container">
+            <div class="page-header__inner">
+                <h2>Profile</h2>
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="index.html">Home</a></li>
+                    <li><span>/</span></li>
+               
+                
+                    <li>Profile</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--Page Header End-->
+<!-- Profile Section Start -->
+<section class="profile">
+    <div class="container">
+        <div class="row">
+            <!-- Profile Picture and Info -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="profile__left">
+                    <div class="profile__img">
+                        <img src="assets/images/testimonial/testimonial-1-1.jpg" alt="Profile Picture">
+                    </div>
+                    <div class="profile__info">
+                        <h2>[UserName]</h2>
+                        <p>Email: [UserEmail]</p>
+                        <p>Joined on: [JoinDate]</p>
+                        <a href="/settings" class="thm-btn profile__btn">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile Details -->
+            <div class="col-xl-8 col-lg-7">
+                <div class="profile__right">
+                    <div class="section-title text-left mb-4">
+                        <h2 class="section-title__title">Your <span>Profile</span> Overview</h2>
+                    </div>
+                    
+                    <!-- Blog Section -->
+                    <div class="profile__section mb-4">
+                        <h3>Your Blog Posts</h3>
+                        <ul class="list-unstyled">
+                            <li><a href="/blog/post1" class="profile__link">Post Title 1</a></li>
+                            <li><a href="/blog/post2" class="profile__link">Post Title 2</a></li>
+                        </ul>
+                        <a href="/blog" class="thm-btn profile__btn">View All Blog Posts</a>
+                    </div>
+                    
+                    <!-- Activities Section -->
+                    <div class="profile__section mb-4">
+                        <h3>Your Activities</h3>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="/activities/activity1" class="profile__link">
+                                    <h4>Activity Title 1</h4>
+                                    <p><strong>Steps:</strong> [Brief description of steps]</p>
+                                    <p><strong>Materials:</strong> [List of materials]</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/activities/activity2" class="profile__link">
+                                    <h4>Activity Title 2</h4>
+                                    <p><strong>Steps:</strong> [Brief description of steps]</p>
+                                    <p><strong>Materials:</strong> [List of materials]</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="/activities" class="thm-btn profile__btn">View All Activities</a>
+                        <a href="/activities/new" class="thm-btn profile__btn">Add New Activity</a>
+                    </div>
+                    
+                    <!-- Parent Chat Section -->
+                    <div class="profile__section mb-4">
+                        <h3>Your Chats</h3>
+                        <ul class="list-unstyled">
+                            <li><a href="/chat/1" class="profile__link">Chat with [ParentName1]</a></li>
+                            <li><a href="/chat/2" class="profile__link">Chat with [ParentName2]</a></li>
+                        </ul>
+                        <a href="/chat" class="thm-btn profile__btn">Start a New Chat</a>
+                    </div>
+                    
+                    <!-- Psychological Sessions Section -->
+                    <div class="profile__section mb-4">
+                        <h3>Your Sessions</h3>
+                        <ul class="list-unstyled">
+                            <li>Session with [PsychologistName] - <span class="status upcoming">Upcoming</span></li>
+                            <li>Session with [PsychologistName] - <span class="status completed">Completed</span></li>
+                        </ul>
+                        <a href="/sessions" class="thm-btn profile__btn">View All Sessions</a>
+                        <a href="/sessions/new" class="thm-btn profile__btn">Book New Session</a>
+                    </div>
+                    
+                    <!-- Orders Section -->
+                    <div class="profile__section">
+                        <h3>Your Orders</h3>
+                        <ul class="list-unstyled">
+                            <li>Order #123 - <span class="status in-progress">In Progress</span></li>
+                            <li>Order #124 - <span class="status completed">Completed</span></li>
+                        </ul>
+                        <a href="/orders" class="thm-btn profile__btn">View All Orders</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!--Site Footer Start-->
+    <footer class="site-footer-two">
+        <div class="site-footer-two__shape-one float-bob-y">
+            <img src="assets/images/shapes/footer-2-shape-1.png" alt="delogis">
+        </div>
+        <div class="site-footer-two__shape-two float-bob-y">
+            <img src="assets/images/shapes/footer-2-shape-2.png" alt="delogis">
+        </div>
+        <div class="container">
+            <div class="site-footer-two__top">
+                <div class="site-footer-two__logo">
+                    <a href="index.html"><img src="assets/images/resources/Kiddie.png" width="140" alt="delogis"></a>
+                </div>
+                <div class="site-footer-two__social">
+                    <a href="https://facebook.com/">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        <span class="sr-only">Facebook</span>
+                    </a>
+                    <a href="https://twitter.com/">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sr-only">Twitter</span>
+                    </a>
+                    <a href="https://pinterest.com/">
+                        <i class="fab fa-pinterest-p" aria-hidden="true"></i>
+                        <span class="sr-only">Pinterest</span>
+                    </a>
+                    <a href="https://instagram.com/">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                        <span class="sr-only">Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-delay="100ms">
+                    <div class="footer-widget__column footer-widget__link">
+                        <div class="footer-widget__title-box">
+                            <h3 class="footer-widget__title">Explore</h3>
+                        </div>
+                        <ul class="footer-widget__link-list list-unstyled">
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="make-appointment.html">Make Appointment</a></li>
+                            <li><a href="blog.html">Latest Post</a></li>
+                            <li><a href="activities.html">Our Activities</a></li>
+                            <li><a href="faq.html">Faqs</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+                    <div class="footer-widget__column footer-widget__Contact">
+                        <div class="footer-widget__title-box">
+                            <h3 class="footer-widget__title">Contact</h3>
+                        </div>
+                        <ul class="footer-widget__Contact-list list-unstyled">
+                            <li>
+                                <div class="icon">
+                                    <span class="delogis-icons-two-telephone-call"></span>
+                                </div>
+                                <div class="text">
+                                    <p>
+                                        <a href="tel:9238008060">+92 3800 8060</a>
+                                        <a href="tel:2195550114">+21 9555-0114</a>
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">
+                                    <span class="fas fa-globe"></span>
+                                </div>
+                                <div class="text">
+                                    <p>
+                                        <a href="">Screen-less@gmail.com</a>
+                                        <a href="www.website.html">www.website.com</a>
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">
+                                    <span class="delogis-icons-two-ping"></span>
+                                </div>
+                                <div class="text">
+                                    <p>
+                                        Irbid<br> Jordan
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-md-12 wow fadeInUp" data-wow-delay="300ms">
+                    <div class="footer-widget__column footer-widget__newsletter">
+                        <div class="footer-widget__title-box">
+                            <h3 class="footer-widget__title">Subscribe to get latest updates daily.</h3>
+                        </div>
+                        <form class="footer-widget__email-box" data-url="MC_FORM_URL">
+                            <div class="footer-widget__email-input-box">
+                                <input type="email" placeholder="Email Address" name="email">
+                            </div>
+                            <button type="submit" class="footer-widget__subscribe-btn thm-btn thm-btn--two"><i class="delogis-icons-two-right-arrow"></i></button>
+                        </form>
+                        <div class="mc-form__response"></div>
+                        <div class="site-footer-two__checked-box">
+                            <input type="checkbox" name="agree" id="agree" checked="">
+                            <label for="agree"><span></span>I agree to all your terms and policies</label>
+                        </div>
+                        <div class="site-footer-two__gallery">
+                            <img src="assets/images/resources/gallery-1.jpg" alt="delogis">
+                            <img src="assets/images/resources/gallery-2.jpg" alt="delogis">
+                            <img src="assets/images/resources/gallery-3.jpg" alt="delogis">
+                            <img src="assets/images/resources/gallery-4.jpg" alt="delogis">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="site-footer-two__bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="site-footer-two__bottom__text">© Copyright 2024 by <a href="index.html">Screenless.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Site Footer End-->
+</section>
+<!-- Profile Section End -->
+
+
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-up-arrow"></i></a>
 
 

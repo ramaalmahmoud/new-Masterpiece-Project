@@ -17197,7 +17197,7 @@ body.megamenu-popup-active .mobile-nav__content {
   top: 1px;
 }
 .main-header-topbar__call a {
-  color: inherit;
+  color: #212529;
   background: linear-gradient(to right, currentcolor 0%, currentcolor 100%) 0px 95%/0px 1px no-repeat;
   transition: all 500ms ease;
 }
