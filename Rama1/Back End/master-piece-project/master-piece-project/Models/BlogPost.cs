@@ -21,6 +21,8 @@ public partial class BlogPost
 
     public string? Category { get; set; }
 
+    public bool IsConfirmed { get; set; }
+
     public virtual User? Author { get; set; }
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();

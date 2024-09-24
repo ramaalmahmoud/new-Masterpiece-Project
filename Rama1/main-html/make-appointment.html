@@ -228,11 +228,8 @@
                                 <!-- Select a Program -->
                                 <div class="col-xl-12">
                                     <div class="make-appointment__form-input-box">
-                                        <select class="selectpicker" name="program" aria-label="Select a Program">
-                                            <option selected>Select a Program</option>
-                                            <option value="1">General Therapy</option>
-                                            <option value="2">Cognitive Behavioral Therapy</option>
-                                            <option value="3">Consultation</option>
+                                        <select id="programId" class="selectpicker" name="program" aria-label="Select a Program">
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -240,11 +237,9 @@
                                 <!-- Select a Doctor -->
                                 <div class="col-xl-6 col-lg-6">
                                     <div class="make-appointment__form-input-box">
-                                        <select class="selectpicker" name="doctor" aria-label="Select a Doctor">
-                                            <option selected>Select a Doctor</option>
-                                            <option value="1">Dr. John Doe</option>
-                                            <option value="2">Dr. Jane Smith</option>
-                                            <option value="3">Dr. Ahmed Ali</option>
+                                        <select class="selectpicker" id="doctorId" name="doctor" aria-label="Select a Doctor">
+                                            <option style="background-color:#E6E6FA ;" selected>Select a Doctor</option>
+                                          
                                         </select>
                                     </div>
                                 </div>
@@ -316,7 +311,7 @@
     </div>
 </section>
 <!--Make Appointment End-->
-
+<script src="API-JS/forms.js"></script>
 <!-- Modal -->
 <div class="modal fade" id="doctorsPricingModal" tabindex="-1" aria-labelledby="doctorsPricingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

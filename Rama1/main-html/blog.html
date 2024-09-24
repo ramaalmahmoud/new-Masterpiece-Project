@@ -179,203 +179,100 @@
 
        <!--Blog Sidebar Start-->
 <section class="blog-sidebar">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-4 col-lg-5">
-                <div class="sidebar">
-                    <div class="sidebar__single sidebar__search">
-                        <form action="#" class="sidebar__search-form">
-                            <input type="search" placeholder="Search for activities, tips, or resources...">
-                            <button type="submit"><i class="icon-magnifying-glass"></i></button>
-                        </form>
-                    </div>
-                    <div class="sidebar__single sidebar__post">
-                        <h3 class="sidebar__title">Recent Articles</h3>
-                        <ul class="sidebar__post-list list-unstyled">
-                            <li>
-                                <div class="sidebar__post-image">
-                                    <img src="assets/images/blog/lp-1-1.jpg" alt="">
-                                </div>
-                                <div class="sidebar__post-content">
-                                    <h3>
-                                        <span class="sidebar__post-content-meta"><i class="fa fa-comments"></i>5
-                                            Comments</span>
-                                        <a href="blog-details.html">How to Encourage Creative Play Indoors</a>
-                                    </h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sidebar__post-image">
-                                    <img src="assets/images/blog/lp-1-2.jpg" alt="">
-                                </div>
-                                <div class="sidebar__post-content">
-                                    <h3>
-                                        <span class="sidebar__post-content-meta"><i class="fa fa-comments"></i>3
-                                            Comments</span>
-                                        <a href="blog-details.html">Top Outdoor Activities to Boost Your Child's Skills</a>
-                                    </h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sidebar__post-image">
-                                    <img src="assets/images/blog/lp-1-3.jpg" alt="">
-                                </div>
-                                <div class="sidebar__post-content">
-                                    <h3>
-                                        <span class="sidebar__post-content-meta"><i class="fa fa-comments"></i>8
-                                            Comments</span>
-                                        <a href="blog-details.html">Screen Time Alternatives for a Balanced Day</a>
-                                    </h3>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="sidebar__single sidebar__category">
-                        <h3 class="sidebar__title">Categories</h3>
-                        <ul class="sidebar__category-list list-unstyled">
-                            <li><a href="blog-details.html">Creative Play</a></li>
-                            <li><a href="blog-details.html">Outdoor Activities</a></li>
-                            <li><a href="blog-details.html">Screen Time Management</a></li>
-                            <li><a href="blog-details.html">Skill Development</a></li>
-                            <li><a href="blog-details.html">Parenting Tips</a></li>
-                        </ul>
-                    </div>
-                    <div class="sidebar__single sidebar__tags">
-                        <h3 class="sidebar__title">Tags</h3>
-                        <div class="sidebar__tags-list">
-                            <a href="#">Playtime</a>
-                            <a href="#">Screen-Free</a>
-                            <a href="#">Learning</a>
-                            <a href="#">Activities</a>
-                            <a href="#">Parenting</a>
-                        </div>
-                    </div>
-                    <div class="sidebar__single sidebar__comments">
-                        <h3 class="sidebar__title">Recent Comments</h3>
-                        <ul class="sidebar__comments-list list-unstyled">
-                            <li>
-                                <div class="sidebar__comments-icon">
-                                    <i class="fas fa-comment"></i>
-                                </div>
-                                <div class="sidebar__comments-text-box">
-                                    <p>A parent on <br> Encouraging Creative Play</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sidebar__comments-icon">
-                                    <i class="fas fa-comment"></i>
-                                </div>
-                                <div class="sidebar__comments-text-box">
-                                    <p><span>Jane Doe</span> on <br> Outdoor Fun for All Ages</p>
-                                </div>
-                            </li>
-                        </ul>
+    <!-- Button to Open the Modal -->
+<div class="text-center">
+    <button id="addPostButton" class="thm-btn">Add New Post</button>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-4 col-lg-5">
+            <div class="sidebar">
+                <div class="sidebar__single sidebar__search">
+                    <form action="#" class="sidebar__search-form">
+                        <input type="search" placeholder="Search for activities, tips, or resources...">
+                        <button type="submit"><i class="icon-magnifying-glass"></i></button>
+                    </form>
+                </div>
+                <div class="sidebar__single sidebar__post">
+                    <h3 class="sidebar__title">Recent Articles</h3>
+                    <ul id="recent-articles" class="sidebar__post-list list-unstyled">
+                        <!-- Recent Articles will be populated here -->
+                    </ul>
+                </div>
+                <div class="sidebar__single sidebar__category">
+                    <h3 class="sidebar__title">Categories</h3>
+                    <ul class="sidebar__category-list list-unstyled">
+                        <li><a href="blog-details.html">Creative Play</a></li>
+                        <li><a href="blog-details.html">Outdoor Activities</a></li>
+                        <li><a href="blog-details.html">Screen Time Management</a></li>
+                        <li><a href="blog-details.html">Skill Development</a></li>
+                        <li><a href="blog-details.html">Parenting Tips</a></li>
+                    </ul>
+                </div>
+                <div class="sidebar__single sidebar__tags">
+                    <h3 class="sidebar__title">Tags</h3>
+                    <div class="sidebar__tags-list">
+                        <a href="#">Playtime</a>
+                        <a href="#">Screen-Free</a>
+                        <a href="#">Learning</a>
+                        <a href="#">Activities</a>
+                        <a href="#">Parenting</a>
                     </div>
                 </div>
+                <div class="sidebar__single sidebar__comments">
+                    <h3 class="sidebar__title">Recent Comments</h3>
+                    <ul class="sidebar__comments-list list-unstyled">
+                        <li>
+                            <div class="sidebar__comments-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <div class="sidebar__comments-text-box">
+                                <p>A parent on <br> Encouraging Creative Play</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sidebar__comments-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <div class="sidebar__comments-text-box">
+                                <p><span>Jane Doe</span> on <br> Outdoor Fun for All Ages</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-xl-8 col-lg-7">
-                <div class="blog-sidebar__left">
-                    <div class="blog-sidebar__content-box">
-                        <!--Blog sidebar Single Start-->
-                        <div class="blog-sidebar__single">
-                            <div class="blog-sidebar__img">
-                                <img src="assets/images/blog/blog-sidebar-1-1.jpg" alt="">
-                                <div class="blog-sidebar__date">
-                                    <p>20
-                                        <br> Aug</p>
-                                </div>
-                            </div>
-                            <div class="blog-sidebar__content">
-                                <ul class="blog-sidebar__meta list-unstyled">
-                                    <li>
-                                        <a href="blog-details.html"><i class="fas fa-user-circle"></i>by Sarah Johnson</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-details.html"><i class="fas fa-comments"></i>04 Comments</a>
-                                    </li>
-                                </ul>
-                                <h3 class="blog-sidebar__title"><a href="blog-details.html">Balancing Screen Time with Active Play</a></h3>
-                                <p class="blog-sidebar__text">Discover practical ways to balance screen time with active play, helping your child develop essential skills while having fun.</p>
-                                <div class="blog-sidebar__btn">
-                                    <a href="blog-details.html"><span class="icon-right-arrow"></span>Read More </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Blog sidebar Single End-->
-                        <!--Blog sidebar Single Start-->
-                        <div class="blog-sidebar__single">
-                            <div class="blog-sidebar__img">
-                                <img src="assets/images/blog/blog-sidebar-1-2.jpg" alt="">
-                                <div class="blog-sidebar__date">
-                                    <p>15
-                                        <br> Aug</p>
-                                </div>
-                            </div>
-                            <div class="blog-sidebar__content">
-                                <ul class="blog-sidebar__meta list-unstyled">
-                                    <li>
-                                        <a href="blog-details.html"><i class="fas fa-user-circle"></i>by Mark Thompson</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-details.html"><i class="fas fa-comments"></i>02 Comments</a>
-                                    </li>
-                                </ul>
-                                <h3 class="blog-sidebar__title"><a href="blog-details.html">Creative Indoor Games for Rainy Days</a></h3>
-                                <p class="blog-sidebar__text">Rainy days can be just as fun! Check out these creative indoor games that keep your children engaged and learning.</p>
-                                <div class="blog-sidebar__btn">
-                                    <a href="blog-details.html"><span class="icon-right-arrow"></span>Read More </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Blog sidebar Single End-->
-                        <!--Blog sidebar Single Start-->
-                        <div class="blog-sidebar__single">
-                            <div class="blog-sidebar__img">
-                                <img src="assets/images/blog/blog-sidebar-1-3.jpg" alt="">
-                                <div class="blog-sidebar__date">
-                                    <p>10
-                                        <br> Aug</p>
-                                </div>
-                            </div>
-                            <div class="blog-sidebar__content">
-                                <ul class="blog-sidebar__meta list-unstyled">
-                                    <li>
-                                        <a href="blog-details.html"><i class="fas fa-user-circle"></i>by Emily Davis</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-details.html"><i class="fas fa-comments"></i>06 Comments</a>
-                                    </li>
-                                </ul>
-                                <h3 class="blog-sidebar__title"><a href="blog-details.html">Outdoor Adventures to Encourage Exploration</a></h3>
-                                <p class="blog-sidebar__text">Explore the great outdoors with your kids! Discover how outdoor adventures can boost their curiosity and learning.</p>
-                                <div class="blog-sidebar__btn">
-                                    <a href="blog-details.html"><span class="icon-right-arrow"></span>Read More </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Blog sidebar Single End-->
+        </div>
+        <div class="col-xl-8 col-lg-7">
+            <div class="blog-sidebar__left">
+                <div class="blog-sidebar__content-box" id="blog-posts">
+                    <!-- Blog Posts will be populated here -->
+                </div>
+                <div class="blog-sidebar__bottom-box">
+                    <div class="blog-sidebar__bottom-box-icon">
+                        <img src="assets/images/icon/blog-sidebar-bottom-box-icon.png" alt="">
                     </div>
-                    <div class="blog-sidebar__bottom-box">
-                        <div class="blog-sidebar__bottom-box-icon">
-                            <img src="assets/images/icon/blog-sidebar-bottom-box-icon.png" alt="">
-                        </div>
-                        <p class="blog-sidebar__bottom-box-text">Engage with your children through creative play and meaningful activities that encourage learning and growth.</p>
+                    <p class="blog-sidebar__bottom-box-text">Engage with your children through creative play and meaningful activities that encourage learning and growth.</p>
+                </div>
+                <div class="blog-sidebar__provide-services">
+                    <div class="blog-sidebar__provide-services-icon">
+                        <a href="blog-details.html"><img
+                                src="assets/images/icon/blog-sidebar-provide-services-icon.png" alt=""></a>
                     </div>
-                    <div class="blog-sidebar__provide-services">
-                        <div class="blog-sidebar__provide-services-icon">
-                            <a href="blog-details.html"><img
-                                    src="assets/images/icon/blog-sidebar-provide-services-icon.png" alt=""></a>
-                        </div>
-                        <h3 class="blog-sidebar__provide-services-title"><a href="blog-details.html">Supporting Your Parenting Journey with Expert Advice</a></h3>
-                    </div>
-                    <div class="blog-sidebar__load-more">
-                        <a href="blog-details.html" class="thm-btn blog-sidebar__load-more-btn">Load More
-                            Posts</a>
-                    </div>
+                    <h3 class="blog-sidebar__provide-services-title"><a href="blog-details.html">Supporting Your Parenting Journey with Expert Advice</a></h3>
+                </div>
+                <div class="blog-sidebar__load-more">
+                    <a href="#" class="thm-btn blog-sidebar__load-more-btn" id="load-more">Load More Posts</a>
                 </div>
             </div>
         </div>
     </div>
+<script>
+  
+</script>
+
     <!--Site Footer Start-->
     <footer class="site-footer-two">
         <div class="site-footer-two__shape-one float-bob-y">
@@ -506,7 +403,150 @@
     <!--Site Footer End-->
 </section>
 <!--Blog Sidebar End-->
+<!-- Modal for Adding a Post -->
+<div id="addPostModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add New Post</h2>
+        <form id="addPostForm">
+            <div class="post-creation-area">
+                <!-- Title Input -->
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="Title" placeholder="Enter the title of your post" required>
+                </div>
+                <textarea id="content" name="Content" placeholder="What's on your mind?" required></textarea>
+                <div class="form-group image-upload">
+                    <label for="image" class="image-label">Attach an Image</label>
+                    <input type="file" id="image" name="Image" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="Category">
+                        <option value="Creative Play">Creative Play</option>
+                        <option value="Outdoor Activities">Outdoor Activities</option>
+                        <option value="Screen Time Management">Screen Time Management</option>
+                        <option value="Skill Development">Skill Development</option>
+                        <option value="Parenting Tips">Parenting Tips</option>
+                    </select>
+                </div>
+                <button type="submit" class="thm-btn">Post</button>
+            </div>
+        </form>
+    </div>
+</div>
 
+</div>
+
+<style>
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Black background */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px; /* Padding from top */
+}
+
+.modal-content {
+    background-color: #fefefe; /* White background */
+    margin: 5% auto; /* Centered */
+    padding: 20px; /* Padding around content */
+    border: 1px solid #888; /* Light gray border */
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+    color: #aaa; /* Light gray */
+    float: right; /* Align to the right */
+    font-size: 28px; /* Font size */
+    font-weight: bold; /* Bold text */
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Darker on hover */
+    text-decoration: none; /* No underline */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space below form group */
+}
+
+.form-group label {
+    display: block; /* Block display for label */
+    margin-bottom: 5px; /* Space below label */
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.post-creation-area {
+    display: flex;
+    flex-direction: column; /* Column layout */
+}
+
+textarea {
+    height: 100px; /* Height for the textarea */
+    resize: none; /* Disable resizing */
+}
+
+.thm-btn {
+    background-color: #007bff; /* Button color */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px; /* Padding */
+    cursor: pointer; /* Pointer cursor */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.thm-btn:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.image-upload {
+    margin: 10px 0; /* Space above and below image upload */
+}
+
+.image-label {
+    display: block; /* Block display for label */
+    margin-bottom: 5px; /* Space below label */
+    color: #555; /* Dark gray */
+}
+</style>
+<script src="API-JS/blog.js"></script>
+<!-- JavaScript to Handle Modal -->
+<script>
+document.getElementById('addPostButton').onclick = function() {
+    document.getElementById('addPostModal').style.display = "block";
+}
+
+document.getElementsByClassName('close')[0].onclick = function() {
+    document.getElementById('addPostModal').style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById('addPostModal')) {
+        document.getElementById('addPostModal').style.display = "none";
+    }
+}
+document.querySelector('.image-label').addEventListener('click', function() {
+    document.getElementById('image').click();
+});
+
+</script>
 
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-up-arrow"></i></a>
 

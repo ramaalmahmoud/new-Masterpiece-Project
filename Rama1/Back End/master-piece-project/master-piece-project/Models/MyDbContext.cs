@@ -35,6 +35,8 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<ParentChat> ParentChats { get; set; }
 
+    public virtual DbSet<Payment> Payments { get; set; }
+
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<ProductCategory> ProductCategories { get; set; }
@@ -134,6 +136,7 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Image)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            entity.Property(e => e.IsConfirmed).HasDefaultValue(false);
             entity.Property(e => e.Title)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -259,6 +262,32 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.Sender).WithMany(p => p.ParentChatSenders)
                 .HasForeignKey(d => d.SenderId)
                 .HasConstraintName("FK__ParentCha__Sende__6E01572D");
+        });
+
+        modelBuilder.Entity<Payment>(entity =>
+        {
+            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A58FBF0CB8B");
+
+            entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
+            entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
+            entity.Property(e => e.PaymentDate).HasColumnType("datetime");
+            entity.Property(e => e.PaymentStatus).HasMaxLength(50);
+            entity.Property(e => e.PaymentType).HasMaxLength(50);
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.Appointment).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.AppointmentId)
+                .HasConstraintName("FK__Payments__Appoin__03F0984C");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.ProductId)
+                .HasConstraintName("FK__Payments__Produc__04E4BC85");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Payments__UserID__02FC7413");
         });
 
         modelBuilder.Entity<Product>(entity =>

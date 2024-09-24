@@ -41,6 +41,8 @@ public partial class User
 
     public virtual ICollection<ParentChat> ParentChatSenders { get; set; } = new List<ParentChat>();
 
+    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+
     public virtual ICollection<SavedPrintedActivity> SavedPrintedActivities { get; set; } = new List<SavedPrintedActivity>();
 
     public virtual ICollection<Suggestion> Suggestions { get; set; } = new List<Suggestion>();

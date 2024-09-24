@@ -25,6 +25,13 @@ options.AddPolicy("development", builder =>
 
 })
 );
+// Configure PayPal API
+builder.Services.AddSingleton(new PayPalConfiguration
+{
+    ClientId = "your-client-id",  // Replace with your PayPal client ID
+    ClientSecret = "your-client-secret",  // Replace with your PayPal client secret
+    Mode = "sandbox" // Change to "live" for production
+});
 builder.Services.AddSingleton<TokenGenerator>();
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = jwtSettings.GetValue<string>("Key");
