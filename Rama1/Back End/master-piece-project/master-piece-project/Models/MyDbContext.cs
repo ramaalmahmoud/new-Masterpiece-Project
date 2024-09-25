@@ -31,6 +31,8 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<Doctor> Doctors { get; set; }
 
+    public virtual DbSet<Instruction> Instructions { get; set; }
+
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<ParentChat> ParentChats { get; set; }
@@ -189,6 +191,7 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.IsApproved).HasDefaultValue(false);
             entity.Property(e => e.PostId).HasColumnName("PostID");
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
@@ -219,6 +222,26 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Doctors)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__Doctors__UserID__3A81B327");
+        });
+
+        modelBuilder.Entity<Instruction>(entity =>
+        {
+            entity.HasKey(e => e.InstructionId).HasName("PK__Instruct__CE0694514C83824E");
+
+            entity.Property(e => e.InstructionId).HasColumnName("InstructionID");
+            entity.Property(e => e.ActivityId).HasColumnName("ActivityID");
+            entity.Property(e => e.ImageUrl)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("ImageURL");
+            entity.Property(e => e.InstructionText)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Activity).WithMany(p => p.InstructionsNavigation)
+                .HasForeignKey(d => d.ActivityId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK__Instructi__Activ__17F790F9");
         });
 
         modelBuilder.Entity<Order>(entity =>

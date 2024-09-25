@@ -79,13 +79,29 @@ namespace master_piece_project.Controllers
         [HttpGet("getPostByID{id}")]
         public async Task<IActionResult> GetBlogPost(int id)
         {
-            var blogPost = await _db.BlogPosts.FindAsync(id);
+            var blogPost = await _db.BlogPosts
+                .Include(bp => bp.Author) // Assuming you have a navigation property for Author
+                .FirstOrDefaultAsync(bp => bp.PostId == id); // Use FirstOrDefaultAsync instead of FindAsync
+
             if (blogPost == null)
             {
                 return NotFound();
             }
-            return Ok(blogPost);
+
+            // Create a response model that includes the author's name
+            var response = new
+            {
+                blogPost.PostId,
+                blogPost.Title,
+                blogPost.Image,
+                blogPost.Content,
+                AuthorName = blogPost.Author.FullName, // Adjust based on your User model
+                                                   // Include other fields you want to return
+            };
+
+            return Ok(response);
         }
+
         [HttpGet("confirmedposts")]
         public async Task<IActionResult> GetConfirmedPosts()
         {
@@ -109,6 +125,35 @@ namespace master_piece_project.Controllers
             }
 
             return Ok(confirmedPosts); // Return the list of confirmed posts with author names
+        }
+        [HttpGet("sidebarData")]
+        public async Task<IActionResult> GetSidebarData()
+        {
+            // Fetch latest posts
+            var latestPosts = await _db.BlogPosts
+                .OrderByDescending(bp => bp.CreatedAt)
+                .Take(3) // Limit to the latest 3 posts
+                .Select(bp => new SidebarPostDto
+                {
+                    Id = bp.PostId,
+                    Title = bp.Title,
+                    ImageUrl = bp.Image,
+                    CommentCount = bp.Comments.Count() // Count of approved comments
+                })
+                .ToListAsync();
+
+            
+
+     
+
+            // Create response
+            var sidebarResponse = new SidebarResponse
+            {
+                LatestPosts = latestPosts,
+                
+            };
+
+            return Ok(sidebarResponse);
         }
 
 

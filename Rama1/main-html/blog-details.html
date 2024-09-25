@@ -243,10 +243,14 @@
                                 </div>
                             </div>
                         </div>
+                   
                         <div class="comment-one">
-                            <h3 class="comment-one__title"></h3> <!-- Dynamically populated -->
-                            <!-- Comments will be populated dynamically -->
+                            <h3 class="comment-one__title">Comments</h3>
+                            <div id="comments-container"></div>
                         </div>
+                        
+                       
+                        
                         <div class="comment-form">
                             <h3 class="comment-form__title">Leave a Comment</h3>
                             <form action="https://yourwebsite.com/submit-comment" class="comment-one__form contact-form-validated" novalidate="novalidate">
@@ -287,6 +291,7 @@
     </div>
 </section>
 <!--Blog Details End-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script >
 
@@ -298,6 +303,7 @@ async function fetchBlogPost(postId) {
         const response = await fetch(`https://localhost:7084/api/Blogs/getPostByID${postId}`);
         const post = await response.json();
         renderBlogPost(post);
+        
     } catch (error) {
         console.error('Error fetching blog post:', error);
     }
@@ -308,45 +314,28 @@ function renderBlogPost(post) {
     document.querySelector('.blog-details__img img').src = `../Back End/master-piece-project/master-piece-project/Uploads/Blogs/${post.image}`;
     document.querySelector('.blog-details__date p').innerHTML = formatDate(new Date(post.createdAt).getDate(),new Date(post.createdAt).toLocaleString('default', { month: 'short' }));
     document.querySelector('.blog-details__meta li:first-child a').innerText = `by ${post.authorName}`;
-    document.querySelector('.blog-details__meta li:nth-child(2) a').innerText = `${post.comments.length} Comments`;
+    // document.querySelector('.blog-details__meta li:nth-child(2) a').innerText = `${post.comments.length} Comments`;
     document.querySelector('.blog-details__title').innerText = post.title;
     document.querySelector('.blog-details__text-1').innerText = post.content[0];
     document.querySelector('.blog-details__text-2').innerText = post.content[1];
 
-    // Populate tags
-    const tagsList = document.querySelector('.blog-details__tags');
-    tagsList.innerHTML = `<span>Tags</span> ${post.tags.map(tag => `<a href="#">${tag}</a>`).join(' ')}`;
+    const recentArticlesContainer = document.getElementById('recent-articles');
+      // Populate recent articles
+      const recentArticleHTML = `
+                <li>
+                    <div class="sidebar__post-image">
+                        <img src="${post.image}" alt="">
+                    </div>
+                    <div class="sidebar__post-content">
+                        <h3>
+                            <span class="sidebar__post-content-meta"><i class="fa fa-comments"></i>${post.commentsCount} Comments</span>
+                            <a  href="blog-details.html">${post.title}</a>
+                        </h3>
+                    </div>
+                </li>
+            `;
+            recentArticlesContainer.insertAdjacentHTML('beforeend', recentArticleHTML);
 
-    // Populate comments
-    const commentsContainer = document.querySelector('.comment-one');
-    commentsContainer.innerHTML = post.comments.map(comment => `
-        <div class="comment-one__single">
-            <div class="comment-one__image">
-                <img src="${comment.image}" alt="Commenter Image">
-            </div>
-            <div class="comment-one__content">
-                <h3>${comment.name}</h3>
-                <p>${comment.message}</p>
-                <a href="#" class="thm-btn comment-one__btn">Reply</a>
-            </div>
-        </div>
-    `).join('');
-
-    // Update pagination (you may need to fetch previous and next posts separately)
-    const prevPost = post.prevPost;
-    const nextPost = post.nextPost;
-
-    if (prevPost) {
-        document.querySelector('.blog-details__pagenation-left .blog-details__pagenation-left-img img').src = prevPost.imageUrl;
-        document.querySelector('.blog-details__pagenation-left h4 a').innerText = prevPost.title;
-        document.querySelector('.blog-details__pagenation-left .blog-details__pagenation-left-date').innerText = formatDate(prevPost.date);
-    }
-
-    if (nextPost) {
-        document.querySelector('.blog-details__pagenation-right .blog-details__pagenation-right-img img').src = nextPost.imageUrl;
-        document.querySelector('.blog-details__pagenation-right h4 a').innerText = nextPost.title;
-        document.querySelector('.blog-details__pagenation-right .blog-details__pagenation-right-date').innerText = formatDate(nextPost.date);
-    }
 }
 
 function formatDate(dateString) {
@@ -357,6 +346,158 @@ function formatDate(dateString) {
 // Call fetchBlogPost with the ID of the post you want to display
 const postId = localStorage.getItem("PostID");// Implement this function to get the post ID from the URL
 fetchBlogPost(postId);
+async function fetchSidebarData() {
+    try {
+        const response = await fetch('https://localhost:7084/api/Blogs/sidebarData'); // Adjust the URL as needed
+        if (!response.ok) {
+            throw new Error('Network response was not ok' + response.statusText);
+        }
+
+        const data = await response.json();
+        displaySidebarData(data); // Call a function to handle displaying the data
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+    }
+}
+
+function displaySidebarData(data) {
+    debugger
+    const sidebarPostsContainer = document.querySelector('.sidebar__post-list'); // Adjust the selector as needed
+
+    // Clear existing posts if any
+   
+    data.latestPosts.forEach(post => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <div class="sidebar__post-image">
+                <img src="${post.imageUrl}" alt="Latest Post Image">
+            </div>
+            <div class="sidebar__post-content">
+                <h3>
+                    <span class="sidebar__post-content-meta"><i class="fa fa-comments"></i>${post.commentCount} Comment${post.commentCount !== 1 ? 's' : ''}</span>
+                    <a href="blog-details.html?id=${post.id}">${post.title}</a>
+                </h3>
+            </div>
+        `;
+        sidebarPostsContainer.appendChild(listItem);
+    });
+}
+debugger
+// Call the function to fetch and display sidebar data
+fetchSidebarData();
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//display comments
+debugger
+                        async function fetchComments(postId) {
+                            debugger
+                            const response = await fetch(`https://localhost:7084/api/Comments/comments/${postId}`);
+                            const commentsContainer = document.getElementById('comments-container');
+                        
+                            if (response.ok) {
+                                const comments = await response.json();
+                                comments.forEach(comment => {
+                                    const commentElement = `
+                                         <div class="comment-one__single">
+                                <div class="comment-one__image">
+                                    <img src="../Back End/master-piece-project/master-piece-project/Uploads/Profiles/${comment.userImage}" alt="Commenter Image">
+                                </div>
+                                <div class="comment-one__content">
+                                    <h3>${comment.userName}</h3>
+                                    <p>${comment.commentText}</p>
+                                    <a href="blog-details.html" class="thm-btn comment-one__btn">Reply</a>
+                                </div>
+                            </div>
+                                    `;
+                                    commentsContainer.insertAdjacentHTML('beforeend', commentElement);
+                                });
+                            } else {
+                                const result = await response.json();
+                                commentsContainer.innerHTML = `<p>${result.message}</p>`;
+                            }
+                        }
+                        
+                        // Call the function with the specific postId
+
+                        fetchComments(postId); // Change this ID dynamically based on your context
+
+
+
+                        
+
+// Add comment 
+document.querySelector('.comment-one__form').addEventListener('submit', async function (e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    // Get form data
+    const name = document.querySelector('input[name="name"]').value.trim();
+    const email = document.querySelector('input[name="email"]').value.trim();
+    const message = document.querySelector('textarea[name="message"]').value.trim();
+
+    // Validate fields
+    if (!name || !email || !message) {
+        // Display error message using SweetAlert for empty fields
+        Swal.fire({
+            icon: 'warning',
+            title: 'Validation Error',
+            text: 'Please fill in all fields before submitting your comment.',
+            confirmButtonText: 'OK'
+        });
+        return; // Stop execution if validation fails
+    }
+
+    // Create the comment object
+    const commentData = {
+        PostId: postId,
+        Name: name,
+        Email: email,
+        CommentText: message
+    };
+
+    try {
+        // Send the POST request to the API
+        const response = await fetch('https://localhost:7084/api/Comments/submitComment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(commentData)
+        });
+
+        // Handle response
+        if (response.ok) {
+            const result = await response.json();
+            
+            // Display success message using SweetAlert
+            Swal.fire({
+                icon: 'success',
+                title: 'Comment Submitted!',
+                text: result.message,
+                confirmButtonText: 'OK'
+            });
+
+        } else {
+            const error = await response.json();
+            
+            // Display error message using SweetAlert
+            Swal.fire({
+                icon: 'error',
+                title: 'Submission Failed',
+                text: error.message,
+                confirmButtonText: 'Try Again'
+            });
+        }
+    } catch (error) {
+        // Display general error using SweetAlert
+        Swal.fire({
+            icon: 'error',
+            title: 'Error Occurred',
+            text: 'An error occurred while submitting the comment. Please try again later.',
+            confirmButtonText: 'OK'
+        });
+    }
+});
+
 </script>
 
 <!--Site Footer Start-->

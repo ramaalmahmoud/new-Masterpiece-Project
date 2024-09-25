@@ -1,0 +1,2 @@
+ALTER TABLE Comments
+ADD IsApproved BIT  NULL DEFAULT 0;

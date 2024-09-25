@@ -11,7 +11,7 @@ public partial class Activity
 
     public string? Image { get; set; }
 
-    public int? CategoryId { get; set; }
+    public int CategoryId { get; set; }
 
     public string? AgeGroup { get; set; }
 
@@ -24,6 +24,8 @@ public partial class Activity
     public string? Suggestions { get; set; }
 
     public virtual ActivityCategory? Category { get; set; }
+
+    public virtual ICollection<Instruction> InstructionsNavigation { get; set; } = new List<Instruction>();
 
     public virtual ICollection<SavedPrintedActivity> SavedPrintedActivities { get; set; } = new List<SavedPrintedActivity>();
 
