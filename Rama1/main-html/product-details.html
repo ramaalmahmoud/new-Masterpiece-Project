@@ -50,6 +50,8 @@
     <!-- template styles -->
     <link rel="stylesheet" href="assets/css/delogis.css" />
     <link rel="stylesheet" href="assets/css/delogis-color-1.css" />
+
+
 </head>
 
 <body class="custom-cursor">
@@ -182,7 +184,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-xl-6">
                         <div class="product-details__img">
-                            <img src="assets/images/shop/product-2.jpg"alt="" />
+                            <img src=""alt="" />
                             <div class="product-details__img-search">
                                 <a class="img-popup" href="assets/images/shop/product-details-img-1.jpg"><span
                                         class="icon-magnifying-glass"></span></a>
@@ -191,7 +193,7 @@
                     </div>
                     <div class="col-lg-6 col-xl-6">
                         <div class="product-details__top">
-                            <h3 class="product-details__title">Children's Learning Book <span>$78.00</span> </h3>
+                            <h3 class="product-details__title"></h3>
                         </div>
                         <div class="product-details__reveiw">
                             <i class="fa fa-star"></i>
@@ -199,14 +201,11 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
-                            <span>2 customer reviews</span>
+                            <span></span>
                         </div>
                         <div class="product-details__content">
-                            <p class="product-details__content-text1">Aliquam hendrerit a augue insuscipit. Etiam
-                                aliquam massa quis des mauris commodo venenatis ligula commodo leez sed blandit
-                                convallis dignissim onec vel pellentesque neque.</p>
-                            <p class="product-details__content-text2">REF. 4231/406 <br>
-                                Available in store</p>
+                            <p class="product-details__content-text1"></p>
+                            <p class="product-details__content-text2"> </p>
                         </div>
 
                         <div class="product-details__quantity">
@@ -224,9 +223,10 @@
                                 <a href="product-details.html" class="thm-btn">Add to Wishlist</a>
                             </div>
 
-                            <div class="product-details__buttons-2">
-                                <a href="cart.html" class="thm-btn">Add to Cart</a>
-                            </div>
+                           <!-- Product Details Page Button -->
+<div class="product-details__buttons-2">
+    <a href="#" class="thm-btn" data-product-id="1" >Add to Cart</a>
+</div>
                         </div>
                         <div class="product-details__social">
                             <div class="title">
@@ -354,54 +354,64 @@
             </div>
         </section>
         <!--Review One End-->
+<style>
+    .review-form-one__rate i.fa-star {
+    color: var(--delogis-extra); /* Default color */
+    cursor: pointer; /* Change cursor on hover */
+}
 
-        <!--Start Review Form-->
-        <section class="review-form-one">
-            <div class="container">
-                <div class="review-form-one__inner">
-                    <h3 class="review-form-one__title">Add a Review</h3>
-                    <div class="review-form-one__rate-box">
-                        <p class="review-form-one__rate-text">Rate this Product?</p>
-                        <div class="review-form-one__rate">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                    <form action="https://bracketweb.com/delogis-html/main-html/assets/inc/sendemail.php" class="review-form-one__form contact-form-validated"
-                        novalidate="novalidate">
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="review-form-one__input-box text-message-box">
-                                    <textarea name="message" placeholder="Write  a Comment"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6">
-                                <div class="review-form-one__input-box">
-                                    <input type="text" placeholder="Your Name" name="name">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6">
-                                <div class="review-form-one__input-box">
-                                    <input type="email" placeholder="Email Address" name="email">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <button type="submit" class="thm-btn review-form-one__btn">Submit Comment</button>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="result"></div>
+.review-form-one__rate i.fa-star.checked {
+    color: var(--delogis-base); /* Color for checked stars */
+}
+
+</style>
+     <!--Start Review Form-->
+<section class="review-form-one">
+    <div class="container">
+        <div class="review-form-one__inner">
+            <h3 class="review-form-one__title">Add a Review</h3>
+            <div class="review-form-one__rate-box">
+                <p class="review-form-one__rate-text">Rate this Product?</p>
+                <div class="review-form-one__rate">
+                    <i class="fa fa-star" data-value="1"></i>
+                    <i class="fa fa-star" data-value="2"></i>
+                    <i class="fa fa-star" data-value="3"></i>
+                    <i class="fa fa-star" data-value="4"></i>
+                    <i class="fa fa-star" data-value="5"></i>
                 </div>
             </div>
-        </section>
-        <!--End Review Form-->
+            <form id="reviewForm" class="review-form-one__form contact-form-validated" novalidate="novalidate">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="review-form-one__input-box text-message-box">
+                            <textarea id="Comment" name="Comment" placeholder="Write a Comment" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="review-form-one__input-box">
+                            <input type="text" placeholder="Your Name" name="Name" required>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="review-form-one__input-box">
+                            <input type="email" placeholder="Email Address" name="Email" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <button type="submit" class="thm-btn review-form-one__btn">Submit Comment</button>
+                    </div>
+                </div>
+            </form>
+            <div class="result"></div>
+        </div>
+    </div>
+</section>
+<!--End Review Form-->
+
 <!--Site Footer Start-->
 <footer class="site-footer-two">
     <div class="site-footer-two__shape-one float-bob-y">
@@ -625,6 +635,8 @@
 
     <!-- template js -->
     <script src="assets/js/delogis.js"></script>
+    <script src="API-JS/product.js"></script>
+
 </body>
 
 

@@ -17,15 +17,13 @@ public partial class Activity
 
     public string? Duration { get; set; }
 
-    public string? Materials { get; set; }
-
-    public string? Instructions { get; set; }
-
     public string? Suggestions { get; set; }
 
-    public virtual ActivityCategory? Category { get; set; }
+    public virtual ActivityCategory Category { get; set; } = null!;
 
-    public virtual ICollection<Instruction> InstructionsNavigation { get; set; } = new List<Instruction>();
+    public virtual ICollection<Instruction> Instructions { get; set; } = new List<Instruction>();
+
+    public virtual ICollection<Material> Materials { get; set; } = new List<Material>();
 
     public virtual ICollection<SavedPrintedActivity> SavedPrintedActivities { get; set; } = new List<SavedPrintedActivity>();
 

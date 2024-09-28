@@ -43,6 +43,8 @@ public partial class User
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
+    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+
     public virtual ICollection<SavedPrintedActivity> SavedPrintedActivities { get; set; } = new List<SavedPrintedActivity>();
 
     public virtual ICollection<Suggestion> Suggestions { get; set; } = new List<Suggestion>();

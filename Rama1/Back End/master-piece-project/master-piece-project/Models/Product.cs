@@ -15,13 +15,17 @@ public partial class Product
 
     public int? Stock { get; set; }
 
-    public int? CategoryId { get; set; }
+    public int CategoryId { get; set; }
 
     public string? Image { get; set; }
 
     public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
-    public virtual ProductCategory? Category { get; set; }
+    public virtual ProductCategory Category { get; set; } = null!;
+
+    public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+
+    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 }

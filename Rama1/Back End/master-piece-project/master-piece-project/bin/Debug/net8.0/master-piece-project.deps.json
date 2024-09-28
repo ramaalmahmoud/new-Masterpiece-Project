@@ -14,6 +14,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "8.0.8",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "8.0.4",
           "PayPal": "1.9.1",
+          "PayPalCheckoutSdk": "1.0.4",
           "Swashbuckle.AspNetCore": "6.7.0"
         },
         "runtime": {
@@ -1625,6 +1626,25 @@
           }
         }
       },
+      "PayPalCheckoutSdk/1.0.4": {
+        "dependencies": {
+          "PayPalHttp": "1.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/PayPalCheckoutSdk.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "PayPalHttp/1.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/PayPalHttp-Dotnet.dll": {
+            "assemblyVersion": "1.0.1.0",
+            "fileVersion": "1.0.1.0"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.7.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
@@ -2786,6 +2806,20 @@
       "sha512": "sha512-b3vq6Lc9CwSooCX2tsZ02zb7E/K/cA6EILCoMynue+ZeVuitJNqt0YwxPnp7uN0Pccob02oDlpAjRLH+GRCRxA==",
       "path": "paypal/1.9.1",
       "hashPath": "paypal.1.9.1.nupkg.sha512"
+    },
+    "PayPalCheckoutSdk/1.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4fsOPj6SOJurbVf5ANg7NQ5TNvSYmtngf3dpJN11xEk6BP+5Rn6OcaaTbUx+bVnnYmgaoe5LbRZe52QpAjuwqg==",
+      "path": "paypalcheckoutsdk/1.0.4",
+      "hashPath": "paypalcheckoutsdk.1.0.4.nupkg.sha512"
+    },
+    "PayPalHttp/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Jlg8e9Egwxk+sfkIoGIkjQS+uxGNIOnY6NbUkWXKJiEGGqryeV9bIRNtSfjSgs/g02JcIQbKRFQW+8amtSo3ig==",
+      "path": "paypalhttp/1.0.1",
+      "hashPath": "paypalhttp.1.0.1.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.7.0": {
       "type": "package",

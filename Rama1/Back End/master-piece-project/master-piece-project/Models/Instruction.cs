@@ -9,7 +9,7 @@ public partial class Instruction
 
     public int? ActivityId { get; set; }
 
-    public int? StepNumber { get; set; }
+    public int StepNumber { get; set; }
 
     public string? InstructionText { get; set; }
 

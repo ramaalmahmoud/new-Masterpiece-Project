@@ -191,211 +191,36 @@
         </section>
         <!--Page Header End-->
         
-
         <div class="row">
             <!-- Indexing Sidebar -->
             <div class="col-xl-3 col-lg-3">
                 <div class="product__sidebar">
                     <div class="shop-search product__sidebar-single">
-                        <form action="#">
-                            <input type="text" placeholder="Search Activities...">
+                        <form id="search-form">
+                            <input type="text" id="search-input" placeholder="Search Activities...">
                         </form>
                     </div>
                     <div class="shop-category product__sidebar-single">
                         <h3 class="product__sidebar-title">Categories</h3>
-                        <ul class="list-unstyled">
-                            <li><a href="#strawberry-playdough">Strawberry Playdough</a></li>
-                            <li><a href="#summer-scavenger-hunt">Summer Scavenger Hunt</a></li>
-                            <li><a href="#paper-roll-bugs">Paper Roll Bugs</a></li>
-                            <li><a href="#ice-cream-color-by-number">Ice Cream Color by Number</a></li>
-                            <li><a href="#ocean-i-spy">Ocean I Spy</a></li>
-                            <li><a href="#beach-color-by-number">Beach Color by Number</a></li>
-                            <li><a href="#nature-scavenger-hunt">Nature Scavenger Hunt</a></li>
-                            <li><a href="#summer-word-scramble">Summer Word Scramble</a></li>
-                            <li><a href="#popsicle-stick-bird-feeder">DIY Popsicle Stick Bird Feeder</a></li>
-                            <li><a href="#4th-of-july-bingo">4th of July Bingo</a></li>
-                            <li><a href="#unicorn-color-by-number">Unicorn Color by Number</a></li>
-                            <li><a href="#dinosaur-color-by-number">Dinosaur Color by Number</a></li>
+                        <ul id="categories-list" class="list-unstyled">
+                            <!-- Categories will be dynamically inserted here -->
                         </ul>
                     </div>
                 </div>
             </div>
+            
             <!-- Activities Section -->
             <div class="col-xl-9 col-lg-9">
                 <div class="product__items">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="strawberry-playdough">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/strawberry-playdough.jpg" alt="Strawberry Playdough">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">Strawberry Playdough</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="summer-scavenger-hunt">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/summer-scavenger-hunt.jpg" alt="Summer Scavenger Hunt">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">Summer Scavenger Hunt</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="paper-roll-bugs">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/paper-roll-bugs.jpg" alt="Paper Roll Bugs">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">Paper Roll Bugs</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="ice-cream-color-by-number">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/ice-cream-color-by-number.jpg" alt="Ice Cream Color by Number">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">Ice Cream Color by Number</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="ocean-i-spy">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/ocean-i-spy.jpg" alt="Ocean I Spy">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">Ocean I Spy</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="beach-color-by-number">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/beach-color-by-number.jpg" alt="Beach Color by Number">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">Beach Color by Number</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="nature-scavenger-hunt">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/nature-scavenger-hunt.jpg" alt="Nature Scavenger Hunt">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">Nature Scavenger Hunt</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="summer-word-scramble">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/summer-word-scramble.jpg" alt="Summer Word Scramble">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">Summer Word Scramble</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="popsicle-stick-bird-feeder">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/popsicle-stick-bird-feeder.jpg" alt="DIY Popsicle Stick Bird Feeder">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">DIY Popsicle Stick Bird Feeder</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="4th-of-july-bingo">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/4th-of-july-bingo.jpg" alt="4th of July Bingo">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">4th of July Bingo</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="unicorn-color-by-number">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/unicorn-color-by-number.jpg" alt="Unicorn Color by Number">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">Unicorn Color by Number</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6" id="dinosaur-color-by-number">
-                            <div class="services-two__single">
-                                <div class="services-two__img-box">
-                                    <div class="services-two__img">
-                                        <img src="assets/images/activities/dinosaur-color-by-number.jpg" alt="Dinosaur Color by Number">
-                                    </div>
-                                </div>
-                                <div class="services-two__content">
-                                    <div class="services-two__title-box">
-                                        <h3 class="services-two__title"><a href="activity-details.html">Dinosaur Color by Number</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="activities-container" class="row">
+                        <!-- Activities will be dynamically inserted here -->
                     </div>
                 </div>
             </div>
         </div>
+        
+       
+        
         
 
 <!--Site Footer Start-->
@@ -619,6 +444,8 @@
 
     <!-- template js -->
     <script src="assets/js/delogis.js"></script>
+    <script src="API-JS/activity.js"></script>
+
 </body>
 
 

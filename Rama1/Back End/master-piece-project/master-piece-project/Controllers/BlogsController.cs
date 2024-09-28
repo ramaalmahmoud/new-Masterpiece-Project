@@ -119,7 +119,7 @@ namespace master_piece_project.Controllers
                 })
                 .ToListAsync();
 
-            if (confirmedPosts == null || confirmedPosts.Count == 0)
+            if (confirmedPosts == null || confirmedPosts?.Count == 0)
             {
                 return NotFound("No confirmed posts found.");
             }

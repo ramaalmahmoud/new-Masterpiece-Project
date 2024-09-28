@@ -41,6 +41,58 @@ namespace master_piece_project.Controllers
             return Ok(activities);
         }
 
+        [HttpGet("GetCategories")]
+        public async Task<IActionResult> GetCategories()
+        {
+            var categories = await _db.ActivityCategories.ToListAsync();
+            return Ok(categories);
+        }
+        [HttpGet("GetActivityWithDetails/{id}")]
+        
+        public async Task<ActionResult<ActivityWithMaterialsDto>> GetActivityWithMaterials(int id)
+        {
+            var activity = await _db.Activities
+    .Include(a => a.Materials) // Include the related materials
+    .Include(a => a.Instructions) // Include instructions
+    .FirstOrDefaultAsync(a => a.ActivityId == id);
+
+
+            if (activity == null)
+            {
+                return NotFound();
+            }
+
+            var activityDto = new ActivityWithMaterialsDto
+            {
+                Title = activity.Title,
+                Image = activity.Image,
+                Materials = activity.Materials?.Select(m => m.Name).ToList() ?? new List<string>(), // Ensure it returns a list, even if null
+                Instructions = activity.Instructions?.Select(i => new InstructionDto
+                {
+                    StepNumber = i.StepNumber,
+                    InstructionText = i.InstructionText,
+                    ImageUrl = i.ImageUrl
+                }).ToList() ?? new List<InstructionDto>() // Ensure this also returns a list
+            };
+
+
+            return Ok(activityDto);
+        }
+
+        public class ActivityWithMaterialsDto
+        {
+            public string Title { get; set; }
+            public string Image { get; set; }
+            public List<string> Materials { get; set; }
+            public List<InstructionDto> Instructions { get; set; }
+        }
+
+        public class InstructionDto
+        {
+            public int StepNumber { get; set; }
+            public string InstructionText { get; set; }
+            public string ImageUrl { get; set; }
+        }
 
 
     }

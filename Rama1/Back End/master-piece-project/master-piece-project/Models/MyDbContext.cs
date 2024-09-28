@@ -33,7 +33,11 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<Instruction> Instructions { get; set; }
 
+    public virtual DbSet<Material> Materials { get; set; }
+
     public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<OrderProduct> OrderProducts { get; set; }
 
     public virtual DbSet<ParentChat> ParentChats { get; set; }
 
@@ -44,6 +48,8 @@ public partial class MyDbContext : DbContext
     public virtual DbSet<ProductCategory> ProductCategories { get; set; }
 
     public virtual DbSet<PsychologicalSession> PsychologicalSessions { get; set; }
+
+    public virtual DbSet<Review> Reviews { get; set; }
 
     public virtual DbSet<SavedPrintedActivity> SavedPrintedActivities { get; set; }
 
@@ -76,8 +82,6 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Image)
                 .HasMaxLength(255)
                 .IsUnicode(false);
-            entity.Property(e => e.Instructions).HasColumnType("text");
-            entity.Property(e => e.Materials).HasColumnType("text");
             entity.Property(e => e.Suggestions).HasColumnType("text");
             entity.Property(e => e.Title)
                 .HasMaxLength(255)
@@ -85,6 +89,7 @@ public partial class MyDbContext : DbContext
 
             entity.HasOne(d => d.Category).WithMany(p => p.Activities)
                 .HasForeignKey(d => d.CategoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Activitie__Categ__4AB81AF0");
         });
 
@@ -238,10 +243,22 @@ public partial class MyDbContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.Activity).WithMany(p => p.InstructionsNavigation)
+            entity.HasOne(d => d.Activity).WithMany(p => p.Instructions)
                 .HasForeignKey(d => d.ActivityId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__Instructi__Activ__17F790F9");
+        });
+
+        modelBuilder.Entity<Material>(entity =>
+        {
+            entity.HasKey(e => e.MaterialId).HasName("PK__Material__C50610F71DA8D4EB");
+
+            entity.Property(e => e.Name).HasMaxLength(255);
+
+            entity.HasOne(d => d.Activity).WithMany(p => p.Materials)
+                .HasForeignKey(d => d.ActivityId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Materials__Activ__1AD3FDA4");
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -264,6 +281,21 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__Orders__UserID__628FA481");
+        });
+
+        modelBuilder.Entity<OrderProduct>(entity =>
+        {
+            entity.HasKey(e => e.OrderProductId).HasName("PK__OrderPro__29B019C2738D3525");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderProducts)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__OrderProd__Order__2EDAF651");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.OrderProducts)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__OrderProd__Produ__2FCF1A8A");
         });
 
         modelBuilder.Entity<ParentChat>(entity =>
@@ -330,6 +362,7 @@ public partial class MyDbContext : DbContext
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CategoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Products__Catego__5EBF139D");
         });
 
@@ -359,6 +392,28 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.Doctor).WithMany(p => p.PsychologicalSessions)
                 .HasForeignKey(d => d.DoctorId)
                 .HasConstraintName("FK__Psycholog__Docto__5165187F");
+        });
+
+        modelBuilder.Entity<Review>(entity =>
+        {
+            entity.HasKey(e => e.ReviewId).HasName("PK__Reviews__74BC79AE1D8CBD5B");
+
+            entity.Property(e => e.ReviewId).HasColumnName("ReviewID");
+            entity.Property(e => e.Comment).HasMaxLength(500);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Reviews__Product__2B0A656D");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_Reviews_Users");
         });
 
         modelBuilder.Entity<SavedPrintedActivity>(entity =>
