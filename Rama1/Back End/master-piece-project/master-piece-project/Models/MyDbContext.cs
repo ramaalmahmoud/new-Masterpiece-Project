@@ -29,7 +29,11 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<Comment> Comments { get; set; }
 
+    public virtual DbSet<ContactMessage> ContactMessages { get; set; }
+
     public virtual DbSet<Doctor> Doctors { get; set; }
+
+    public virtual DbSet<DoctorAvailability> DoctorAvailabilities { get; set; }
 
     public virtual DbSet<Instruction> Instructions { get; set; }
 
@@ -108,9 +112,7 @@ public partial class MyDbContext : DbContext
             entity.HasKey(e => e.AppointmentId).HasName("PK__Appointm__8ECDFCA2D17CA7CA");
 
             entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
-            entity.Property(e => e.AppointmentDate)
-                .IsRowVersion()
-                .IsConcurrencyToken();
+            entity.Property(e => e.AppointmentDate).HasColumnType("datetime");
             entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
             entity.Property(e => e.Notes).HasColumnType("text");
             entity.Property(e => e.SessionType)
@@ -209,6 +211,19 @@ public partial class MyDbContext : DbContext
                 .HasConstraintName("FK__Comments__UserID__45F365D3");
         });
 
+        modelBuilder.Entity<ContactMessage>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ContactM__3214EC07AD8BC7F3");
+
+            entity.Property(e => e.ContactReason).HasMaxLength(50);
+            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Phone).HasMaxLength(50);
+            entity.Property(e => e.SubmittedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+        });
+
         modelBuilder.Entity<Doctor>(entity =>
         {
             entity.HasKey(e => e.DoctorId).HasName("PK__Doctors__2DC00EDF8425C108");
@@ -227,6 +242,20 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Doctors)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__Doctors__UserID__3A81B327");
+        });
+
+        modelBuilder.Entity<DoctorAvailability>(entity =>
+        {
+            entity.HasKey(e => e.DoctorAvailabilityId).HasName("PK__DoctorAv__C7493B7397AE6465");
+
+            entity.ToTable("DoctorAvailability");
+
+            entity.Property(e => e.AvailableTime).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Doctor).WithMany(p => p.DoctorAvailabilities)
+                .HasForeignKey(d => d.DoctorId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__DoctorAva__Docto__40058253");
         });
 
         modelBuilder.Entity<Instruction>(entity =>
@@ -287,6 +316,8 @@ public partial class MyDbContext : DbContext
         {
             entity.HasKey(e => e.OrderProductId).HasName("PK__OrderPro__29B019C2738D3525");
 
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
+
             entity.HasOne(d => d.Order).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -329,16 +360,15 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.PaymentDate).HasColumnType("datetime");
             entity.Property(e => e.PaymentStatus).HasMaxLength(50);
             entity.Property(e => e.PaymentType).HasMaxLength(50);
-            entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.Appointment).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.AppointmentId)
                 .HasConstraintName("FK__Payments__Appoin__03F0984C");
 
-            entity.HasOne(d => d.Product).WithMany(p => p.Payments)
-                .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("FK__Payments__Produc__04E4BC85");
+            entity.HasOne(d => d.Order).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("FK_Payment_Order");
 
             entity.HasOne(d => d.User).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.UserId)

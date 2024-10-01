@@ -360,6 +360,7 @@
         debugger
 //Activity with details
 async function fetchActivityDetails(activityId) {
+    debugger
     try {
         const response = await fetch(`https://localhost:7084/api/Activities/GetActivityWithDetails/${activityId}`);
         if (!response.ok) {
@@ -369,17 +370,17 @@ async function fetchActivityDetails(activityId) {
         const activity = await response.json();
 
         // Set the activity title
-        document.querySelector('.activity-title').textContent = activity.Title;
+        document.querySelector('.activity-title').textContent = activity.title;
 
         // Set the activity image
-        document.querySelector('.activity-image').src = activity.Image;
+        document.querySelector('.activity-image').src = activity.image;
 
         // Set the materials
         const materialsChecklist = document.querySelector('.ingredients-checklist');
         materialsChecklist.innerHTML = ''; // Clear existing list
 
-        if (Array.isArray(activity.Materials)) {
-            activity.Materials.forEach(material => {
+        if (Array.isArray(activity.materials)) {
+            activity.materials.forEach(material => {
                 const materialItem = document.createElement('li');
                 materialItem.innerHTML = `<input type="checkbox" id="${material}"><label for="${material}"><i class="fas fa-cube"></i> ${material}</label>`;
                 materialsChecklist.appendChild(materialItem);
@@ -390,13 +391,15 @@ async function fetchActivityDetails(activityId) {
         const instructionsList = document.querySelector('.instructions-list');
         instructionsList.innerHTML = ''; // Clear existing list
 
-        if (Array.isArray(activity.Instructions)) {
-            activity.Instructions.forEach(instruction => {
+        if (Array.isArray(activity.instructions)) {
+         
+            activity.instructions.forEach(instruction => {
+                console.log(instruction)
                 const instructionItem = document.createElement('li');
                 instructionItem.innerHTML = `
-                    <i class="fas fa-hand-holding"></i> ${instruction.InstructionText}
+                    <i class="fas fa-hand-holding"></i> ${instruction.instructionText}
                     
-                    <img src="${instruction.ImageUrl}" alt="Step ${instruction.StepNumber}" class="step-image">
+                    <img src="${instruction.imageUrl}" alt="Step ${instruction.stepNumber}" class="step-image">
                 `;
                 instructionsList.appendChild(instructionItem);
             });

@@ -117,72 +117,72 @@ document.getElementById('load-more').addEventListener('click', (event) => {
 });
 
 
-// Example: Fetching blog post data dynamically
-async function fetchBlogPost(postId) {
-    debugger
-    try {
-        const response = await fetch(`https://localhost:7084/api/Blogs/getPostByID${postId}`);
-        const post = await response.json();
-        renderBlogPost(post);
-    } catch (error) {
-        console.error('Error fetching blog post:', error);
-    }
-}
-debugger
-function renderBlogPost(post) {
-    // Populate the blog details with the fetched data
-    document.querySelector('.blog-details__img img').src = `../Back End/master-piece-project/master-piece-project/Uploads/Blogs/${post.image}`;
-    document.querySelector('.blog-details__date p').innerHTML = formatDate(new Date(post.createdAt).getDate(),new Date(post.createdAt).toLocaleString('default', { month: 'short' }));
-    document.querySelector('.blog-details__meta li:first-child a').innerText = `by ${post.authorName}`;
-    document.querySelector('.blog-details__meta li:nth-child(2) a').innerText = `${post.comments.length} Comments`;
-    document.querySelector('.blog-details__title').innerText = post.title;
-    document.querySelector('.blog-details__text-1').innerText = post.content[0];
-    document.querySelector('.blog-details__text-2').innerText = post.content[1];
+// // Example: Fetching blog post data dynamically
+// async function fetchBlogPost(postId) {
+//     debugger
+//     try {
+//         const response = await fetch(`https://localhost:7084/api/Blogs/getPostByID${postId}`);
+//         const post = await response.json();
+//         renderBlogPost(post);
+//     } catch (error) {
+//         console.error('Error fetching blog post:', error);
+//     }
+// }
+// debugger
+// function renderBlogPost(post) {
+//     // Populate the blog details with the fetched data
+//     document.querySelector('.blog-details__img img').src = `../Back End/master-piece-project/master-piece-project/Uploads/Blogs/${post.image}`;
+//     document.querySelector('.blog-details__date p').innerHTML = formatDate(new Date(post.createdAt).getDate(),new Date(post.createdAt).toLocaleString('default', { month: 'short' }));
+//     document.querySelector('.blog-details__meta li:first-child a').innerText = `by ${post.authorName}`;
+//     document.querySelector('.blog-details__meta li:nth-child(2) a').innerText = `${post.comments.length} Comments`;
+//     document.querySelector('.blog-details__title').innerText = post.title;
+//     document.querySelector('.blog-details__text-1').innerText = post.content[0];
+//     document.querySelector('.blog-details__text-2').innerText = post.content[1];
 
-    // Populate tags
-    const tagsList = document.querySelector('.blog-details__tags');
-    tagsList.innerHTML = `<span>Tags</span> ${post.tags.map(tag => `<a href="#">${tag}</a>`).join(' ')}`;
+//     // Populate tags
+//     const tagsList = document.querySelector('.blog-details__tags');
+//     tagsList.innerHTML = `<span>Tags</span> ${post.tags.map(tag => `<a href="#">${tag}</a>`).join(' ')}`;
 
-    // Populate comments
-    const commentsContainer = document.querySelector('.comment-one');
-    commentsContainer.innerHTML = post.comments.map(comment => `
-        <div class="comment-one__single">
-            <div class="comment-one__image">
-                <img src="${comment.image}" alt="Commenter Image">
-            </div>
-            <div class="comment-one__content">
-                <h3>${comment.name}</h3>
-                <p>${comment.message}</p>
-                <a href="#" class="thm-btn comment-one__btn">Reply</a>
-            </div>
-        </div>
-    `).join('');
+//     // Populate comments
+//     const commentsContainer = document.querySelector('.comment-one');
+//     commentsContainer.innerHTML = post.comments.map(comment => `
+//         <div class="comment-one__single">
+//             <div class="comment-one__image">
+//                 <img src="${comment.image}" alt="Commenter Image">
+//             </div>
+//             <div class="comment-one__content">
+//                 <h3>${comment.name}</h3>
+//                 <p>${comment.message}</p>
+//                 <a href="#" class="thm-btn comment-one__btn">Reply</a>
+//             </div>
+//         </div>
+//     `).join('');
 
-    // Update pagination (you may need to fetch previous and next posts separately)
-    const prevPost = post.prevPost;
-    const nextPost = post.nextPost;
+//     // Update pagination (you may need to fetch previous and next posts separately)
+//     const prevPost = post.prevPost;
+//     const nextPost = post.nextPost;
 
-    if (prevPost) {
-        document.querySelector('.blog-details__pagenation-left .blog-details__pagenation-left-img img').src = prevPost.imageUrl;
-        document.querySelector('.blog-details__pagenation-left h4 a').innerText = prevPost.title;
-        document.querySelector('.blog-details__pagenation-left .blog-details__pagenation-left-date').innerText = formatDate(prevPost.date);
-    }
+//     if (prevPost) {
+//         document.querySelector('.blog-details__pagenation-left .blog-details__pagenation-left-img img').src = prevPost.imageUrl;
+//         document.querySelector('.blog-details__pagenation-left h4 a').innerText = prevPost.title;
+//         document.querySelector('.blog-details__pagenation-left .blog-details__pagenation-left-date').innerText = formatDate(prevPost.date);
+//     }
 
-    if (nextPost) {
-        document.querySelector('.blog-details__pagenation-right .blog-details__pagenation-right-img img').src = nextPost.imageUrl;
-        document.querySelector('.blog-details__pagenation-right h4 a').innerText = nextPost.title;
-        document.querySelector('.blog-details__pagenation-right .blog-details__pagenation-right-date').innerText = formatDate(nextPost.date);
-    }
-}
+//     if (nextPost) {
+//         document.querySelector('.blog-details__pagenation-right .blog-details__pagenation-right-img img').src = nextPost.imageUrl;
+//         document.querySelector('.blog-details__pagenation-right h4 a').innerText = nextPost.title;
+//         document.querySelector('.blog-details__pagenation-right .blog-details__pagenation-right-date').innerText = formatDate(nextPost.date);
+//     }
+// }
 
-function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-}
+// function formatDate(dateString) {
+//     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+//     return new Date(dateString).toLocaleDateString(undefined, options);
+// }
 
 // Call fetchBlogPost with the ID of the post you want to display
-const postId = localStorage.getItem("PostID");// Implement this function to get the post ID from the URL
-fetchBlogPost(postId);
+// const postId = localStorage.getItem("PostID");// Implement this function to get the post ID from the URL
+// fetchBlogPost(postId);
 
 
 

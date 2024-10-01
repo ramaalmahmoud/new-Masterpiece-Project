@@ -17,6 +17,66 @@ namespace master_piece_project.Controllers
         {
             _db = db;
         }
+
+        // GET: api/BlogPost
+        [HttpGet("getAllBlogbost")]
+        public IActionResult GetBlogPosts()
+        {
+            var posts =  _db.BlogPosts
+                .Include(p => p.Author)
+                .Select(post => new
+                {
+                    post.PostId,
+                    post.Title,
+                    post.Content,
+                    post.CreatedAt,
+                    post.Category,
+                    post.Image,
+                    Author = post.Author.FullName,
+                    post.CommentsCount
+                })
+                .ToList();
+
+            return Ok(posts);
+        }
+        [HttpPut("approve/{id}")]
+        public IActionResult ApprovePost(int id)
+        {
+            // Find the blog post by its ID
+            var post =  _db.BlogPosts.Find(id);
+
+            if (post == null)
+            {
+                return NotFound("Post not found.");
+            }
+
+            // Update the IsConfirmed field to true
+          post.IsConfirmed = true;
+
+            // Save the changes to the database
+             _db.SaveChanges();
+
+            return Ok(new { message = "Post approved successfully." });
+        }
+        [HttpPut("reject/{id}")]
+        public IActionResult RejectPost(int id)
+        {
+            var post = _db.BlogPosts.Find(id);
+
+            if (post == null)
+            {
+                return NotFound("Post not found.");
+            }
+
+            // Update the IsConfirmed field to false
+            post.IsConfirmed = false;
+
+            _db.SaveChanges();
+
+            return Ok(new { message = "Post rejected successfully." });
+        }
+
+
         [HttpPost("createpost")]
         public async Task<IActionResult> CreateBlogPost([FromForm] CreateBlogPostRequest request)
         {
@@ -103,10 +163,10 @@ namespace master_piece_project.Controllers
         }
 
         [HttpGet("confirmedposts")]
-        public async Task<IActionResult> GetConfirmedPosts()
+        public IActionResult GetConfirmedPosts()
         {
-            var confirmedPosts = await _db.BlogPosts
-                .Where(post => post.IsConfirmed) // Filter by confirmed posts
+            var confirmedPosts = _db.BlogPosts
+                .Where(post => post.IsConfirmed == true) // Filter by confirmed posts
                 .Select(post => new
                 {
                     PostId = post.PostId,
@@ -117,15 +177,17 @@ namespace master_piece_project.Controllers
                     Category = post.Category,
                     AuthorName = post.Author.FullName // Assuming 'UserName' is the author's name in the 'Users' table
                 })
-                .ToListAsync();
+                .ToList();
 
-            if (confirmedPosts == null || confirmedPosts?.Count == 0)
+            if (confirmedPosts == null)
             {
                 return NotFound("No confirmed posts found.");
             }
 
             return Ok(confirmedPosts); // Return the list of confirmed posts with author names
         }
+
+       
         [HttpGet("sidebarData")]
         public async Task<IActionResult> GetSidebarData()
         {

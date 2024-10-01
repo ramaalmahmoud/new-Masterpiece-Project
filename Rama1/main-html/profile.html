@@ -216,17 +216,49 @@
             <div class="col-xl-4 col-lg-5">
                 <div class="profile__left">
                     <div class="profile__img">
-                        <img src="assets/images/testimonial/testimonial-1-1.jpg" alt="Profile Picture">
+                        <img id="profilePicture" src="assets/images/testimonial/testimonial-1-1.jpg" alt="Profile Picture">
                     </div>
                     <div class="profile__info">
-                        <h2>[UserName]</h2>
-                        <p>Email: [UserEmail]</p>
-                        <p>Joined on: [JoinDate]</p>
-                        <a href="/settings" class="thm-btn profile__btn">Edit Profile</a>
+                        <h2 id="username">[UserName]</h2>
+                        <p id="email">Email: [UserEmail]</p>
+                        <!-- <p id="profilePicture">Joined on: [JoinDate]</p> -->
+                        <a href="javascript:void(0);" class="thm-btn profile__btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</a>
                     </div>
                 </div>
             </div>
-            
+            <!-- Edit Profile Modal Start -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form for Editing User Information -->
+                <form id="editProfileForm">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name">
+                    </div>
+                  
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number">
+                    </div>
+                    <div class="mb-3">
+                        <label for="profilePicture" class="form-label">Profile Picture</label>
+                        <input type="file" class="form-control" id="profilePicture" name="profilePicture">
+                        <img id="img-profile" src="" alt="profile Picture">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Profile Modal End -->
+
             <!-- Profile Details -->
             <div class="col-xl-8 col-lg-7">
                 <div class="profile__right">
@@ -466,5 +498,6 @@
 
     <!-- template js -->
     <script src="assets/js/delogis.js"></script>  
+    <script src="API-JS/profile.js"></script>
 </body>
 </html>

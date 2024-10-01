@@ -421,10 +421,113 @@
                                 </div><!-- /.checkout__payment__item -->
                             </div><!-- /.checkout__payment -->
                             <div class="text-right d-flex justify-content-end">
-                                <a href="checkout.html" class="thm-btn">Place your Order</a>
+                                <a href="checkout.html" class="thm-btn" id="place-order-button">Place your Order</a>
                             </div><!-- /.text-right -->
 
                         </div><!-- /.col-lg-6 -->
+                        <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const placeOrderButton = document.getElementById('place-order-button');
+        const paymentItems = document.querySelectorAll('.checkout__payment__item');
+        let selectedPaymentMethod = 'bank'; // Default to Direct Bank Transfer
+
+        // Click event to toggle payment method selection
+        paymentItems.forEach((item, index) => {
+            item.addEventListener('click', function () {
+                paymentItems.forEach(paymentItem => paymentItem.classList.remove('checkout__payment__item--active'));
+                item.classList.add('checkout__payment__item--active');
+
+                // Check which payment method is selected
+                if (index === 1) {
+                    selectedPaymentMethod = 'paypal';
+                    showPayPalButton();
+                } else {
+                    selectedPaymentMethod = 'bank';
+                    hidePayPalButton();
+                }
+            });
+        });
+
+        // Function to show PayPal buttons if PayPal is selected
+        function showPayPalButton() {
+            const paypalContainer = document.getElementById('paypal-button-container');
+            if (!paypalContainer) {
+                const paypalHTML = `<div id="paypal-button-container"></div>`;
+                paymentItems[1].insertAdjacentHTML('beforeend', paypalHTML);
+
+                // Initialize PayPal buttons
+                paypal.Buttons({
+                    createOrder: function (data, actions) {
+                        // This sets up the transaction on the server
+                        return fetch('/api/paypal/create-order', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                amount: '10.00' // Replace with the actual amount
+                            })
+                        }).then(function (response) {
+                            return response.json();
+                        }).then(function (orderData) {
+                            return orderData.id;
+                        });
+                    },
+                    onApprove: function (data, actions) {
+                        // This captures the funds from the transaction.
+                        return fetch('/api/paypal/capture-order', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                orderId: data.orderID
+                            })
+                        }).then(function (response) {
+                            return response.json();
+                        }).then(function (captureData) {
+                            if (captureData.status === 'COMPLETED') {
+                                alert('Payment successful! Order ID: ' + captureData.id);
+                                // Redirect to a success page or process the order
+                            } else {
+                                alert('Payment was not completed. Please try again.');
+                            }
+                        });
+                    },
+                    onError: function (err) {
+                        console.error('PayPal error', err);
+                        alert('An error occurred during the payment process.');
+                    }
+                }).render('#paypal-button-container'); // Render the PayPal buttons
+            }
+        }
+
+        // Function to hide PayPal buttons if another method is selected
+        function hidePayPalButton() {
+            const paypalContainer = document.getElementById('paypal-button-container');
+            if (paypalContainer) {
+                paypalContainer.remove();
+            }
+        }
+
+        // Handle Place Order button click
+        placeOrderButton.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default link behavior
+
+            if (selectedPaymentMethod === 'paypal') {
+                // Handle PayPal payment (PayPal buttons will handle the flow)
+                alert('Please complete the payment through PayPal.');
+            } else if (selectedPaymentMethod === 'bank') {
+                // Handle Direct Bank Transfer (show confirmation message)
+                alert('Thank you! Your order will be processed once payment has been received.');
+                // You can add logic here to process the bank transfer order
+            }
+        });
+    });
+</script>
+
                     </div>
                 </div>
             </div>
@@ -653,6 +756,7 @@
 
     <!-- template js -->
     <script src="assets/js/delogis.js"></script>
+    <script src="API-JS/checkout.js"></script>
 </body>
 
 

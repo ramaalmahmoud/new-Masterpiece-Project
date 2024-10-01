@@ -11,11 +11,11 @@ public partial class Appointment
 
     public int? DoctorId { get; set; }
 
-    public byte[] AppointmentDate { get; set; } = null!;
-
     public string? SessionType { get; set; }
 
     public string? Notes { get; set; }
+
+    public DateTime? AppointmentDate { get; set; }
 
     public virtual Doctor? Doctor { get; set; }
 

@@ -31,6 +31,7 @@ namespace master_piece_project.Controllers
                 Title = p.Title,
                 Price = p.Price,
                 Image = p.Image,
+                categoryID=p.CategoryId,
                 Stars = GetAverageRating(p.ProductId) // Method to calculate the average rating
             }).ToList();
 

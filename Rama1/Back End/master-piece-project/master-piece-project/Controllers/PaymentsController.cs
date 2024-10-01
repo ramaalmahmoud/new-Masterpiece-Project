@@ -1,5 +1,7 @@
 ﻿using master_piece_project.DTO;
 using master_piece_project.Models;
+using master_piece_project.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,29 +12,25 @@ namespace master_piece_project.Controllers
     [ApiController]
     public class PaymentsController : ControllerBase
     {
-        private readonly MyDbContext _db;
-        public PaymentsController(MyDbContext db)
+        private readonly PayPalService _payPalService;
+
+        public PaymentsController(PayPalService payPalService)
         {
-            _db = db;
+            _payPalService = payPalService;
         }
-        [HttpPost]
-        public IActionResult CreatePayment([FromBody] PaymentRequestDTO request)
+
+        [HttpPost("create-order")]
+        public async Task<IActionResult> CreateOrder([FromBody] decimal amount)
         {
-            var payment = new Payment
-            {
-                UserId = request.UserId,
-                PaymentType = request.PaymentType,
-                Amount = request.Amount,
-                PaymentDate = request.PaymentDate,
-                PaymentStatus = request.PaymentStatus,
-                AppointmentId = request.PaymentType == "Appointment" ? request.AppointmentId : null,
-                ProductId = request.PaymentType == "Product" ? request.ProductId : null
-            };
+            var order = await _payPalService.CreateOrder(amount, "USD");
+            return Ok(order);
+        }
 
-            _db.Payments.Add(payment);
-            _db.SaveChanges(); // This will block until the payment is saved to the database
-
-            return Ok(payment);
+        [HttpPost("capture-order/{orderId}")]
+        public async Task<IActionResult> CaptureOrder(string orderId)
+        {
+            var order = await _payPalService.CaptureOrder(orderId);
+            return Ok(order);
         }
 
 

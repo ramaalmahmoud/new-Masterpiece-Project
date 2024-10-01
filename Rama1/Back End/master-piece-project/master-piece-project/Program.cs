@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using master_piece_project.Services;
+using master_piece_project.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<IPayPalClient, PayPalClient>();
+builder.Services.AddSignalR(); // Add SignalR service
 
 
 builder.Services.AddControllers();
@@ -66,6 +68,18 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
     options.AddPolicy("client", policy => policy.RequireRole("client"));
 });
+// PayPal Service Injection
+builder.Services.AddSingleton<PayPalService>(sp =>
+{
+    // You can get these values from your appsettings.json or environment variables
+    var clientId = builder.Configuration["PayPal:ClientId"];
+    var clientSecret = builder.Configuration["PayPal:ClientSecret"];
+
+    // Ensure you toggle this flag for live/sandbox environments
+    var isLive = builder.Configuration.GetValue<bool>("PayPal:IsLive");
+
+    return new PayPalService(clientId, clientSecret, isLive);
+});
 
 var app = builder.Build();
 
@@ -85,6 +99,7 @@ app.UseAuthorization();
 app.UseCors("development");
 
 app.MapControllers();
-
+// Map the SignalR hub for the chat
+app.MapHub<ChatHub>("/chatHub"); // Add SignalR Hub Mapping here
 
 app.Run();

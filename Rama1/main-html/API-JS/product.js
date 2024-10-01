@@ -6,31 +6,31 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchProducts();
 debugger
  // Async function to fetch sorted products
-async function fetchSortedProducts(sortBy) {
-    debugger
-    try {
-        // Construct the API endpoint based on the sort criteria
-        const response = await fetch(`https://localhost:7084/api/Products/sort?sortBy=${sortBy}`);
+// async function fetchSortedProducts(sortBy) {
+//     debugger
+//     try {
+//         // Construct the API endpoint based on the sort criteria
+//         const response = await fetch(`https://localhost:7084/api/Products/sort?sortBy=${sortBy}`);
         
-        if (!response.ok) {
-            throw new Error('Error fetching sorted products');
-        }
+//         if (!response.ok) {
+//             throw new Error('Error fetching sorted products');
+//         }
         
-        const products = await response.json();
+//         const products = await response.json();
 
-        // Assuming you have a function to display products
-        displayProducts(products);
+//         // Assuming you have a function to display products
+//         displayProducts(products);
 
-    } catch (error) {
-        console.error('Error fetching sorted products:', error);
-    }
-}
+//     } catch (error) {
+//         console.error('Error fetching sorted products:', error);
+//     }
+// }
 debugger
-document.getElementById('sort-by').addEventListener('change', (e) => {
-    debugger
-    const sortBy = Number(e.target.value); // Get the selected sorting option
-    fetchSortedProducts(sortBy);   // Fetch sorted products based on the selected option
-});
+// document.getElementById('sort-by').addEventListener('change', (e) => {
+//     debugger
+//     const sortBy = Number(e.target.value); // Get the selected sorting option
+//     fetchSortedProducts(sortBy);   // Fetch sorted products based on the selected option
+// });
 
 // Function to display products (You can modify this function based on your page structure)
 function displayProducts(products) {
@@ -76,6 +76,7 @@ let selectedCategories = [];
 
 // Fetch categories from API
 async function fetchCategories() {
+    debugger
     try {
         const response = await fetch('https://localhost:7084/api/Categories/categories'); // Replace with your API URL
         const categories = await response.json();
@@ -84,32 +85,21 @@ async function fetchCategories() {
         categoryList.innerHTML = ''; // Clear existing categories
 
         categories.forEach(category => {
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="#" data-category="${category.categoryID}">${category.categoryName}</a>`;
-            categoryList.appendChild(li);
-        });
+            const  categoryHTML = `
+            <li>
+                <input type="checkbox" id="category-${category.categoryID}" data-category-id="${category.categoryID}" class="category-checkbox">
+                <label for="category-${category.categoryID}">${category.categoryName}</label>
+            </li>`;
+            categoryList.insertAdjacentHTML('beforeend', categoryHTML);
 
+        });
+        categoryList.addEventListener('change',(e)=>{
+const selectedCategories=Array.from(document.querySelectorAll('.category-checkbox:checked'))
+.map(checkbox=>checkbox.getAttribute('data-category-id'));
+fetchProductsByCategories(selectedCategories);
+        });
         // Add click event listeners for category filtering
-        document.querySelectorAll('#category-list a').forEach(categoryLink => {
-            categoryLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                const categoryId = parseInt(e.target.getAttribute('data-category'));
-
-                // Toggle category selection
-                if (selectedCategories.includes(categoryId)) {
-                    selectedCategories = selectedCategories.filter(id => id !== categoryId); // Remove if already selected
-                } else {
-                    selectedCategories.push(categoryId); // Add if not selected
-                }
-
-                // Fetch products based on selected categories
-                if (selectedCategories.length > 0) {
-                    fetchProductsByCategories(selectedCategories); // Fetch with selected categories
-                } else {
-                    fetchProducts(); // Fetch all products if no category is selected
-                }
-            });
-        });
+        
     } catch (error) {
         console.error('Error fetching categories:', error);
     }
@@ -133,7 +123,7 @@ async function fetchCategories() {
 
                 products.forEach(product => {
                     const productHtml = `
-                        <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="col-xl-4 col-lg-4 col-md-6 services-two__single" data-category-id="${product.categoryID}" >
                             <div class="product__all-single">
                                 <div class="product__all-single-inner">
                                     <div class="product__all-img">
@@ -167,32 +157,47 @@ async function fetchCategories() {
             .catch(error => console.error('Error fetching products:', error));
     }
 // Async function to fetch products by category IDs
-async function fetchProductsByCategories(categoryIds) {
-    debugger
-    const url =`https://localhost:7084/api/products/filterByCategories?${categoryIds.map(id => `categoryIds=${id}`).join('&')}`;
-
-    try {
-        // Make the POST request with the category IDs in the query parameters
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
+async function fetchProductsByCategories(selectedCategoryIds) {
+    const activities = document.querySelectorAll('.services-two__single');
+    if (selectedCategoryIds.length === 0) {
+        activities.forEach(activity => activity.style.display = 'block');
+    } else {
+        activities.forEach(activity => {
+            const activityCategoryId = activity.getAttribute('data-category-id');
+            if (selectedCategoryIds.includes(activityCategoryId)) {
+                activity.style.display = 'block';
+            } else {
+                activity.style.display = 'none';
             }
         });
-
-        // Check if the response is successful
-        if (!response.ok) {
-            throw new Error(`Error fetching products: ${response.statusText}`);
-        }
-
-        // Parse the JSON data
-        const products = await response.json();
-
-        // Handle the products data (e.g., update the UI)
-        renderProducts(products);
-    } catch (error) {
-        console.error('Error:', error);
     }
+
+    // debugger
+    // const url =`https://localhost:7084/api/products/filterByCategories?${categoryIds.map(id => `categoryIds=${id}`).join('&')}`;
+
+    // try {
+    //     // Make the POST request with the category IDs in the query parameters
+    //     debugger
+    //     const response = await fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     });
+
+    //     // Check if the response is successful
+    //     if (!response.ok) {
+    //         throw new Error(`Error fetching products: ${response.statusText}`);
+    //     }
+
+    //     // Parse the JSON data
+    //     const products = await response.json();
+
+    //     // Handle the products data (e.g., update the UI)
+    //     renderProducts(products);
+    // } catch (error) {
+    //     console.error('Error:', error);
+    // }
 }
     // Helper function to render stars
     function renderStars(rating) {

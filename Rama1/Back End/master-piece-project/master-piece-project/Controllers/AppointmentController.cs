@@ -58,36 +58,36 @@ namespace master_piece_project.Controllers
         }
         //
         // POST: Book an appointment (Synchronous Version)
-        [HttpPost("book")]
-        public IActionResult BookAppointment([FromForm] AppointmentRequestDTO appointmentDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[HttpPost("book")]
+        //public IActionResult BookAppointment([FromForm] AppointmentRequestDTO appointmentDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            // Ensure UserId is provided
-            if (appointmentDto.UserId == null)
-            {
-                return BadRequest("UserId is required.");
-            }
+        //    // Ensure UserId is provided
+        //    if (appointmentDto.UserId == null)
+        //    {
+        //        return BadRequest("UserId is required.");
+        //    }
 
-            // Create a new Appointment object
-            var appointment = new Appointment
-            {
-                UserId = appointmentDto.UserId,  // Using UserId from DTO
-                DoctorId = appointmentDto.DoctorId,
-                AppointmentDate = BitConverter.GetBytes(appointmentDto.AppointmentDate.ToBinary()),
-                SessionType = appointmentDto.SessionType,
-                Notes = appointmentDto.Message
-            };
+        //    // Create a new Appointment object
+        //    var appointment = new Appointment
+        //    {
+        //        UserId = appointmentDto.UserId,  // Using UserId from DTO
+        //        DoctorId = appointmentDto.DoctorId,
+        //        AppointmentDate = BitConverter.GetBytes(appointmentDto.AppointmentDate.ToBinary()),
+        //        SessionType = appointmentDto.SessionType,
+        //        Notes = appointmentDto.Message
+        //    };
 
-            // Add the appointment to the database and save changes
-            _db.Appointments.Add(appointment);
-            _db.SaveChanges();
+        //    // Add the appointment to the database and save changes
+        //    _db.Appointments.Add(appointment);
+        //    _db.SaveChanges();
 
-            return Ok("Appointment booked successfully");
-        }
+        //    return Ok("Appointment booked successfully");
+        //}
 
     }
 }

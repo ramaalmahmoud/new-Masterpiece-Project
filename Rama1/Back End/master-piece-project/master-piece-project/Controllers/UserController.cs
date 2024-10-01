@@ -110,15 +110,28 @@ namespace master_piece_project.Controllers
                 Specialization = model.Specialization,
                 ExperienceYears = model.ExperienceYears,
                 ClinicAddress = model.ClinicAddress,
-                AvailableForVolunteering = model.AvailableForVolunteering,
                 ConsultationFee = model.ConsultationFee,
-                AvailableTimes = model.AvailableTimes,
             };
 
             _db.Doctors.Add(doctor);
             _db.SaveChanges();
+            // Step 4: Add available times to DoctorAvailability table
+            if (model.AvailableTimes != null )
+            {
+                foreach (var availableTime in model.AvailableTimes)
+                {
+                    var doctorAvailability = new DoctorAvailability
+                    {
+                        DoctorId = doctor.DoctorId,
+                        //AvailableTime = availableTime,
+                        IsBooked = false
+                    };
+                    _db.DoctorAvailabilities.Add(doctorAvailability);
+                }
 
-            return Ok();
+                _db.SaveChanges();
+            }
+            return Ok(new { message = "Doctor and availability added successfully." });
         }
         [HttpPost("addVolunteer")]
         public IActionResult AddVolunteer([FromForm] VolunteerRequestDTO model)

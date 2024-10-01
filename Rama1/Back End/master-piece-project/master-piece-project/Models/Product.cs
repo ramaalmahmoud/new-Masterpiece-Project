@@ -25,7 +25,5 @@ public partial class Product
 
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 
-    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 }

@@ -13,7 +13,6 @@
         public string? Email { get; set; }
         public string? ClinicAddress { get; set; }
 
-        public bool? AvailableForVolunteering { get; set; }
 
         public decimal? ConsultationFee { get; set; }
 

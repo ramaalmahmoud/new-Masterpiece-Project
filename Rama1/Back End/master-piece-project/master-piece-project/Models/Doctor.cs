@@ -23,6 +23,8 @@ public partial class Doctor
 
     public virtual ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
 
+    public virtual ICollection<DoctorAvailability> DoctorAvailabilities { get; set; } = new List<DoctorAvailability>();
+
     public virtual ICollection<PsychologicalSession> PsychologicalSessions { get; set; } = new List<PsychologicalSession>();
 
     public virtual User? User { get; set; }

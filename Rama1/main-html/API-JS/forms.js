@@ -145,3 +145,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // fetchPrograms();
     fetchDoctors();
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//contact us
+// Get the form element
+const contactForm = document.getElementById('contactForm');
+debugger
+
+// Attach the submit event listener
+contactForm.addEventListener('submit', async function (event) {
+    debugger
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    // Create a FormData object to hold form data
+    const formData = new FormData(contactForm);
+
+    // Convert form data to an object
+  
+
+    try {
+        // Send the form data to the API
+        const response = await fetch('https://localhost:7084/api/Contact/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+
+        // Parse the JSON response
+        const result = await response.json();
+
+        // Handle success or error
+        if (response.ok) {
+            document.getElementById('result').innerHTML = `<p class="success-message">${result.message}</p>`;
+            contactForm.reset(); // Reset the form after successful submission
+        } else {
+            document.getElementById('result').innerHTML = `<p class="error-message">Error: ${result.message}</p>`;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('result').innerHTML = `<p class="error-message">Error submitting form. Please try again later.</p>`;
+    }
+});

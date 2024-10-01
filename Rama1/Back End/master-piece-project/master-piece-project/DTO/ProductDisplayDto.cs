@@ -8,7 +8,10 @@
             public decimal? Price { get; set; }
             public string Image { get; set; }
             public double? Stars { get; set; } // This will represent the star rating
-        }
+        public int categoryID { get; set; }
 
-    
+
+    }
+
+
 }

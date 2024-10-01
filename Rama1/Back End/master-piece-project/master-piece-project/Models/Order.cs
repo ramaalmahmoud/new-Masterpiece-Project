@@ -5,8 +5,6 @@ namespace master_piece_project.Models;
 
 public partial class Order
 {
-    internal readonly object Links;
-
     public int OrderId { get; set; }
 
     public int? UserId { get; set; }
@@ -20,6 +18,8 @@ public partial class Order
     public string? OrderStatus { get; set; }
 
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+
+    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
     public virtual User? User { get; set; }
 }

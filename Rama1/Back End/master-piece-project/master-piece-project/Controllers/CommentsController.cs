@@ -15,6 +15,62 @@ namespace master_piece_project.Controllers
         {
             _db = db;
         }
+        // GET: api/Comment
+        [HttpGet("GetComments")]
+        public IActionResult GetComments()
+        {
+            var comments =  _db.Comments
+                .Include(c => c.Post)
+                .Include(c => c.User)
+                .Select(comment => new
+                {
+                    comment.CommentId,
+                    comment.CommentText,
+                    comment.CreatedAt,
+                    PostTitle = comment.Post.Title,
+                    UserName = comment.User.FullName
+                })
+                .ToList();
+
+            return Ok(comments);
+        }
+        [HttpPut("approve/{id}")]
+        public IActionResult ApproveComment(int id)
+        {
+            // Find the blog post by its ID
+            var post = _db.Comments.Find(id);
+
+            if (post == null)
+            {
+                return NotFound("Post not found.");
+            }
+
+            // Update the IsConfirmed field to true
+            post.IsApproved = true;
+
+            // Save the changes to the database
+            _db.SaveChanges();
+
+            return Ok(new { message = "Post approved successfully." });
+        }
+        [HttpPut("reject/{id}")]
+        public IActionResult RejectComment(int id)
+        {
+            var post = _db.Comments.Find(id);
+
+            if (post == null)
+            {
+                return NotFound("Post not found.");
+            }
+
+            // Update the IsConfirmed field to false
+            post.IsApproved = false;
+
+            _db.SaveChanges();
+
+            return Ok(new { message = "Post rejected successfully." });
+        }
+
         [HttpPost("submitComment")]
         public async Task<IActionResult> SubmitComment([FromBody] SubmitCommentDto commentDto)
         {
@@ -73,7 +129,7 @@ namespace master_piece_project.Controllers
         {
             // Retrieve comments that are approved for the specified post
             var approvedComments = await _db.Comments
-                .Where(c => c.PostId == postId && c.IsApproved)
+                .Where(c => c.PostId == postId && c.IsApproved.GetValueOrDefault())
                 .Select(c => new
                 {
                     c.CommentId,

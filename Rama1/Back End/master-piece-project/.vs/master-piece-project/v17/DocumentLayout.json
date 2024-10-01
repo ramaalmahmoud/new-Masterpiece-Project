@@ -3,84 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\dto\\updateusermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\dto\\updateusermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\controllers\\activitiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\controllers\\activitiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\dto\\contactformdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\dto\\contactformdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\controllers\\blogscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\controllers\\blogscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\services\\paypalclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\services\\paypalclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\services\\paypalconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\services\\paypalconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\models\\orderproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\models\\orderproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\services\\ipaypalclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\services\\ipaypalclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\dto\\checkoutmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\dto\\checkoutmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\dto\\cartitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\dto\\cartitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\models\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\models\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\dto\\cartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\dto\\cartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\dto\\addtocartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\dto\\addtocartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\dto\\reviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\dto\\reviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|c:\\users\\orange\\desktop\\orange-projects\\rama1\\back end\\master-piece-project\\master-piece-project\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F040621-5A71-460C-AD6A-6BFF92800B86}|master-piece-project\\master-piece-project.csproj|solutionrelative:master-piece-project\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -90,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,262 +54,106 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AppointmentController.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\AppointmentController.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\AppointmentController.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\AppointmentController.cs",
-              "RelativeToolTip": "master-piece-project\\Controllers\\AppointmentController.cs",
-              "ViewState": "AQIAAEwAAAAAAAAAAAAuwEUAAAAQAAAA",
+              "DocumentIndex": 1,
+              "Title": "UpdateUserModel.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\UpdateUserModel.cs",
+              "RelativeDocumentMoniker": "master-piece-project\\DTO\\UpdateUserModel.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\UpdateUserModel.cs",
+              "RelativeToolTip": "master-piece-project\\DTO\\UpdateUserModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T19:42:38.624Z",
+              "WhenOpened": "2024-10-01T18:54:25.032Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "PayPalClient.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Services\\PayPalClient.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Services\\PayPalClient.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Services\\PayPalClient.cs",
-              "RelativeToolTip": "master-piece-project\\Services\\PayPalClient.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAUwAwAAAAjAAAA",
+              "Title": "ActivitiesController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\ActivitiesController.cs",
+              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\ActivitiesController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\ActivitiesController.cs",
+              "RelativeToolTip": "master-piece-project\\Controllers\\ActivitiesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T18:54:32.813Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PayPalConfiguration.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Services\\PayPalConfiguration.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Services\\PayPalConfiguration.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Services\\PayPalConfiguration.cs",
-              "RelativeToolTip": "master-piece-project\\Services\\PayPalConfiguration.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T18:54:03.031Z",
+              "WhenOpened": "2024-10-01T18:21:12.737Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CheckoutController.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\CheckoutController.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\CheckoutController.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\CheckoutController.cs",
-              "RelativeToolTip": "master-piece-project\\Controllers\\CheckoutController.cs",
-              "ViewState": "AQIAAGAAAAAAAAAAAAAcwHEAAAAAAAAA",
+              "Title": "ProfileController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\ProfileController.cs",
+              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\ProfileController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\ProfileController.cs",
+              "RelativeToolTip": "master-piece-project\\Controllers\\ProfileController.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAAAcwD4AAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T18:47:58.526Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PaymentsController.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\PaymentsController.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\PaymentsController.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\PaymentsController.cs",
-              "RelativeToolTip": "master-piece-project\\Controllers\\PaymentsController.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAA1wAsAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T18:36:59.809Z",
+              "WhenOpened": "2024-10-01T18:21:06.461Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Payment.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\Payment.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Models\\Payment.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\Payment.cs",
-              "RelativeToolTip": "master-piece-project\\Models\\Payment.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAA9wBQAAAAAAAAA",
+              "Title": "BlogsController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\BlogsController.cs",
+              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\BlogsController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\BlogsController.cs",
+              "RelativeToolTip": "master-piece-project\\Controllers\\BlogsController.cs",
+              "ViewState": "AQIAAHIAAAAAAAAAAAAowAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T18:37:20.714Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\Order.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Models\\Order.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\Order.cs",
-              "RelativeToolTip": "master-piece-project\\Models\\Order.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAkwBEAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T18:37:08.969Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "OrderProduct.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\OrderProduct.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Models\\OrderProduct.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\OrderProduct.cs",
-              "RelativeToolTip": "master-piece-project\\Models\\OrderProduct.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T18:37:13.24Z",
+              "WhenOpened": "2024-10-01T15:12:25.01Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Program.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Program.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Program.cs",
-              "RelativeToolTip": "master-piece-project\\Program.cs",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAiwFoAAAAAAAAA",
+              "Title": "ContactFormDto.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\ContactFormDto.cs",
+              "RelativeDocumentMoniker": "master-piece-project\\DTO\\ContactFormDto.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\ContactFormDto.cs",
+              "RelativeToolTip": "master-piece-project\\DTO\\ContactFormDto.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAQwBEAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T19:07:19.681Z",
+              "WhenOpened": "2024-10-01T14:41:28.044Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CheckoutModel.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\CheckoutModel.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\DTO\\CheckoutModel.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\CheckoutModel.cs",
-              "RelativeToolTip": "master-piece-project\\DTO\\CheckoutModel.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAowA4AAAAAAAAA",
+              "DocumentIndex": 5,
+              "Title": "ContactController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\ContactController.cs",
+              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\ContactController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\ContactController.cs",
+              "RelativeToolTip": "master-piece-project\\Controllers\\ContactController.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAArwCIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T18:50:20.584Z",
+              "WhenOpened": "2024-10-01T14:34:46.729Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "IPayPalClient.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Services\\IPayPalClient.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Services\\IPayPalClient.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Services\\IPayPalClient.cs",
-              "RelativeToolTip": "master-piece-project\\Services\\IPayPalClient.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAUwAgAAAAAAAAA",
+              "DocumentIndex": 2,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\UserController.cs",
+              "RelativeToolTip": "master-piece-project\\Controllers\\UserController.cs",
+              "ViewState": "AQIAAE8AAAAAAAAAAAAIwGQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T19:05:41.279Z",
+              "WhenOpened": "2024-09-30T12:21:42.647Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "CartDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\CartDTO.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\DTO\\CartDTO.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\CartDTO.cs",
-              "RelativeToolTip": "master-piece-project\\DTO\\CartDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAIAAAARAAAA",
+              "DocumentIndex": 7,
+              "Title": "AppointmentController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\AppointmentController.cs",
+              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\AppointmentController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\AppointmentController.cs",
+              "RelativeToolTip": "master-piece-project\\Controllers\\AppointmentController.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAgwFkAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T15:42:49.336Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "CartItemDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\CartItemDTO.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\DTO\\CartItemDTO.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\CartItemDTO.cs",
-              "RelativeToolTip": "master-piece-project\\DTO\\CartItemDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAQAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T15:41:41.316Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "AddToCartDto.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\AddToCartDto.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\DTO\\AddToCartDto.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\AddToCartDto.cs",
-              "RelativeToolTip": "master-piece-project\\DTO\\AddToCartDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T12:33:54.073Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "CartItem.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\CartItem.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Models\\CartItem.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\CartItem.cs",
-              "RelativeToolTip": "master-piece-project\\Models\\CartItem.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAcAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T12:21:50.18Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Cart.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\Cart.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Models\\Cart.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\Cart.cs",
-              "RelativeToolTip": "master-piece-project\\Models\\Cart.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAswAkAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T12:22:09.877Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "CartController.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\CartController.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\CartController.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\CartController.cs",
-              "RelativeToolTip": "master-piece-project\\Controllers\\CartController.cs",
-              "ViewState": "AQIAAF8AAAAAAAAAAAAswGgAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T12:19:44.354Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Review.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\Review.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Models\\Review.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Models\\Review.cs",
-              "RelativeToolTip": "master-piece-project\\Models\\Review.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAuwBcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T08:52:32.071Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ReviewDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\ReviewDTO.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\DTO\\ReviewDTO.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\DTO\\ReviewDTO.cs",
-              "RelativeToolTip": "master-piece-project\\DTO\\ReviewDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAgAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T08:16:02.55Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ReviewsController.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\ReviewsController.cs",
-              "RelativeDocumentMoniker": "master-piece-project\\Controllers\\ReviewsController.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Orange-projects\\Rama1\\Back End\\master-piece-project\\master-piece-project\\Controllers\\ReviewsController.cs",
-              "RelativeToolTip": "master-piece-project\\Controllers\\ReviewsController.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAASwBMAAABJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T08:12:35.372Z",
+              "WhenOpened": "2024-09-28T19:42:38.624Z",
               "EditorCaption": ""
             }
           ]
