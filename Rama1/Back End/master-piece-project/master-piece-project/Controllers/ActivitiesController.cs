@@ -1,7 +1,9 @@
-﻿using master_piece_project.Models;
+﻿using master_piece_project.DTO;
+using master_piece_project.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static master_piece_project.Controllers.ActivitiesController;
 
 namespace master_piece_project.Controllers
 {
@@ -78,7 +80,107 @@ namespace master_piece_project.Controllers
 
             return Ok(activityDto);
         }
+        // Add a new Activity
+        [HttpPost("add-activity")]
+        public IActionResult AddActivity([FromForm] AddActivityDto activityDto)
+        {
+            var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+            if (activityDto.Image != null && activityDto.Image.Length > 0)
+            {
+                if (!Directory.Exists(uploadsFolderPath))
+                {
+                    Directory.CreateDirectory(uploadsFolderPath);
+                }
+                var filePath = Path.Combine(uploadsFolderPath, activityDto.Image.FileName);
 
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    activityDto.Image.CopyTo(stream);
+                }
+            }
+
+            var activity = new Activity
+            {
+                Title = activityDto.Title,
+                Image = activityDto.Image.FileName,
+                CategoryId = activityDto.CategoryId,
+                Duration = activityDto.Duration,
+                Suggestions = activityDto.Suggestions
+            };
+
+            _db.Activities.Add(activity);
+             _db.SaveChanges();
+          
+            //Add Matirials
+            foreach (var matirialDto in activityDto.Materials)
+            {
+                var material = new Material
+                {
+                    ActivityId = activity.ActivityId,
+                    Name = matirialDto.Name,
+
+                };
+                _db.Materials.Add(material);
+
+            }
+
+            // Add Instructions to the Activity
+            foreach (var instructionDto in activityDto.Instructions)
+            {
+                if (instructionDto.ImageUrl != null && instructionDto.ImageUrl.Length > 0)
+                {
+                    if (!Directory.Exists(uploadsFolderPath))
+                    {
+                        Directory.CreateDirectory(uploadsFolderPath);
+                    }
+                    var filePath = Path.Combine(uploadsFolderPath, instructionDto.ImageUrl.FileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        instructionDto.ImageUrl.CopyTo(stream);
+                    }
+                }
+                var instruction = new Instruction
+                {
+                    ActivityId = activity.ActivityId,
+                    StepNumber = instructionDto.StepNumber,
+                    InstructionText = instructionDto.InstructionText,
+                    ImageUrl = instructionDto.ImageUrl.FileName
+                };
+
+                _db.Instructions.Add(instruction);
+            }
+
+             _db.SaveChanges();
+
+            return Ok(new { Message = "Activity added successfully" });
+        }
+
+
+        // Add a new Category
+        [HttpPost("add-category")]
+        public IActionResult AddCategory([FromForm] ActivityCategoryDto categoryDto)
+        {
+            var category = new ActivityCategory
+            {
+                CategoryName = categoryDto.CategoryName
+            };
+
+            _db.ActivityCategories.Add(category);
+             _db.SaveChanges();
+
+            return Ok(new { Message = "Category added successfully" });
+        }
+        [HttpGet("get-activityCategory")]
+        public IActionResult getactivityCategory()
+        {
+            var activitiesCat =  _db.ActivityCategories.ToList();
+            if (!activitiesCat.Any())
+            {
+                return NotFound(new { message = "No activities found." });
+            }
+            return Ok(activitiesCat);
+        }
         public class ActivityWithMaterialsDto
         {
             public string Title { get; set; }
@@ -93,7 +195,11 @@ namespace master_piece_project.Controllers
             public string InstructionText { get; set; }
             public string ImageUrl { get; set; }
         }
+        public class ActivityCategoryDto
+        {
+            public string CategoryName { get; set; }
+        }
 
 
+        }
     }
-}

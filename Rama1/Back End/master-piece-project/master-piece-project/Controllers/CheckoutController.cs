@@ -16,14 +16,14 @@
 //    {
 //        private readonly IPayPalClient _payPalClient;
 //        private readonly MyDbContext _context;
-//        public CheckoutController(IPayPalClient payPalClient,MyDbContext context)
+//        public CheckoutController(IPayPalClient payPalClient, MyDbContext context)
 //        {
 //            _payPalClient = payPalClient; // Using dependency injection
-//            _context = context; 
+//            _context = context;
 //        }
 
 //        [HttpPost("create-order")]
-//       public async Task<IActionResult> CreateOrder([FromBody] Order order)
+//        public async Task<IActionResult> CreateOrder([FromBody] Order order)
 //        {
 //            // Create the PayPal order request
 //            var orderRequest = new OrdersCreateRequest();
@@ -54,7 +54,7 @@
 //            // Using the injected PayPalClient to execute the request
 //            var client = _payPalClient.GetClient();
 //            var response = await client.Execute(orderRequest);
-            
+
 //            // Check if the response status is 201 Created
 //            if (response.StatusCode == System.Net.HttpStatusCode.Created)
 //            {
@@ -71,37 +71,37 @@
 
 //            return BadRequest("Could not create PayPal order");
 //        }
-//    //[HttpGet("return")]
-//    //    public async Task<IActionResult> CapturePayment(string token, string PayerID)
-//    //    {
-//    //        // Step 1: Capture the order after approval
-//    //        var captureRequest = new OrdersCaptureRequest(token);
-//    //        captureRequest.RequestBody(new OrderActionRequest());
-//    //        var response = await _payPalClient.Client.Execute(captureRequest);
-//    //        var order = response.Result<Order>();
+//        //[HttpGet("return")]
+//        //    public async Task<IActionResult> CapturePayment(string token, string PayerID)
+//        //    {
+//        //        // Step 1: Capture the order after approval
+//        //        var captureRequest = new OrdersCaptureRequest(token);
+//        //        captureRequest.RequestBody(new OrderActionRequest());
+//        //        var response = await _payPalClient.Client.Execute(captureRequest);
+//        //        var order = response.Result<Order>();
 
-//    //        // Step 2: Update the order status in your database
-//    //        var dbOrder = await _context.Orders.FindAsync(order.Id);
-//    //        if (dbOrder != null)
-//    //        {
-//    //            // Create a Payment record
-//    //            var payment = new Payment
-//    //            {
-//    //                UserId = dbOrder.UserId,
-//    //                PaymentType = "PayPal",
-//    //                Amount = dbOrder.TotalAmount,
-//    //                PaymentDate = DateTime.UtcNow,
-//    //                PaymentStatus = "Completed", // Update payment status
-//    //                ProductId = dbOrder.OrderId // Link payment to the order
-//    //            };
+//        //        // Step 2: Update the order status in your database
+//        //        var dbOrder = await _context.Orders.FindAsync(order.Id);
+//        //        if (dbOrder != null)
+//        //        {
+//        //            // Create a Payment record
+//        //            var payment = new Payment
+//        //            {
+//        //                UserId = dbOrder.UserId,
+//        //                PaymentType = "PayPal",
+//        //                Amount = dbOrder.TotalAmount,
+//        //                PaymentDate = DateTime.UtcNow,
+//        //                PaymentStatus = "Completed", // Update payment status
+//        //                ProductId = dbOrder.OrderId // Link payment to the order
+//        //            };
 
-//    //            _context.Payments.Add(payment);
-//    //            dbOrder.OrderStatus = "Completed"; // Update order status
-//    //            await _context.SaveChangesAsync();
-//    //        }
+//        //            _context.Payments.Add(payment);
+//        //            dbOrder.OrderStatus = "Completed"; // Update order status
+//        //            await _context.SaveChangesAsync();
+//        //        }
 
-//    //        return Ok("PaymentSuccess"); // Redirect or show a success page
-//    //    }
+//        //        return Ok("PaymentSuccess"); // Redirect or show a success page
+//        //    }
 
 //        // Step 3: Handle payment cancellation
 //        [HttpGet("cancel")]

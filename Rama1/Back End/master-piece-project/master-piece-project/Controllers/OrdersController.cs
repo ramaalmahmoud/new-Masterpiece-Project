@@ -2,6 +2,7 @@
 using master_piece_project.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace master_piece_project.Controllers
 {
@@ -17,7 +18,7 @@ namespace master_piece_project.Controllers
         }
         [HttpPost("createOrderAPI")]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderDTO newOrder)
-        {
+       {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -27,7 +28,6 @@ namespace master_piece_project.Controllers
             var order = new Order
             {
                 UserId = newOrder.UserId,
-                TotalAmount = newOrder.TotalAmount,
                 OrderStatus = newOrder.OrderStatus,
                 OrderDate = newOrder.OrderDate,
                 ShippingAddress = newOrder.ShippingAddress
@@ -62,7 +62,7 @@ namespace master_piece_project.Controllers
             var payment = new Payment
             {
                 OrderId = order.OrderId,
-                PaymentType = newOrder.PaymentMethod,
+                PaymentType = "products",
                 Amount = newOrder.TotalAmount,
                 PaymentDate = DateTime.Now,
                 PaymentStatus = "Pending"
@@ -72,6 +72,35 @@ namespace master_piece_project.Controllers
             await _db.SaveChangesAsync();
 
             return Ok();
+        }
+
+        [HttpGet("user/{userId}")]
+        public IActionResult GetCartForUser(int userId)
+        {
+            // Find the user's cart
+            var order = _db.Orders
+                .Include(c => c.OrderProducts)
+                .ThenInclude(i => i.Product)
+                .FirstOrDefault(c => c.UserId == userId);
+
+            if (order == null)
+                return NotFound(new { Message = "Cart not found for the user." });
+
+            // Map the cart items to the DTO
+            var cartDto = new OrderDto
+            {
+                Products = order.OrderProducts.Select(i => new CartItemDTO
+                {
+                    ProductName = i.Product.Title,
+                    Price = i.Product.Price,
+                    Quantity = i.Quantity
+                }).ToList(),
+                SubTotal = order.TotalAmount,
+                Shipping = order.ShippingAddress,
+                Total = order.TotalAmount + 200
+            };
+
+            return Ok(cartDto);
         }
     }
 }
