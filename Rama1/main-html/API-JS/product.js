@@ -55,7 +55,7 @@ function displayProducts(products) {
                             <h4 class="product__all-title"><a href="product-details.html?id=${product.productId}">${product.title}</a></h4>
                             <p class="product__all-price">$${product.price}</p>
                             <div class="product__all-btn-box">
-                                <a href="cart.html" class="thm-btn product__all-btn">Add to Cart</a>
+                                <a href="cart.html" class="thm-btn product__all-btn" onclick="saveProductId(${product.productID})">Add to Cart</a>
                             </div>
                         </div>
                         <div class="products__all-icon-boxes">

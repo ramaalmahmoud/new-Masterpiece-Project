@@ -120,6 +120,41 @@ namespace master_piece_project.Controllers
             }
             return Ok(product);
         }
+
+
+        [HttpPost]
+        public IActionResult AddProduct([FromForm] addProductDto productDto)
+        {
+            var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+            if (productDto.Image != null && productDto.Image.Length > 0)
+            {
+                if (!Directory.Exists(uploadsFolderPath))
+                {
+                    Directory.CreateDirectory(uploadsFolderPath);
+                }
+                var filePath = Path.Combine(uploadsFolderPath, productDto.Image.FileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    productDto.Image.CopyTo(stream);
+                }
+            }
+
+            var product = new Product
+            {
+                Title = productDto.Title,
+                Description = productDto.Description,
+                Price = productDto.Price,
+                Stock = productDto.Stock,
+                CategoryId = productDto.CategoryId,
+                Image = productDto.Image.FileName
+            };
+
+            _db.Products.Add(product);
+             _db.SaveChanges();
+
+            return Ok(new { message = "Product added successfully!" });
+        }
     }
 }
 

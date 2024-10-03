@@ -149,12 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //contact us
 // Get the form element
-const contactForm = document.getElementById('contactForm');
+const contactButton = document.getElementById('btnContact');
 debugger
 
 // Attach the submit event listener
-contactForm.addEventListener('submit', async function (event) {
+contactButton.addEventListener('click', async function (event) {
     debugger
+    const contactForm = document.getElementById('contactForm');
+
     event.preventDefault(); // Prevent the default form submission behavior
 
     // Create a FormData object to hold form data

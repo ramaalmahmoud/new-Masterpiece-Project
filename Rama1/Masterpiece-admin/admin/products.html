@@ -40,6 +40,8 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   </head>
   <body>
     <div class="wrapper">
@@ -204,18 +206,9 @@
                       <th scope="col">Actions</th>
                   </tr>
               </thead>
-              <tbody>
+              <tbody id="productTableBody">
                   <!-- Rows should be populated dynamically -->
-                  <tr>
-                      <td>1</td>
-                      <td>Product Name</td>
-                      <td>$10.00</td>
-                      <td>50</td>
-                      <td>
-                          <a href="/admin/edit-product/1" class="btn btn-warning btn-sm">Edit</a>
-                          <a href="/admin/delete-product/1" class="btn btn-danger btn-sm">Delete</a>
-                      </td>
-                  </tr>
+                  
               </tbody>
           </table>
       </div>
@@ -233,42 +226,40 @@
                           <!-- Product Name -->
                           <div class="form-group mb-3">
                               <label for="productName">Product Name</label>
-                              <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+                              <input name="Title" type="text" class="form-control" id="productName" placeholder="Enter product name" required>
                           </div>
   
                           <!-- Product Price -->
                           <div class="form-group mb-3">
                               <label for="productPrice">Price</label>
-                              <input type="number" class="form-control" id="productPrice" placeholder="Enter product price" step="0.01" required>
+                              <input name="Price" type="number" class="form-control" id="productPrice" placeholder="Enter product price" step="0.01" required>
                           </div>
   
                           <!-- Product Category -->
                           <div class="form-group mb-3">
                               <label for="productCategory">Category</label>
-                              <select class="form-control" id="productCategory" required>
+                              <select name="CategoryId" class="form-control" id="productCategory" required>
                                   <option value="">Select Category</option>
-                                  <option value="toys">Toys</option>
-                                  <option value="books">Books</option>
-                                  <option value="games">Games</option>
+                                  
                               </select>
                           </div>
   
                           <!-- Product Stock -->
                           <div class="form-group mb-3">
                               <label for="productStock">Stock</label>
-                              <input type="number" class="form-control" id="productStock" placeholder="Enter stock quantity" required>
+                              <input name="Stock" type="number" class="form-control" id="productStock" placeholder="Enter stock quantity" required>
                           </div>
   
                           <!-- Product Image -->
                           <div class="form-group mb-3">
                               <label for="productImage">Product Image</label>
-                              <input type="file" class="form-control-file" id="productImage" required>
+                              <input name="Image" type="file" class="form-control-file" id="productImage" required>
                           </div>
   
                           <!-- Product Description -->
                           <div class="form-group mb-3">
                               <label for="productDescription">Description</label>
-                              <textarea class="form-control" id="productDescription" rows="4" placeholder="Enter product description" required></textarea>
+                              <textarea name="Description" class="form-control" id="productDescription" rows="4" placeholder="Enter product description" required></textarea>
                           </div>
   
                           <!-- Submit Button -->
@@ -292,7 +283,7 @@
   
   
   <!-- JavaScript to handle form display and submission -->
-  <script>
+  <!-- <script>
     // Handle form submission (example with alert)
     document.getElementById('addProductForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -323,7 +314,7 @@
   
         // Optionally, update the product list (for example, appending to a table dynamically)
     });
-  </script>
+  </script> -->
   
   
   <!-- Add some basic CSS for form styling -->
@@ -352,6 +343,9 @@
     <script src="../assets/js/kaiadmin.min.js"></script>
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="../assets/js/setting-demo2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../API-JS/shop.js"></script>
+
   
   </body>
 </html>

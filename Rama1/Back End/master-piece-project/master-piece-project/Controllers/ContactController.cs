@@ -21,10 +21,7 @@ namespace master_piece_project.Controllers
         public IActionResult SubmitContact([FromForm] ContactFormDto form)
         {
             // التحقق من صحة البيانات الواردة
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            
 
             // إنشاء رسالة جديدة وتخزينها في قاعدة البيانات
             var newMessage = new ContactMessage
@@ -40,7 +37,7 @@ namespace master_piece_project.Controllers
             _dbContext.ContactMessages.Add(newMessage);
             _dbContext.SaveChanges(); // حفظ التغييرات في قاعدة البيانات
 
-            return Ok(new { message = "Your message has been submitted successfully." });
+            return Ok();
         }
     }
 }

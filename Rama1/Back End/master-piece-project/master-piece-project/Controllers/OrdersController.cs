@@ -18,7 +18,7 @@ namespace master_piece_project.Controllers
         }
         [HttpPost("createOrderAPI")]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderDTO newOrder)
-       {
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -101,6 +101,35 @@ namespace master_piece_project.Controllers
             };
 
             return Ok(cartDto);
+        }
+        // GET: api/orders/{id}
+        [HttpGet("GetOrder")]
+        public IActionResult GetOrder()
+        {
+            var order = _db.Orders.ToList();
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(order);
+        }
+
+        // PUT: api/orders/{id}
+        [HttpPut("{id}")]
+        public IActionResult UpdateOrderStatus(int id, [FromBody] string newStatus)
+        {
+            var order =  _db.Orders.Find(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            order.OrderStatus = newStatus;
+             _db.SaveChanges();
+
+            return NoContent();
         }
     }
 }
