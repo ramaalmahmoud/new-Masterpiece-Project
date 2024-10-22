@@ -67,29 +67,29 @@
 // }
 
 
-debugger
-async function fetchDoctors() {
+// debugger
+// async function fetchDoctors() {
   
 
-    debugger
-    try {
-        const response = await fetch('https://localhost:7084/api/Appointment/getDoctors');
-        const doctors = await response.json();
-        const doctorSelect = document.getElementById('doctorId');
-        debugger
-        doctors.forEach(doctor => {
-            debugger
-            const option = document.createElement('option');
-            option.value = doctor.doctorId;
-            option.textContent = doctor.fullName; // Use FullName from the API response
-            doctorSelect.appendChild(option);
-        });
+//     debugger
+//     try {
+//         const response = await fetch('https://localhost:7084/api/Appointment/getDoctors');
+//         const doctors = await response.json();
+//         const doctorSelect = document.getElementById('doctorId');
+//         debugger
+//         doctors.forEach(doctor => {
+//             debugger
+//             const option = document.createElement('option');
+//             option.value = doctor.doctorId;
+//             option.textContent = doctor.fullName; // Use FullName from the API response
+//             doctorSelect.appendChild(option);
+//         });
      
-    } catch (error) {
-        console.error('Error fetching doctors:', error);
-    }
+//     } catch (error) {
+//         console.error('Error fetching doctors:', error);
+//     }
     
-}
+// }
 
 
 // async function submitAppointmentForm() {
@@ -139,54 +139,56 @@ async function fetchDoctors() {
 // });
 
 // Fetch user info, programs, and doctors when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    debugger
-    // fetchUserInfo();
-    // fetchPrograms();
-    fetchDoctors();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     debugger
+//     // fetchUserInfo();
+//     // fetchPrograms();
+//     fetchDoctors();
+// });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //contact us
 // Get the form element
-const contactButton = document.getElementById('btnContact');
 debugger
 
 // Attach the submit event listener
-contactButton.addEventListener('click', async function (event) {
+// Get the form element
+document.addEventListener('DOMContentLoaded', function () {
     debugger
-    const contactForm = document.getElementById('contactForm');
+    const contactButton = document.getElementById('btnContact');
 
-    event.preventDefault(); // Prevent the default form submission behavior
+    // Attach the submit event listener
+    contactButton.addEventListener('click', async function (event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+debugger
+        const contactForm = document.getElementById('contactForm');
+        
+        // Create a FormData object
+        const formData = new FormData(contactForm);
 
-    // Create a FormData object to hold form data
-    const formData = new FormData(contactForm);
+        // Convert FormData to a plain object
+        // const formObject = Object.fromEntries(formData.entries());
 
-    // Convert form data to an object
-  
+        try {
+            // Send the form data to the API as JSON
+            const response = await fetch('https://localhost:7084/api/Contact/submit', {
+                method: 'POST',
+               
+                body: formData, // Convert the formObject to JSON
+            });
 
-    try {
-        // Send the form data to the API
-        const response = await fetch('https://localhost:7084/api/Contact/submit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
+            const result = await response.json();
 
-        // Parse the JSON response
-        const result = await response.json();
-
-        // Handle success or error
-        if (response.ok) {
-            document.getElementById('result').innerHTML = `<p class="success-message">${result.message}</p>`;
-            contactForm.reset(); // Reset the form after successful submission
-        } else {
-            document.getElementById('result').innerHTML = `<p class="error-message">Error: ${result.message}</p>`;
+            // Handle success or error
+            if (response.ok) {
+                document.querySelector('.result').innerHTML = `<p class="success-message">${result.message}</p>`;
+                contactForm.reset(); // Reset the form after successful submission
+            } else {
+                document.querySelector('.result').innerHTML = `<p class="error-message">Error: ${result.message}</p>`;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.querySelector('.result').innerHTML = `<p class="error-message">Error submitting form. Please try again later.</p>`;
         }
-    } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('result').innerHTML = `<p class="error-message">Error submitting form. Please try again later.</p>`;
-    }
+    });
 });

@@ -1,4 +1,4 @@
-using master_piece_project.Models;
+﻿using master_piece_project.Models;
 using Microsoft.EntityFrameworkCore;
 using master_piece_project.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using master_piece_project.Services;
 using master_piece_project.Hubs;
+using PayPal.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,13 +31,10 @@ options.AddPolicy("development", builder =>
 
 })
 );
-// Configure PayPal API
-builder.Services.AddSingleton(new PayPalConfiguration
-{
-    ClientId = "your-client-id",  // Replace with your PayPal client ID
-    ClientSecret = "your-client-secret",  // Replace with your PayPal client secret
-    Mode = "sandbox" // Change to "live" for production
-});
+var config = ConfigManager.Instance.GetProperties();
+config["clientId"] = "AWoQADMAX_vx7WgYgVwr-SiD03yiKLNGdEqcAAJVWhoxvD1UIHRwIsi3O7Ha4RgxaOORA5ZCocdcfTMI"; // استبدل بـ Client ID الخاص بك
+config["clientSecret"] = "EGXwZlz6_I5K4HUN4BBNg8yqb79L3GNWZkahwu8qcIDVnUx9kNHO961d9HwagTiFTKtf2AWCEmwAlBQ3"; // استبدل بـ Secret الخاص بك
+config["mode"] = "sandbox";
 builder.Services.AddSingleton<TokenGenerator>();
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = jwtSettings.GetValue<string>("Key");
@@ -69,17 +67,17 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("client", policy => policy.RequireRole("client"));
 });
 // PayPal Service Injection
-builder.Services.AddSingleton<PayPalService>(sp =>
-{
-    // You can get these values from your appsettings.json or environment variables
-    var clientId = builder.Configuration["PayPal:ClientId"];
-    var clientSecret = builder.Configuration["PayPal:ClientSecret"];
+//builder.Services.AddSingleton<PayPalService>(sp =>
+//{
+//    // You can get these values from your appsettings.json or environment variables
+//    var clientId = builder.Configuration["PayPal:ClientId"];
+//    var clientSecret = builder.Configuration["PayPal:ClientSecret"];
 
-    // Ensure you toggle this flag for live/sandbox environments
-    var isLive = builder.Configuration.GetValue<bool>("PayPal:IsLive");
+//    // Ensure you toggle this flag for live/sandbox environments
+//    var isLive = builder.Configuration.GetValue<bool>("PayPal:IsLive");
 
-    return new PayPalService(clientId, clientSecret, isLive);
-});
+//    return new PayPalService(clientId, clientSecret, isLive);
+//});
 
 var app = builder.Build();
 

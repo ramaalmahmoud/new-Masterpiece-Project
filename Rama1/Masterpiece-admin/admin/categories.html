@@ -40,6 +40,8 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   </head>
   <body>
     <div class="wrapper">
@@ -227,7 +229,7 @@
         <form id="addCategoryForm">
           <div class="mb-3">
             <label for="categoryName" class="form-label">Category Name</label>
-            <input type="text" class="form-control" id="categoryName" required>
+            <input type="text" class="form-control" id="categoryName" name="CategoryName" required>
           </div>
           <button type="submit" class="btn btn-primary">Add Category</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -248,20 +250,33 @@
 
   // Handle form submission for adding a new category
   document.getElementById('addCategoryForm').addEventListener('submit', function(event) {
+    debugger
       event.preventDefault();
-
-      // Collect form data
-      var categoryName = document.getElementById('categoryName').value;
-
-      // Example action: Display alert with the category information
-      alert('Category has been added successfully! \nName: ' + categoryName);
-
-      // Clear the form (optional)
+      var form=document.getElementById("addCategoryForm");
+const formdata=new FormData(form);
+debugger
+    fetch('https://localhost:7084/api/Categories/add-category', { // Adjust API endpoint for adding categories
+        method: 'POST',
+        
+        // body: JSON.stringify({ name: categoryName })
+        body: formdata
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        // Clear the form (optional)
       document.getElementById('addCategoryForm').reset();
 
-      // Hide the modal after submission
-      var addCategoryModal = new bootstrap.Modal(document.getElementById('addCategoryModal'));
-      addCategoryModal.hide();
+// Hide the modal after submission
+var addCategoryModal = new bootstrap.Modal(document.getElementById('addCategoryModal'));
+addCategoryModal.hide();
+
+        loadCategories(); // Reload categories after adding a new one
+        document.getElementById('categoryForm').reset();
+    })
+    .catch(error => console.error('Error adding category:', error));
+      // Collect form data
+      
 
       // Optionally, update the category list (for example, appending to a table dynamically)
   });

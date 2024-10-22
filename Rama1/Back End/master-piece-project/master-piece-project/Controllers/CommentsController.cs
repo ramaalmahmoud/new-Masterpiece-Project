@@ -125,11 +125,11 @@ namespace master_piece_project.Controllers
             return Ok(new { message = "Comment submitted successfully and awaiting approval." });
         }
         [HttpGet("comments/{postId}")]
-        public async Task<IActionResult> GetApprovedComments(int postId)
+        public IActionResult GetApprovedComments(int postId)
         {
             // Retrieve comments that are approved for the specified post
-            var approvedComments = await _db.Comments
-                .Where(c => c.PostId == postId && c.IsApproved.GetValueOrDefault())
+            var approvedComments = _db.Comments
+                .Where(c => c.PostId == postId && (c.IsApproved == true || c.IsApproved == null)) // Fix for IsApproved translation
                 .Select(c => new
                 {
                     c.CommentId,
@@ -138,7 +138,7 @@ namespace master_piece_project.Controllers
                     UserName = c.User.FullName, // Assuming User contains FullName property
                     UserImage = c.User.ProfilePicture // Assuming User has a profile image
                 })
-                .ToListAsync();
+                .ToList();
 
             if (!approvedComments.Any())
             {

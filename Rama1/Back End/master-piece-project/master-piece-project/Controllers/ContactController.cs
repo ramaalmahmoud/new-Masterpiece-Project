@@ -37,7 +37,7 @@ namespace master_piece_project.Controllers
             _dbContext.ContactMessages.Add(newMessage);
             _dbContext.SaveChanges(); // حفظ التغييرات في قاعدة البيانات
 
-            return Ok();
+            return Ok(new { message = "Message submitted successfully " });
         }
     }
 }

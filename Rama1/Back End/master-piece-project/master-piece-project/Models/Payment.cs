@@ -21,6 +21,10 @@ public partial class Payment
 
     public int? OrderId { get; set; }
 
+    public string? PaymentMethod { get; set; }
+
+    public string? PayPalOrderId { get; set; }
+
     public virtual Appointment? Appointment { get; set; }
 
     public virtual Order? Order { get; set; }

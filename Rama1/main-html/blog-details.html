@@ -314,10 +314,10 @@ function renderBlogPost(post) {
     document.querySelector('.blog-details__img img').src = `../Back End/master-piece-project/master-piece-project/Uploads/Blogs/${post.image}`;
     document.querySelector('.blog-details__date p').innerHTML = formatDate(new Date(post.createdAt).getDate(),new Date(post.createdAt).toLocaleString('default', { month: 'short' }));
     document.querySelector('.blog-details__meta li:first-child a').innerText = `by ${post.authorName}`;
-    // document.querySelector('.blog-details__meta li:nth-child(2) a').innerText = `${post.comments.length} Comments`;
+   document.querySelector('.blog-details__meta li:nth-child(2) a').innerText = `${post.commentCount} Comments`;
     document.querySelector('.blog-details__title').innerText = post.title;
-    document.querySelector('.blog-details__text-1').innerText = post.content[0];
-    document.querySelector('.blog-details__text-2').innerText = post.content[1];
+    document.querySelector('.blog-details__text-1').innerText = post.content;
+   
 
     const recentArticlesContainer = document.getElementById('recent-articles');
       // Populate recent articles
@@ -328,7 +328,7 @@ function renderBlogPost(post) {
                     </div>
                     <div class="sidebar__post-content">
                         <h3>
-                            <span class="sidebar__post-content-meta"><i class="fa fa-comments"></i>${post.commentsCount} Comments</span>
+                            <span class="sidebar__post-content-meta"><i class="fa fa-comments"></i>${post.commentCount} Comments</span>
                             <a  href="blog-details.html">${post.title}</a>
                         </h3>
                     </div>
@@ -405,7 +405,6 @@ debugger
                                 <div class="comment-one__content">
                                     <h3>${comment.userName}</h3>
                                     <p>${comment.commentText}</p>
-                                    <a href="blog-details.html" class="thm-btn comment-one__btn">Reply</a>
                                 </div>
                             </div>
                                     `;
@@ -418,7 +417,7 @@ debugger
                         }
                         
                         // Call the function with the specific postId
-
+debugger
                         fetchComments(postId); // Change this ID dynamically based on your context
 
 

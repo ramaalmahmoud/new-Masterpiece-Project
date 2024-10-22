@@ -156,7 +156,9 @@ namespace master_piece_project.Controllers
                 blogPost.Image,
                 blogPost.Content,
                 AuthorName = blogPost.Author.FullName, // Adjust based on your User model
-                                                   // Include other fields you want to return
+                CommentCount = blogPost.Comments.Count(comment => comment.IsApproved == true) // Count of approved comments
+
+                // Include other fields you want to return
             };
 
             return Ok(response);
@@ -175,7 +177,9 @@ namespace master_piece_project.Controllers
                     CreatedAt = post.CreatedAt,
                     Image = post.Image,
                     Category = post.Category,
-                    AuthorName = post.Author.FullName // Assuming 'UserName' is the author's name in the 'Users' table
+                    AuthorName = post.Author.FullName, // Assuming 'UserName' is the author's name in the 'Users' table
+                                CommentCount = post.Comments.Count(comment => comment.IsApproved == true) // Count of approved comments
+
                 })
                 .ToList();
 

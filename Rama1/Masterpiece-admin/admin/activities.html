@@ -582,7 +582,6 @@
                         <select name="CategoryId" class="form-control" id="activityCategory" required>
                             <!-- Categories will be dynamically added here -->
                         </select>
-                        <button type="button" class="btn btn-secondary mt-2" data-toggle="modal" data-target="#addCategoryModal">Add New Category</button>
                     </div>
                     <div class="form-group">
                         <label for="activityDuration">Duration</label>
@@ -776,9 +775,7 @@ const formdata=new FormData(form);
 
     fetch('https://localhost:7084/api/Activities/add-category', { // Adjust API endpoint for adding categories
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        
         // body: JSON.stringify({ name: categoryName })
         body: formdata
     })

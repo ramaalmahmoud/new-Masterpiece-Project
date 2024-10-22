@@ -1,13 +1,13 @@
 
-debugger
+
 // Function to handle adding a new post
 document.getElementById('addPostForm').addEventListener('submit', async function(event){
-    debugger
+    
     event.preventDefault(); // Prevent default button action
-    debugger
+    
     const authorId = localStorage.getItem('UserID');
-    debugger
- 
+    
+
     // Gather form data
     const formData = new FormData(document.getElementById('addPostForm')); // Create FormData from the form
     formData.append('AuthorID', authorId); // Add AuthorID to form data
@@ -23,7 +23,18 @@ document.getElementById('addPostForm').addEventListener('submit', async function
         }
 
         const result = await response.json(); // Parse the JSON response
-        window.alert("Post created successfully:")
+        
+        // Replace the alert with SweetAlert
+        Swal.fire({
+            title: 'Success!',
+            text: "Post created successfully:",
+            icon: 'success',
+            confirmButtonText: 'OK',
+            timer: 100000, // الوقت بالمللي ثانية، هنا 3000 تعني 3 ثواني
+            timerProgressBar: true // لعرض شريط التقدم
+        });
+        
+
         console.log('Post created successfully:', result);
         
         // Optionally, close the modal or reset the form
@@ -31,8 +42,17 @@ document.getElementById('addPostForm').addEventListener('submit', async function
         document.getElementById('addPostForm').reset(); // Reset the form
     } catch (error) {
         console.error('Error creating post:', error);
+        
+        // Optional: Show error message with SweetAlert
+        Swal.fire({
+            title: 'Error!',
+            text: 'Error creating post: ' + error.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     }
 });
+
 
 
 
@@ -70,7 +90,7 @@ debugger
                                 <a href="blog-details.html"><i class="fas fa-user-circle"></i>by ${post.authorName}</a>
                             </li>
                             <li>
-                                <a href="blog-details.html"><i class="fas fa-comments"></i>${post.commentsCount} Comments</a>
+                                <a href="blog-details.html"><i class="fas fa-comments"></i>${post.commentCount} Comments</a>
                             </li>
                         </ul>
                         <h3 class="blog-sidebar__title"><a href="blog-details.html">${post.title}</a></h3>
@@ -91,7 +111,7 @@ debugger
                     </div>
                     <div class="sidebar__post-content">
                         <h3>
-                            <span class="sidebar__post-content-meta"><i class="fa fa-comments"></i>${post.commentsCount} Comments</span>
+                            <span class="sidebar__post-content-meta"><i class="fa fa-comments"></i>${post.commentCount} Comments</span>
                             <a  href="blog-details.html">${post.title}</a>
                         </h3>
                     </div>

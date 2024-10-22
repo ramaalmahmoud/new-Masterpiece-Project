@@ -102,6 +102,26 @@ namespace master_piece_project.Controllers
 
             return Ok(cartDto);
         }
+        [HttpGet("get-cart-total/{userId}")]
+        public async Task<IActionResult> GetCartTotal(int userId)
+        {
+            var cart = await _db.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product) // افتراض أن CartItem يحتوي على علاقة مع جدول المنتجات
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null)
+            {
+                return NotFound("Cart not found for the user.");
+            }
+
+            var totalAmount = cart.CartItems.Sum(item => item.Quantity * item.Product.Price); // احسب الإجمالي بناءً على الكمية والسعر
+
+            return Ok(new { totalAmount });
+        }
+
+
+
         // GET: api/orders/{id}
         [HttpGet("GetOrder")]
         public IActionResult GetOrder()

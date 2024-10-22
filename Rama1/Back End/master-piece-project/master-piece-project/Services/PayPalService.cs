@@ -5,37 +5,48 @@ namespace master_piece_project.Services
 {
     public class PayPalService
     {
-        private PayPalEnvironment _environment;
-        private PayPalHttpClient _client;
+        private readonly PayPalHttpClient _client;
 
-        public PayPalService(string clientId, string secret, bool isLive)
+        public PayPalService(IConfiguration configuration)
         {
-            _environment = isLive
-                ? new LiveEnvironment(clientId, secret)
-                : new SandboxEnvironment(clientId, secret);
-            _client = new PayPalHttpClient(_environment);
+            var clientId = configuration["PayPal:ClientId"];
+            var secret = configuration["PayPal:Secret"];
+            var isLive = configuration["PayPal:IsLive"] == "true";
+
+            PayPalEnvironment environment;
+
+            if (isLive)
+            {
+                environment = new LiveEnvironment(clientId, secret);
+            }
+            else
+            {
+                environment = new SandboxEnvironment(clientId, secret);
+            }
+
+            _client = new PayPalHttpClient(environment);
         }
 
-        public async Task<Order> CreateOrder(decimal amount, string currency)
+        public async Task<Order> CreateOrder(decimal amount, string currency, string returnUrl, string cancelUrl)
         {
             var orderRequest = new OrderRequest()
             {
                 CheckoutPaymentIntent = "CAPTURE",
                 PurchaseUnits = new List<PurchaseUnitRequest>
-            {
-                new PurchaseUnitRequest
                 {
-                    AmountWithBreakdown = new AmountWithBreakdown
+                    new PurchaseUnitRequest
                     {
-                        CurrencyCode = currency,
-                        Value = amount.ToString("F2")
+                        AmountWithBreakdown = new AmountWithBreakdown
+                        {
+                            CurrencyCode = currency,
+                            Value = amount.ToString("F2")
+                        }
                     }
-                }
-            },
+                },
                 ApplicationContext = new ApplicationContext
                 {
-                    ReturnUrl = "https://your-frontend.com/success",
-                    CancelUrl = "https://your-frontend.com/cancel"
+                    ReturnUrl = returnUrl,
+                    CancelUrl = cancelUrl
                 }
             };
 

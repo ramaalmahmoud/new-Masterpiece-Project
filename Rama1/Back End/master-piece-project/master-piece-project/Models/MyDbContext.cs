@@ -357,7 +357,11 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
             entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
+            entity.Property(e => e.PayPalOrderId).HasMaxLength(100);
             entity.Property(e => e.PaymentDate).HasColumnType("datetime");
+            entity.Property(e => e.PaymentMethod)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.PaymentStatus).HasMaxLength(50);
             entity.Property(e => e.PaymentType).HasMaxLength(50);
             entity.Property(e => e.UserId).HasColumnName("UserID");

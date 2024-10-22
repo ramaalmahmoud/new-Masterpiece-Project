@@ -43,12 +43,12 @@ namespace master_piece_project.Controllers
             return Ok(activities);
         }
 
-        [HttpGet("GetCategories")]
-        public async Task<IActionResult> GetCategories()
-        {
-            var categories = await _db.ActivityCategories.ToListAsync();
-            return Ok(categories);
-        }
+        //[HttpGet("GetCategories")]
+        //public IActionResult GetCategories()
+        //{
+        //    var categories =  _db.ActivityCategories.ToList();
+        //    return Ok(categories);
+        //}
         [HttpGet("GetActivityWithDetails/{id}")]
         
         public async Task<ActionResult<ActivityWithMaterialsDto>> GetActivityWithMaterials(int id)
@@ -84,7 +84,7 @@ namespace master_piece_project.Controllers
         [HttpPost("add-activity")]
         public IActionResult AddActivity([FromForm] AddActivityDto activityDto)
         {
-            var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+            var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads/Activity");
             if (activityDto.Image != null && activityDto.Image.Length > 0)
             {
                 if (!Directory.Exists(uploadsFolderPath))
@@ -174,13 +174,22 @@ namespace master_piece_project.Controllers
         [HttpGet("get-activityCategory")]
         public IActionResult getactivityCategory()
         {
-            var activitiesCat =  _db.ActivityCategories.ToList();
+            var activitiesCat = _db.ActivityCategories
+                .Select(c => new
+                {
+                    c.CategoryId,   // Assuming CategoryId is the correct field name
+                    CategoryName = c.CategoryName // Adjust the property name here to match what's in your database
+                })
+                .ToList();
+
             if (!activitiesCat.Any())
             {
                 return NotFound(new { message = "No activities found." });
             }
+
             return Ok(activitiesCat);
         }
+
         public class ActivityWithMaterialsDto
         {
             public string Title { get; set; }

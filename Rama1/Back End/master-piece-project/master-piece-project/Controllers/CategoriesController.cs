@@ -3,6 +3,7 @@ using master_piece_project.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static master_piece_project.Controllers.ActivitiesController;
 
 namespace master_piece_project.Controllers
 {
@@ -47,7 +48,20 @@ namespace master_piece_project.Controllers
 
             return Ok(products);
         }
+        // Add a new Category
+        [HttpPost("add-category")]
+        public IActionResult AddCategory([FromForm] PrpductCategoryDto categoryDto)
+        {
+            var category = new ProductCategory
+            {
+                CategoryName = categoryDto.CategoryName
+            };
 
+            _db.ProductCategories.Add(category);
+            _db.SaveChanges();
+
+            return Ok(new { Message = "Category added successfully" });
+        }
 
     }
 }

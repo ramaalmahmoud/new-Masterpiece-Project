@@ -220,6 +220,8 @@ async function fetchProductDetails(productId) {
         }
         const product = await response.json();
         displayProductDetails(product);
+        console.log(product)
+
     } catch (error) {
         console.error('Error fetching product details:', error);
     }
@@ -233,6 +235,7 @@ function displayProductDetails(product) {
     document.querySelector('.product-details__reveiw span').textContent = `${product.reviewsCount} customer reviews`;
     document.querySelector('.product-details__content-text1').textContent = product.description;
     document.querySelector('.product-details__content-text2').innerHTML = `REF. ${product.reference} <br> Available in store`;
+    document.getElementById("addToCartbtn").innerHTML=`    <a href="#" class="thm-btn" data-product-id="1" onclick="saveProductId(${product.productId})" >Add to Cart</a>`
 debugger
     // Adjust stars based on product rating
     const starsContainer = document.querySelector('.product-details__reveiw');

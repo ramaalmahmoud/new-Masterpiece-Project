@@ -63,7 +63,7 @@ namespace master_piece_project.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok(new { message = "Cart item added successfully." });
         }
         // CartController.cs
         [HttpGet("GetCartByUserId/{userId}")]

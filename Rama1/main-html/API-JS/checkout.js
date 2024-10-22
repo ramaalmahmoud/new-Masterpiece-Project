@@ -88,3 +88,54 @@
 //         console.error('PayPal payment error:', error);
 //     }
 // }
+
+// جلب المجموع الإجمالي من الـ API وعرضه في ملخص الطلب
+// async function fetchCartTotal(userId) {
+//     debugger
+//     try {
+//         // استدعاء API لجلب المجموع الكلي لسلة المشتريات
+//         const response = await fetch(`https://localhost:7084/api/Orders/get-cart-total/${userId}`);
+//         const data = await response.json();
+
+//         if (response.ok) {
+//             // ارجع المجموع الكلي
+//             return data.totalAmount;
+//         } else {
+//             console.error("Failed to fetch cart total:", data.message);
+//         }
+//     } catch (error) {
+//         console.error("Error fetching cart total:", error);
+//     }
+// }
+// document.addEventListener('DOMContentLoaded', async function () {
+//     debugger
+//     const userId = 16; // استبدل هذا برقم المستخدم الحقيقي
+//     const totalAmount = await fetchCartTotal(userId);
+//     debugger
+//     // تحديث جدول الطلبات في الـ frontend
+//     document.querySelector('.pro__price.subtotal').textContent = `$${totalAmount} USD`;
+//     document.querySelector('#paypal-button-container').style.display = 'block'; // عرض زر PayPal
+// });
+
+
+// function loadPayPalButton(totalAmount) {
+//     debugger
+//     paypal.Buttons({
+//         createOrder: function (data, actions) {
+//             return actions.order.create({
+//                 purchase_units: [{
+//                     amount: {
+//                         value: totalAmount.toFixed(2) // هنا نستخدم المجموع الديناميكي
+//                     }
+//                 }]
+//             });
+//         },
+//         onApprove: function (data, actions) {
+//             return actions.order.capture().then(function (details) {
+//                 alert('Transaction completed by ' + details.payer.name.given_name);
+//                 window.location.href = '/order-success';
+//             });
+//         }
+//     }).render('#paypal-button-container');
+// }
+

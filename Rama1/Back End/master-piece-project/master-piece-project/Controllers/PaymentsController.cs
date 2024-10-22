@@ -13,26 +13,47 @@ namespace master_piece_project.Controllers
     public class PaymentsController : ControllerBase
     {
         private readonly PayPalService _payPalService;
+        private readonly MyDbContext _db;
 
-        public PaymentsController(PayPalService payPalService)
+        public PaymentsController(PayPalService payPalService, MyDbContext db)
         {
             _payPalService = payPalService;
+            _db = db;
         }
 
         [HttpPost("create-order")]
-        public async Task<IActionResult> CreateOrder([FromBody] decimal amount)
+        [Authorize]
+        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
         {
-            var order = await _payPalService.CreateOrder(amount, "USD");
+            if (request == null || request.Amount <= 0)
+            {
+                return BadRequest("Invalid order details.");
+            }
+
+            // يمكنك استبدال هذه الروابط بروابط الواجهة الأمامية الخاصة بك
+            string returnUrl = "https://your-frontend.com/success";
+            string cancelUrl = "https://your-frontend.com/cancel";
+
+            var order = await _payPalService.CreateOrder(request.Amount, "USD", returnUrl, cancelUrl);
             return Ok(order);
         }
 
         [HttpPost("capture-order/{orderId}")]
+        [Authorize]
         public async Task<IActionResult> CaptureOrder(string orderId)
         {
+            if (string.IsNullOrWhiteSpace(orderId))
+            {
+                return BadRequest("Invalid order ID.");
+            }
+
             var order = await _payPalService.CaptureOrder(orderId);
             return Ok(order);
         }
+    }
 
-
+    public class CreateOrderRequest
+    {
+        public decimal Amount { get; set; }
     }
 }
