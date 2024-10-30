@@ -25,7 +25,6 @@ namespace master_piece_project.Controllers
                 {
                     CategoryID = c.CategoryId,
                     CategoryName = c.CategoryName,
-                    Description = c.Description // Optional field
                 })
                 .ToListAsync();
 

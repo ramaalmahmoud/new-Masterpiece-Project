@@ -140,16 +140,27 @@ namespace master_piece_project.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateOrderStatus(int id, [FromBody] string newStatus)
         {
-            var order =  _db.Orders.Find(id);
+            var order = _db.Orders.Find(id);
             if (order == null)
             {
                 return NotFound();
             }
 
             order.OrderStatus = newStatus;
-             _db.SaveChanges();
+            _db.SaveChanges();
 
             return NoContent();
         }
+
+        [HttpGet("user/{userId}/orders")]
+        public async Task<IActionResult> GetUserOrders(int userId)
+        {
+            var orders = await _db.Orders
+                .Where(o => o.UserId == userId)
+                .ToListAsync();
+
+            return Ok(orders);
+        }
+
     }
 }

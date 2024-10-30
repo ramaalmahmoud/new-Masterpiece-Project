@@ -14,7 +14,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IPayPalClient, PayPalClient>();
 builder.Services.AddSignalR(); // Add SignalR service
 
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -23,23 +22,39 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
 builder.Services.AddCors(options =>
-options.AddPolicy("development", builder =>
-{
-    builder.AllowAnyOrigin();
-    builder.AllowAnyMethod();
-    builder.AllowAnyHeader();
-
-})
+    options.AddPolicy("development", builder =>
+    {
+        builder.AllowAnyOrigin();
+        builder.AllowAnyMethod();
+        builder.AllowAnyHeader();
+    })
 );
+
+// Add PayPal configuration
 var config = ConfigManager.Instance.GetProperties();
-config["clientId"] = "AWoQADMAX_vx7WgYgVwr-SiD03yiKLNGdEqcAAJVWhoxvD1UIHRwIsi3O7Ha4RgxaOORA5ZCocdcfTMI"; // استبدل بـ Client ID الخاص بك
-config["clientSecret"] = "EGXwZlz6_I5K4HUN4BBNg8yqb79L3GNWZkahwu8qcIDVnUx9kNHO961d9HwagTiFTKtf2AWCEmwAlBQ3"; // استبدل بـ Secret الخاص بك
-config["mode"] = "sandbox";
+config["clientId"] = builder.Configuration["PayPal:ClientId"]; // from appsettings.json
+config["clientSecret"] = builder.Configuration["PayPal:ClientSecret"]; // from appsettings.json
+config["mode"] = "sandbox"; // or "live" depending on environment
+
+
+
+// Register PayPalService with DI container
+builder.Services.AddSingleton<PayPalService>(sp =>
+{
+    var clientId = builder.Configuration["PayPal:ClientId"];
+    var clientSecret = builder.Configuration["PayPal:ClientSecret"];
+    var isLive = builder.Configuration.GetValue<bool>("PayPal:IsLive");
+    return new PayPalService(clientId, clientSecret, isLive);
+});
+
 builder.Services.AddSingleton<TokenGenerator>();
+
+// JWT Configuration
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = jwtSettings.GetValue<string>("Key");
 var issuer = jwtSettings.GetValue<string>("Issuer");
 var audience = jwtSettings.GetValue<string>("Audience");
+
 if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(issuer) || string.IsNullOrEmpty(audience))
 {
     throw new InvalidOperationException("JWT settings are not properly configured.");
@@ -48,16 +63,15 @@ if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(issuer) || string.IsNullOr
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        var jwtSettings = builder.Configuration.GetSection("Jwt");
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = jwtSettings["Issuer"],
-            ValidAudience = jwtSettings["Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+            ValidIssuer = issuer,
+            ValidAudience = audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
         };
     });
 
@@ -66,21 +80,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
     options.AddPolicy("client", policy => policy.RequireRole("client"));
 });
-// PayPal Service Injection
-//builder.Services.AddSingleton<PayPalService>(sp =>
-//{
-//    // You can get these values from your appsettings.json or environment variables
-//    var clientId = builder.Configuration["PayPal:ClientId"];
-//    var clientSecret = builder.Configuration["PayPal:ClientSecret"];
-
-//    // Ensure you toggle this flag for live/sandbox environments
-//    var isLive = builder.Configuration.GetValue<bool>("PayPal:IsLive");
-
-//    return new PayPalService(clientId, clientSecret, isLive);
-//});
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -97,6 +98,7 @@ app.UseAuthorization();
 app.UseCors("development");
 
 app.MapControllers();
+
 // Map the SignalR hub for the chat
 app.MapHub<ChatHub>("/chatHub"); // Add SignalR Hub Mapping here
 

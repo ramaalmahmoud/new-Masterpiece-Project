@@ -97,12 +97,12 @@
           </li>
   
           <!-- Volunteer & Doctor Management -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="../admin/volunteers.html">
-              <i class="fas fa-user-md"></i> <!-- Changed Icon -->
+              <i class="fas fa-user-md"></i> 
               <p>Volunteers & Doctors</p>
             </a>
-          </li>
+          </li> -->
   
           <!-- Activity Management -->
           <li class="nav-item">
@@ -113,12 +113,12 @@
           </li>
   
           <!-- Appointment Management -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="../admin/appointments.html">
               <i class="fas fa-calendar-alt"></i>
               <p>Appointments</p>
             </a>
-          </li>
+          </li> -->
   
           <!-- Feedback & Rating Management -->
           <li class="nav-item">
@@ -129,12 +129,12 @@
           </li>
   
           <!-- Chat Management -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="../admin/chat.html">
               <i class="fas fa-comments"></i>
               <p>Chat Management</p>
             </a>
-          </li>
+          </li> -->
   
           <!-- Shop Management -->
           <li class="nav-item">
@@ -202,7 +202,7 @@
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="categoryTableBody">
             <!-- Rows should be populated dynamically -->
             <tr>
                 <td>1</td>
@@ -280,6 +280,42 @@ addCategoryModal.hide();
 
       // Optionally, update the category list (for example, appending to a table dynamically)
   });
+
+   // JavaScript function to fetch and populate the table
+   async function loadCategories() {
+    debugger
+        try {
+            const response = await fetch('https://localhost:7084/api/Categories/categories'); // Adjust the URL if needed
+            if (response.ok) {
+                const categories = await response.json();
+
+                const tableBody = document.getElementById('categoryTableBody');
+                tableBody.innerHTML = ''; // Clear the existing rows
+debugger
+                // Loop through each category and create a table row
+                categories.forEach(category => {
+                    const row = `
+                        <tr>
+                            <td>${category.categoryID}</td>
+                            <td>${category.categoryName}</td>
+                            <td>
+                                <a href="/admin/edit-category/${category.categoryID}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="/admin/delete-category/${category.categoryID}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row; // Append each row to the table body
+                });
+            } else {
+                console.error('Failed to fetch categories');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    // Call the function to load categories when the page loads
+    document.addEventListener('DOMContentLoaded', loadCategories);
 </script>
 
  

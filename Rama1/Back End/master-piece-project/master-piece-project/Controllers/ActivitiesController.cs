@@ -189,6 +189,25 @@ namespace master_piece_project.Controllers
 
             return Ok(activitiesCat);
         }
+        [HttpGet("user/{userId}/activities")]
+        public async Task<IActionResult> GetUserActivities(int userId)
+        {
+            var userActivities = await _db.SavedPrintedActivities
+                .Where(spa => spa.UserId == userId)
+                .Select(spa => new
+                {
+                    ActivityId = spa.ActivityId,
+                    ActivityTitle = spa.Activity != null ? spa.Activity.Title : null,
+                    ActionType = spa.ActionType,
+                    ActionDate = spa.ActionDate,
+                    Steps = spa.Activity != null ? spa.Activity.Instructions : null, // Assuming Activity contains 'Steps'
+                    Materials = spa.Activity != null ? spa.Activity.Materials : null // Assuming Activity contains 'Materials'
+                })
+                .ToListAsync();
+
+            return Ok(userActivities);
+        }
+
 
         public class ActivityWithMaterialsDto
         {

@@ -93,7 +93,7 @@ async function fetchCartItems() {
   // Update Cart Summary
   function updateCartSummary(cartItems) {
     const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const shippingCost = 0; // Assuming free shipping for now
+    const shippingCost = 20; // Assuming free shipping for now
     const totalAmount = subtotal + shippingCost;
   
     document.getElementById('subtotal').innerText = `$${subtotal.toFixed(2)} USD`;

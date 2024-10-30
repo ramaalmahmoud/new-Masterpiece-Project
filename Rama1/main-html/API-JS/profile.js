@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     debugger
-    const userId = 1; // Use the actual user ID from session or context
+    const userId = localStorage.getItem("UserID"); // Use the actual user ID from session or context
 debugger
     fetch(`https://localhost:7084/api/Profile/api/user/${userId}`)
         .then(response => response.json())
@@ -14,8 +14,60 @@ debugger
 
 
         });
+
+        
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const userId = localStorage.getItem("UserID"); // Replace with actual user ID (you can get this from a logged-in user session or token)
+    
+    // Fetch Blog Posts
+    fetch(`https://localhost:7084/api/Blogs/user/${userId}/blogposts`)
+        .then(response => response.json())
+        .then(data => {
+            const blogPostsContainer = document.getElementById("blogPosts");
+            blogPostsContainer.innerHTML = ""; // Clear existing content
+            data.forEach(post => {
+                const listItem = `<li><a href="/blog/${post.id}" class="profile__link">${post.title}</a></li>`;
+                blogPostsContainer.insertAdjacentHTML("beforeend", listItem);
+            });
+        })
+        .catch(error => console.error('Error fetching blog posts:', error));
+
+    // Fetch Activities
+    fetch(`https://localhost:7084/api/Activities/user/${userId}/activities`)
+        .then(response => response.json())
+        .then(data => {
+            const activitiesContainer = document.getElementById("activities");
+            activitiesContainer.innerHTML = ""; // Clear existing content
+            data.forEach(activity => {
+                const listItem = `
+                    <li>
+                        <a href="/activities/${activity.id}" class="profile__link">
+                            <h4>${activity.title}</h4>
+                            <p><strong>Steps:</strong> ${activity.steps}</p>
+                            <p><strong>Materials:</strong> ${activity.materials}</p>
+                        </a>
+                    </li>`;
+                activitiesContainer.insertAdjacentHTML("beforeend", listItem);
+            });
+        })
+        .catch(error => console.error('Error fetching activities:', error));
+
+    // Fetch Orders
+    fetch(`https://localhost:7084/api/Orders/user/${userId}/orders`)
+        .then(response => response.json())
+        .then(data => {
+            const ordersContainer = document.getElementById("orders");
+            ordersContainer.innerHTML = ""; // Clear existing content
+            data.forEach(order => {
+                const statusClass = order.status === "Completed" ? "completed" : "in-progress";
+                const listItem = `<li>Order #${order.id} - <span class="status ${statusClass}">${order.status}</span></li>`;
+                ordersContainer.insertAdjacentHTML("beforeend", listItem);
+            });
+        })
+        .catch(error => console.error('Error fetching orders:', error));
+});
 
 document.querySelector('#editProfileForm').addEventListener('submit', function(event) {
     debugger

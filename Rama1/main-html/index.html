@@ -107,7 +107,6 @@
                             <ul class="main-menu__list">
                                 <li class="megamenu dropdown current megamenu-clickable megamenu-clickable--toggler">
                                     <a href="index.html">Home</a>
-                                  
                                 </li>
                                 <li>
                                     <a href="about.html">About</a>
@@ -115,21 +114,15 @@
                                 <li class="dropdown">
                                     <a href="#">Services</a>
                                     <ul class="sub-menu">
-                                     
                                         <li><a href="blog.html">Screen Risks</a></li>
                                         <li><a href="activities.html">Activities</a></li>
-                                        <li><a href="parent-paltform.html">Parent Platform</a></li>
-                                        <li><a href="family-psycology.html">Psychological Support</a></li>
-                                       
+                                        <li><a href="parent-platform.html">Parent Platform</a></li>
+                                        <li><a href="family-psychology.html">Psychological Support</a></li>
                                     </ul>
                                 </li>
-                               
-                               
-                                <li >
+                                <li>
                                     <a href="products.html">Shop</a>
-                                  
                                 </li>
-                              
                                 <li>
                                     <a href="contact.html">Contact</a>
                                 </li>
@@ -139,12 +132,13 @@
                 </div>
                 <div class="main-header-four__right">
                     <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
-                    <a class="thm-btn thm-btn--two" href="login.html">Sign up</a>
+                    <a class="thm-btn thm-btn--two" id="signup-login-btn" href="login.html">Sign up</a>
+                    <div id="profile-logout-btns" style="display: none;" class="main-header-four__right__btn">
+                        <a href="profile.html" class="login-toggler" style="margin: 10px;"><i class="fas fa-user"></i></a>
+                        <a href="#" id="logout-btn"  class="login-toggler"><i class="fas fa-sign-out-alt"></i> </a>
+                    </div>
                     <div class="main-header-four__right__btn">
-                        <a href="profile.html" class="login-toggler"><i class="fas fa-sign-in-alt"></i></a>
                         <a href="#" class="search-toggler"><i class="icon-magnifying-glass"></i></a>
-                       
-
                         <a href="cart.html" class="main-menu__cart"><i class="icon-shopping-cart"></i></a>
                     </div>
                     <div class="main-header-four__social">
@@ -168,10 +162,63 @@
                 </div>
             </nav>
         </header>
-
+        
         <div class="stricky-header stricked-menu main-menu main-header-four">
-            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+            <div class="sticky-header__content">
+                <!-- Add your dynamic buttons here -->
+                <!-- Sign Up/Discover Activities Button -->
+                <a class="thm-btn thm-btn--two" id="sticky-signup-login-btn" href="login.html">Sign up</a>
+                
+                <!-- Profile and Logout (hidden by default) -->
+                <div id="sticky-profile-logout-btns" style="display: none;">
+                    <a href="profile.html" class="login-toggler"><i class="fas fa-user"></i> Profile</a>
+                    <a href="#" id="sticky-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div><!-- /.sticky-header__content -->
         </div><!-- /.stricky-header -->
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                debugger
+    const isLoggedIn = localStorage.getItem('isLoggedIn'); // Check login status from local storage
+debugger
+    // Sticky header elements
+    const stickySignupLoginBtn = document.getElementById('sticky-signup-login-btn');
+    const stickyProfileLogoutBtns = document.getElementById('sticky-profile-logout-btns');
+
+    // Function to update sticky header buttons based on login status
+    function updateStickyHeaderButtons(isLoggedIn) {
+        if (isLoggedIn === 'true') {
+            // Logged in: Change Sign Up to Discover Activities and show Profile/Logout
+            stickySignupLoginBtn.innerText = "Discover Activities";
+            stickySignupLoginBtn.href = "activities.html";
+            stickyProfileLogoutBtns.style.display = 'block';
+        } else {
+            // Not logged in: Show Sign Up button and hide Profile/Logout
+            stickySignupLoginBtn.innerText = "Sign up";
+            stickySignupLoginBtn.href = "login.html";
+            stickyProfileLogoutBtns.style.display = 'none';
+        }
+    }
+
+    // Initial update on page load
+    updateStickyHeaderButtons(isLoggedIn);
+
+    // Handle logout functionality for sticky header
+    const stickyLogoutBtn = document.getElementById('sticky-logout-btn');
+
+    function handleStickyLogout() {
+        localStorage.setItem('isLoggedIn', 'false');
+        window.location.href = 'login.html';
+    }
+
+    stickyLogoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        handleStickyLogout();
+    });
+});
+
+        </script>
 
         <!-- Main Sllider Four Start -->
         <section class="main-slider-four">
@@ -472,7 +519,7 @@
             <div class="container">
                 <div class="section-title section-title--home-four text-left">
                     <span class="section-title__tagline"><span class="section-title__tagline__icon"><i class="delogis-icons-two-brain"></i></span>Testimonial</span>
-                    <h2 class="section-title__title">What They are Talking<br> About Delogis?</h2>
+                    <h2 class="section-title__title">What They are Talking<br> About Us?</h2>
                 </div>
                 <div class="testimonial-four__carousel owl-carousel delogis-owl__carousel--with-shadow owl-theme thm-owl__carousel" data-owl-options='{
                     "loop": true,
@@ -635,126 +682,7 @@
         </section>
         <!--Testimonial Four End-->
 
-        <!--Team Start-->
-        <section class="team-two">
-            <div class="team-two__shape-top">
-                <img src="assets/images/shapes/team-2-1.png" alt="delogis">
-            </div>
-            <div class="container">
-                <div class="section-title section-title--home-four text-center">
-                    <span class="section-title__tagline"><span class="section-title__tagline__icon"><i class="delogis-icons-two-brain"></i></span>Our Team</span>
-                    <h2 class="section-title__title">Meet Our Team Behind <br>the Best Counseling</h2>
-                </div>
-                <div class="row gutter-y-30">
-                    <!--Team Start-->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="00ms">
-                        <div class="team-two__single">
-                            <div class="team-two__single__image">
-                                <img src="assets/images/team/team-2-1.jpg" alt="delogis">
-                            </div>
-                            <div class="team-two__single__content">
-                                <h3 class="team-two__single__name"><a href="team-details.html">Courtney Henry</a></h3>
-                                <span class="team-two__single__designation">CEO Founder</span>
-                                <div class="team-two__single__hover">
-                                    <div class="team-two__single__hover__iconwrap"><i class="fa fa-share-alt"></i></div>
-                                    <div class="team-two__single__social">
-                                        <a href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
-                                            <span class="sr-only">Facebook</span>
-                                        </a>
-                                        <a href="https://twitter.com/">
-                                            <i class="fab fa-twitter" aria-hidden="true"></i>
-                                            <span class="sr-only">Twitter</span>
-                                        </a>
-                                        <a href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
-                                            <span class="sr-only">Linkedin</span>
-                                        </a>
-                                        <a href="https://www.instagram.com/">
-                                            <i class="fab fa-instagram"></i>
-                                            <span class="sr-only">Instagram</span>
-                                        </a>
-                                    </div><!-- /.team-card__social -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Team End-->
-                    <!--Team Start-->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                        <div class="team-two__single">
-                            <div class="team-two__single__image">
-                                <img src="assets/images/team/team-2-2.jpg" alt="delogis">
-                            </div>
-                            <div class="team-two__single__content">
-                                <h3 class="team-two__single__name"><a href="team-details.html">Alex Udami</a></h3>
-                                <span class="team-two__single__designation">Therapist</span>
-                                <div class="team-two__single__hover">
-                                    <div class="team-two__single__hover__iconwrap"><i class="fa fa-share-alt"></i></div>
-                                    <div class="team-two__single__social">
-                                        <a href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
-                                            <span class="sr-only">Facebook</span>
-                                        </a>
-                                        <a href="https://twitter.com/">
-                                            <i class="fab fa-twitter" aria-hidden="true"></i>
-                                            <span class="sr-only">Twitter</span>
-                                        </a>
-                                        <a href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
-                                            <span class="sr-only">Linkedin</span>
-                                        </a>
-                                        <a href="https://www.instagram.com/">
-                                            <i class="fab fa-instagram"></i>
-                                            <span class="sr-only">Instagram</span>
-                                        </a>
-                                    </div><!-- /.team-card__social -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Team End-->
-                    <!--Team Start-->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                        <div class="team-two__single">
-                            <div class="team-two__single__image">
-                                <img src="assets/images/team/team-2-3.jpg" alt="delogis">
-                            </div>
-                            <div class="team-two__single__content">
-                                <h3 class="team-two__single__name"><a href="team-details.html">Ando Jackson</a></h3>
-                                <span class="team-two__single__designation">Counselor</span>
-                                <div class="team-two__single__hover">
-                                    <div class="team-two__single__hover__iconwrap"><i class="fa fa-share-alt"></i></div>
-                                    <div class="team-two__single__social">
-                                        <a href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
-                                            <span class="sr-only">Facebook</span>
-                                        </a>
-                                        <a href="https://twitter.com/">
-                                            <i class="fab fa-twitter" aria-hidden="true"></i>
-                                            <span class="sr-only">Twitter</span>
-                                        </a>
-                                        <a href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
-                                            <span class="sr-only">Linkedin</span>
-                                        </a>
-                                        <a href="https://www.instagram.com/">
-                                            <i class="fab fa-instagram"></i>
-                                            <span class="sr-only">Instagram</span>
-                                        </a>
-                                    </div><!-- /.team-card__social -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Team End-->
-                </div>
-            </div>
-            <div class="team-two__shape-bottom float-bob-x">
-                <img src="assets/images/shapes/team-2-2.png" alt="delogis">
-            </div>
-        </section>
-        <!--Team End-->
+     
 
        <!--Feature Four Start-->
 <section class="feature-four">
@@ -933,130 +861,7 @@
         </section> 
         <!-- Case End -->
 
-  <!--Contact Four Start-->
-<section class="contact-four">
-    <div class="contact-four__shape float-bob-x" style="background-image: url(assets/images/shapes/contact-4-shape-1.png);"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-6">
-                <div class="contact-four__content">
-                    <div class="section-title section-title--home-four text-left">
-                        <span class="section-title__tagline"><span class="section-title__tagline__icon"><i class="delogis-icons-two-brain"></i></span>Contact With Us</span>
-                        <h2 class="section-title__title">Volunteer Opportunities <br>Open Now! </h2>
-                    </div>
-                    <div class="contact-one__form-box">
-                        <form class="contact-one__form contact-form-validated" novalidate="novalidate" id="volunteer-form" >
-                            <div class="row">
-                                <!-- Volunteer Role -->
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="contact-one__form-input-box">
-                                        <input type="text" placeholder="Volunteer Role" name="VolunteerRole" class="form-control">
-                                    </div>
-                                </div>
-
-                                <!-- Resume -->
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="contact-one__form-input-box">
-                                        <label for="">Resume</label>
-                                        <input type="file"  name="Resume" class="form-control">
-                                    </div>
-                                </div>
-
-                                <!-- Certificates -->
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="contact-one__form-input-box">
-                                        <label for="">Certificates</label>
-                                        <input type="file" name="Certificates" class="form-control">
-                                    </div>
-                                </div>
-
-                         
-
-                                <!-- Why Volunteer -->
-                                <div class="col-xl-12 col-lg-12">
-                                    <div class="contact-one__form-input-box">
-                                        <textarea placeholder="Why do you want to volunteer?" name="WhyVolunteer" class="form-control"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="contact-one__form btn-box">
-                                        <button onclick="addVolunteer()" type="submit"  class="thm-btn thm-btn--two">Be A Volunteer</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="result"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 wow fadeInRight" data-wow-delay="00ms">
-                <div class="delogis-stretch-element-inside-column">
-                    <div class="contact-four__image">
-                        <img src="assets/images/resources/contact-4-1.jpg" alt="delogis">
-                    </div>
-                    <div class="contact-four__shape-one"></div>
-                    <div class="contact-four__shape-two"></div>
-                    <div class="contact-four__info">
-                        <div class="contact-four__info__icon"><span class="delogis-icons-two-call"></span></div>
-                        <span class="contact-four__info__title">Call to Anytime</span>
-                        <h5 class="contact-four__info__text"><a href="tel:9238008060">+92 3800 8060</a></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--Contact Four End-->
-
-<script>
-    debugger
-    async function addVolunteer() {
-
-    debugger
-    const userId = localStorage.getItem('UserID');
-    event.preventDefault(); // لمنع إعادة تحميل الصفحة عند الضغط على زر الإرسال
-
-    // تحديد عنوان الـ API الذي سيتم إرسال البيانات إليه
-    const url = "https://localhost:7084/api/User/addVolunteer";
-
-    // الحصول على النموذج
-    const form = document.getElementById("volunteer-form");
-    
-    // جمع البيانات باستخدام FormData
-    const formData = new FormData(form);
-    formData.append('userId', userId);
-
-    console.log("formdata",formData);
-
-    try {
-        // إرسال البيانات إلى الـ API باستخدام fetch
-        const response = await fetch(url, {
-            method: 'POST', // إرسال البيانات باستخدام POST
-            body: formData // إرسال بيانات النموذج
-        });
-
-        // التحقق من الاستجابة
-        if (response.ok) {
-            // إذا كان الطلب ناجحًا
-            const result = await response.json();
-            alert("Data has been successfully stored!");
-            console.log(result);
-        } else {
-            // إذا كان هناك خطأ في الاستجابة
-            const errorData = await response.json();
-            alert("Error occurred while storing data: " + JSON.stringify(errorData));
-        }
-    } catch (error) {
-        // التعامل مع أي خطأ يحدث أثناء العملية
-        console.error("Error: ", error);
-        alert("An error occurred: " + error.message);
-    }
-}
-
-</script>
+ 
 
         
         <!--Blog Two Start-->
@@ -1421,6 +1226,7 @@
     
     <!-- template js -->
     <script src="assets/js/delogis.js"></script>
+    <script src="API-JS/login-register.js"></script>
     
 </body>
 

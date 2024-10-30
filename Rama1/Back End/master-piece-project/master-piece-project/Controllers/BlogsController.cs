@@ -221,6 +221,15 @@ namespace master_piece_project.Controllers
 
             return Ok(sidebarResponse);
         }
+        [HttpGet("user/{userId}/blogposts")]
+        public async Task<IActionResult> GetUserBlogPosts(int userId)
+        {
+            var blogPosts = await _db.BlogPosts
+                .Where(bp => bp.AuthorId == userId)
+                .ToListAsync();
+
+            return Ok(blogPosts);
+        }
 
 
     }

@@ -210,23 +210,98 @@
     <!--Page Header End-->
 <!-- Profile Section Start -->
 <section class="profile">
-    <div class="container">
+    <div class="container profile-container">
         <div class="row">
             <!-- Profile Picture and Info -->
-            <div class="col-xl-4 col-lg-5">
-                <div class="profile__left">
-                    <div class="profile__img">
-                        <img id="profilePicture" src="assets/images/testimonial/testimonial-1-1.jpg" alt="Profile Picture">
+            <div class="col-xl-4 col-lg-5 profile-left">
+                <div class="profile__img">
+                    <img id="profilePicture" src="assets/images/testimonial/testimonial-1-1.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
+                </div>
+                <div class="profile__info">
+                    <h2 id="username" class="">[UserName]</h2>
+                    <p id="email">Email: [UserEmail]</p>
+                    <a href="javascript:void(0);" class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</a>
+                </div>
+            </div>
+    
+            <!-- Profile Details -->
+            <div class="col-xl-8 col-lg-7 profile-right">
+                <div class="profile-overview">
+                    <h2 class="section-title__title">Your <span class="">Profile</span> Overview</h2>
+    
+                    <!-- Blog Section -->
+                    <div class="profile__section mb-4">
+                        <h3>Your Blog Posts</h3>
+                        <ul id="blogPosts" class="list-unstyled">
+                            <!-- Blog posts will be dynamically loaded here -->
+                        </ul>
+                        <a href="/blog" class="btn btn-outline-secondary">View All Blog Posts</a>
                     </div>
-                    <div class="profile__info">
-                        <h2 id="username">[UserName]</h2>
-                        <p id="email">Email: [UserEmail]</p>
-                        <!-- <p id="profilePicture">Joined on: [JoinDate]</p> -->
-                        <a href="javascript:void(0);" class="thm-btn profile__btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</a>
+    
+                    <!-- Activities Section -->
+                    <div class="profile__section mb-4">
+                        <h3>Your Activities</h3>
+                        <ul id="activities" class="list-unstyled">
+                            <!-- Activities will be dynamically loaded here -->
+                        </ul>
+                        <a href="/activities" class="btn btn-outline-secondary">View All Activities</a>
+                    </div>
+    
+                    <!-- Orders Section -->
+                    <div class="profile__section">
+                        <h3>Your Orders</h3>
+                        <ul id="orders" class="list-unstyled">
+                            <!-- Orders will be dynamically loaded here -->
+                        </ul>
+                        <a href="/orders" class="btn btn-outline-secondary">View All Orders</a>
                     </div>
                 </div>
             </div>
-            <!-- Edit Profile Modal Start -->
+        </div>
+    </div>
+    
+    <!-- Add custom styles -->
+    <style>
+        .profile-container {
+            margin-top: 30px;
+        }
+        .profile__img img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+        .profile__info {
+            text-align: center;
+        }
+        .profile-left, .profile-right {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .profile-overview h2 {
+            margin-bottom: 30px;
+        }
+        .profile__section h3 {
+            margin-bottom: 15px;
+        }
+        .profile__section ul {
+            padding-left: 0;
+        }
+        .profile__section ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .profile__section ul li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .btn-outline-primary {
+            margin-right: 10px;
+        }
+    </style>
+    
+             <!-- Edit Profile Modal Start -->
 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -257,60 +332,18 @@
         </div>
     </div>
 </div>
-<!-- Edit Profile Modal End -->
-
-            <!-- Profile Details -->
-            <div class="col-xl-8 col-lg-7">
-                <div class="profile__right">
-                    <div class="section-title text-left mb-4">
-                        <h2 class="section-title__title">Your <span>Profile</span> Overview</h2>
-                    </div>
-                    
-                    <!-- Blog Section -->
-                    <div class="profile__section mb-4">
-                        <h3>Your Blog Posts</h3>
-                        <ul class="list-unstyled">
-                            <li><a href="/blog/post1" class="profile__link">Post Title 1</a></li>
-                            <li><a href="/blog/post2" class="profile__link">Post Title 2</a></li>
-                        </ul>
-                        <a href="/blog" class="thm-btn profile__btn">View All Blog Posts</a>
-                    </div>
-                    
-                    <!-- Activities Section -->
-                    <div class="profile__section mb-4">
-                        <h3>Your Activities</h3>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="/activities/activity1" class="profile__link">
-                                    <h4>Activity Title 1</h4>
-                                    <p><strong>Steps:</strong> [Brief description of steps]</p>
-                                    <p><strong>Materials:</strong> [List of materials]</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/activities/activity2" class="profile__link">
-                                    <h4>Activity Title 2</h4>
-                                    <p><strong>Steps:</strong> [Brief description of steps]</p>
-                                    <p><strong>Materials:</strong> [List of materials]</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <a href="/activities" class="thm-btn profile__btn">View All Activities</a>
-                        <a href="/activities/new" class="thm-btn profile__btn">Add New Activity</a>
-                    </div>
-                    
-                    <!-- Parent Chat Section -->
-                    <div class="profile__section mb-4">
+      <!-- Parent Chat Section -->
+                    <!-- <div class="profile__section mb-4">
                         <h3>Your Chats</h3>
                         <ul class="list-unstyled">
                             <li><a href="/chat/1" class="profile__link">Chat with [ParentName1]</a></li>
                             <li><a href="/chat/2" class="profile__link">Chat with [ParentName2]</a></li>
                         </ul>
                         <a href="/chat" class="thm-btn profile__btn">Start a New Chat</a>
-                    </div>
+                    </div> -->
                     
                     <!-- Psychological Sessions Section -->
-                    <div class="profile__section mb-4">
+                    <!-- <div class="profile__section mb-4">
                         <h3>Your Sessions</h3>
                         <ul class="list-unstyled">
                             <li>Session with [PsychologistName] - <span class="status upcoming">Upcoming</span></li>
@@ -318,21 +351,8 @@
                         </ul>
                         <a href="/sessions" class="thm-btn profile__btn">View All Sessions</a>
                         <a href="/sessions/new" class="thm-btn profile__btn">Book New Session</a>
-                    </div>
-                    
-                    <!-- Orders Section -->
-                    <div class="profile__section">
-                        <h3>Your Orders</h3>
-                        <ul class="list-unstyled">
-                            <li>Order #123 - <span class="status in-progress">In Progress</span></li>
-                            <li>Order #124 - <span class="status completed">Completed</span></li>
-                        </ul>
-                        <a href="/orders" class="thm-btn profile__btn">View All Orders</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div> -->
+                   
     <!--Site Footer Start-->
     <footer class="site-footer-two">
         <div class="site-footer-two__shape-one float-bob-y">

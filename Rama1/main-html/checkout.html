@@ -203,7 +203,7 @@
                                   
                                     <div class="col-xl-12">
                                         <div class="billing_input_box">
-                                            <input type="text" name="Address" value="" placeholder="Address">
+                                            <input type="text" name="Address" value="" placeholder="Address" id="address">
                                         </div>
                                     </div>
                                 
@@ -213,25 +213,18 @@
                                 <div class="row bs-gutter-x-20">
                                     <div class="col-xl-6">
                                         <div class="billing_input_box">
-                                            <input name="email" type="email" placeholder="Email Address">
+                                            <input name="email" type="email" placeholder="Email Address" id="email">
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="billing_input_box">
                                             <input type="tel" name="form_phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                                required="" placeholder="Phone">
+                                                required="" placeholder="Phone" id="phone">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        <div class="ship_different_input">
-                                            <textarea placeholder="Notes About your Order"
-                                                name="form_order_notes"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
+                            
                             </form>
                         </div>
                     </div>
@@ -296,55 +289,133 @@
                         </div>
                         
                         
-<script>
-    debugger
-    document.getElementById('place-order-button').addEventListener('click', async function(event) {
-        debugger
+                        <script>
+                           document.getElementById('place-order-button').addEventListener('click', async function(event) {
     event.preventDefault(); // Prevent default form submission
-debugger
+
+    // Get the active payment method
     const activePaymentMethod = document.querySelector('.checkout__payment__item--active').getAttribute('data-method');
 
+    // Gather form data
+    const address = document.getElementById('address').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+
     if (activePaymentMethod === 'paypal') {
-        // Trigger PayPal payment
-        document.getElementById('paypal-button-container').style.display = 'block';
+        // Create the order request payload
+        const createOrderRequest = {
+            amount: 22, // This will be recalculated in the backend based on the cart items
+            shippingAddress: address,
+            paymentMethod: 'paypal'
+        };
 
-        paypal.Buttons({
-            createOrder: function(data, actions) {
-                // Set up the transaction
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '20.98' // Replace with the actual total amount
-                        }
-                    }]
-                });
-            },
-            onApprove: function(data, actions) {
-                // Capture the funds from the transaction
-                return actions.order.capture().then(function(details) {
-                    alert('Transaction completed by ' + details.payer.name.given_name);
+        try {
+            // Create order on the backend
+            const orderResponse = await fetch('https://localhost:7084/api/Payments/create-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include auth token if needed
+                },
+                body: JSON.stringify(createOrderRequest),
+            });
 
-                    // You can also send the captured order info to your backend here
-                    // Example: send `details` to your backend for processing
-                });
-            },
-            onError: function(err) {
-                console.error('PayPal error:', err);
+            if (!orderResponse.ok) {
+                const error = await orderResponse.json();
+                alert(`Error creating order: ${error.message}`);
+                return;
             }
-        }).render('#paypal-button-container'); // Render the PayPal button into the container
+
+            const orderData = await orderResponse.json();
+            const totalAmount = orderData.OrderId; // Backend-generated orderId
+            const paypalOrderId = orderData.PayPalOrderId; // PayPal order ID
+
+            // Show PayPal button and initiate the PayPal payment
+            document.getElementById('paypal-button-container').style.display = 'block';
+debugger
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    // Use the PayPal order ID created by the backend
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: totalAmount.toString(), // Ensure total amount is correct
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    // Capture the PayPal order
+                    return actions.order.capture().then(async function(details) {
+                        alert('Transaction completed by ' + details.payer.name.given_name);
+
+                        // Send captured order info to backend to finalize the order
+                        const captureResponse = await fetch(`https://localhost:7084/api/Payments/capture-order/${data.orderID}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include auth token if needed
+                            },
+                            body: JSON.stringify({
+                                orderId: data.orderID,
+                                details: details, // Additional PayPal details if needed
+                            }),
+                        });
+debugger
+                        if (!captureResponse.ok) {
+                            alert('Error capturing payment');
+                        } else {
+                            alert('Payment captured successfully');
+                            // Optionally redirect to a success page or display order summary
+                        }
+                    });
+                },
+                onError: function(err) {
+                    console.error('PayPal error:', err);
+                    alert('There was an error with your payment. Please try again.');
+                }
+            }).render('#paypal-button-container'); // Render the PayPal button
+        } catch (error) {
+            console.error('Error:', error);
+        }
     } else {
-        // Handle cash on delivery order placement
-        alert('Order placed successfully with Cash on Delivery');
+        // Handle Cash on Delivery (COD)
+        try {
+            const codRequest = {
+                amount: 22, // Adjust this amount as necessary
+                shippingAddress: address,
+                paymentMethod: 'Cash On Delivery'
+            };
+
+            const codResponse = await fetch('https://localhost:7084/api/Payments/create-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
+                },
+                body: JSON.stringify(codRequest),
+            });
+
+            if (!codResponse.ok) {
+                const error = await codResponse.json();
+                alert(`Error placing order: ${error.message}`);
+            } else {
+                alert('Order placed successfully with Cash on Delivery');
+                // Optionally redirect to a success page or order summary
+            }
+        } catch (error) {
+            console.error('Error placing COD order:', error);
+        }
     }
 });
 
-// Toggle between Cash On Delivery and PayPal options
+// Toggle between payment methods
 document.querySelectorAll('.checkout__payment__item').forEach(item => {
     item.addEventListener('click', function() {
         document.querySelectorAll('.checkout__payment__item').forEach(i => i.classList.remove('checkout__payment__item--active'));
         this.classList.add('checkout__payment__item--active');
 
-        // Show or hide the PayPal button container
+        // Show/hide the PayPal button container based on the selected payment method
         if (this.getAttribute('data-method') === 'paypal') {
             document.getElementById('paypal-button-container').style.display = 'block';
         } else {
@@ -352,108 +423,8 @@ document.querySelectorAll('.checkout__payment__item').forEach(item => {
         }
     });
 });
+      </script>
 
-</script>
-<!-- <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const placeOrderButton = document.getElementById('place-order-button');
-        const paymentItems = document.querySelectorAll('.checkout__payment__item');
-        let selectedPaymentMethod = 'bank'; // Default to Direct Bank Transfer
-
-        // Click event to toggle payment method selection
-        paymentItems.forEach((item, index) => {
-            item.addEventListener('click', function () {
-                paymentItems.forEach(paymentItem => paymentItem.classList.remove('checkout__payment__item--active'));
-                item.classList.add('checkout__payment__item--active');
-
-                // Check which payment method is selected
-                if (index === 1) {
-                    selectedPaymentMethod = 'paypal';
-                    showPayPalButton();
-                } else {
-                    selectedPaymentMethod = 'bank';
-                    hidePayPalButton();
-                }
-            });
-        });
-
-        // Function to show PayPal buttons if PayPal is selected
-        function showPayPalButton() {
-            const paypalContainer = document.getElementById('paypal-button-container');
-            if (!paypalContainer) {
-                const paypalHTML = `<div id="paypal-button-container"></div>`;
-                paymentItems[1].insertAdjacentHTML('beforeend', paypalHTML);
-
-                // Initialize PayPal buttons
-                paypal.Buttons({
-                    createOrder: function (data, actions) {
-                        // This sets up the transaction on the server
-                        return fetch('/api/paypal/create-order', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                amount: '10.00' // Replace with the actual amount
-                            })
-                        }).then(function (response) {
-                            return response.json();
-                        }).then(function (orderData) {
-                            return orderData.id;
-                        });
-                    },
-                    onApprove: function (data, actions) {
-                        // This captures the funds from the transaction.
-                        return fetch('/api/paypal/capture-order', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                orderId: data.orderID
-                            })
-                        }).then(function (response) {
-                            return response.json();
-                        }).then(function (captureData) {
-                            if (captureData.status === 'COMPLETED') {
-                                alert('Payment successful! Order ID: ' + captureData.id);
-                                // Redirect to a success page or process the order
-                            } else {
-                                alert('Payment was not completed. Please try again.');
-                            }
-                        });
-                    },
-                    onError: function (err) {
-                        console.error('PayPal error', err);
-                        alert('An error occurred during the payment process.');
-                    }
-                }).render('#paypal-button-container'); // Render the PayPal buttons
-            }
-        }
-
-        // Function to hide PayPal buttons if another method is selected
-        function hidePayPalButton() {
-            const paypalContainer = document.getElementById('paypal-button-container');
-            if (paypalContainer) {
-                paypalContainer.remove();
-            }
-        }
-
-        // Handle Place Order button click
-        placeOrderButton.addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent default link behavior
-
-            if (selectedPaymentMethod === 'paypal') {
-                // Handle PayPal payment (PayPal buttons will handle the flow)
-                alert('Please complete the payment through PayPal.');
-            } else if (selectedPaymentMethod === 'bank') {
-                // Handle Direct Bank Transfer (show confirmation message)
-                alert('Thank you! Your order will be processed once payment has been received.');
-                // You can add logic here to process the bank transfer order
-            }
-        });
-    });
-</script> -->
 
                     </div>
                 </div>

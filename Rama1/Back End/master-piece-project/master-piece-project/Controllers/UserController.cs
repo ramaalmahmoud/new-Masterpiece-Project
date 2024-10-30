@@ -64,7 +64,7 @@ namespace master_piece_project.Controllers
             }
 
             var roles = _db.Users.Where(r => r.UserId == user.UserId).Select(r => r.UserRole).ToList();
-            var token = _tokenGenerator.GenerateToken(user.FullName, roles);
+            var token = _tokenGenerator.GenerateToken(user.FullName, roles,user.UserId);
             // Generate a token or return a success response
 
             return Ok(new { Token = token, UserId = user.UserId });

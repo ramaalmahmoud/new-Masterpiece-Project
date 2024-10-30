@@ -1,37 +1,34 @@
 ﻿using PayPalCheckoutSdk.Core;
 using PayPalCheckoutSdk.Orders;
+using Microsoft.Extensions.Configuration;
+using System.Globalization;
 
 namespace master_piece_project.Services
 {
     public class PayPalService
     {
         private readonly PayPalHttpClient _client;
-
-        public PayPalService(IConfiguration configuration)
+        public PayPalService(string clientId, string clientSecret, bool isLive)
         {
-            var clientId = configuration["PayPal:ClientId"];
-            var secret = configuration["PayPal:Secret"];
-            var isLive = configuration["PayPal:IsLive"] == "true";
-
             PayPalEnvironment environment;
 
             if (isLive)
             {
-                environment = new LiveEnvironment(clientId, secret);
+                environment = new LiveEnvironment(clientId, clientSecret);
             }
             else
             {
-                environment = new SandboxEnvironment(clientId, secret);
+                environment = new SandboxEnvironment(clientId, clientSecret);
             }
 
             _client = new PayPalHttpClient(environment);
         }
-
+        // Method to create an order
         public async Task<Order> CreateOrder(decimal amount, string currency, string returnUrl, string cancelUrl)
         {
             var orderRequest = new OrderRequest()
             {
-                CheckoutPaymentIntent = "CAPTURE",
+                CheckoutPaymentIntent = "CAPTURE", // Use "CAPTURE" to immediately capture funds upon payment
                 PurchaseUnits = new List<PurchaseUnitRequest>
                 {
                     new PurchaseUnitRequest
@@ -39,7 +36,7 @@ namespace master_piece_project.Services
                         AmountWithBreakdown = new AmountWithBreakdown
                         {
                             CurrencyCode = currency,
-                            Value = amount.ToString("F2")
+                            Value = amount.ToString("F2", CultureInfo.InvariantCulture) // Ensure correct decimal formatting
                         }
                     }
                 },
@@ -51,20 +48,39 @@ namespace master_piece_project.Services
             };
 
             var request = new OrdersCreateRequest();
-            request.Prefer("return=representation");
+            request.Prefer("return=representation"); // Request full order representation in the response
             request.RequestBody(orderRequest);
 
-            var response = await _client.Execute(request);
-            return response.Result<Order>();
+            try
+            {
+                // Execute the PayPal order creation
+                var response = await _client.Execute(request);
+                return response.Result<Order>();
+            }
+            catch (Exception ex)
+            {
+                // Log the error or handle it as needed
+                throw new Exception($"PayPal order creation failed: {ex.Message}", ex);
+            }
         }
 
+        // Method to capture an order
         public async Task<Order> CaptureOrder(string orderId)
         {
             var request = new OrdersCaptureRequest(orderId);
             request.RequestBody(new OrderActionRequest());
 
-            var response = await _client.Execute(request);
-            return response.Result<Order>();
+            try
+            {
+                // Execute the PayPal order capture
+                var response = await _client.Execute(request);
+                return response.Result<Order>();
+            }
+            catch (Exception ex)
+            {
+                // Log the error or handle it as needed
+                throw new Exception($"PayPal order capture failed: {ex.Message}", ex);
+            }
         }
     }
 }
