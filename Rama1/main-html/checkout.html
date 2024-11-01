@@ -91,7 +91,6 @@
                         <ul class="main-menu__list">
                             <li class="megamenu dropdown current megamenu-clickable megamenu-clickable--toggler">
                                 <a href="index.html">Home</a>
-                              
                             </li>
                             <li>
                                 <a href="about.html">About</a>
@@ -99,21 +98,15 @@
                             <li class="dropdown">
                                 <a href="#">Services</a>
                                 <ul class="sub-menu">
-                                 
                                     <li><a href="blog.html">Screen Risks</a></li>
                                     <li><a href="activities.html">Activities</a></li>
-                                    <li><a href="parent-paltform.html">Parent Platform</a></li>
-                                    <li><a href="family-psycology.html">Psychological Support</a></li>
-                                   
+                                    <li><a href="parent-platform.html">Parent Platform</a></li>
+                                    <li><a href="family-psychology.html">Psychological Support</a></li>
                                 </ul>
                             </li>
-                           
-                           
-                            <li >
+                            <li>
                                 <a href="products.html">Shop</a>
-                              
                             </li>
-                          
                             <li>
                                 <a href="contact.html">Contact</a>
                             </li>
@@ -123,12 +116,13 @@
             </div>
             <div class="main-header-four__right">
                 <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
-                <a class="thm-btn thm-btn--two" href="login.html">Sign up</a>
+                <a class="thm-btn thm-btn--two" id="signup-login-btn" href="login.html">Sign up</a>
+                <div id="profile-logout-btns" style="display: none;" class="main-header-four__right__btn">
+                    <a href="profile.html" class="login-toggler" style="margin: 10px;"><i class="fas fa-user"></i></a>
+                    <a href="#" id="logout-btn"  class="login-toggler"><i class="fas fa-sign-out-alt"></i> </a>
+                </div>
                 <div class="main-header-four__right__btn">
-                    <a href="profile.html" class="login-toggler"><i class="fas fa-sign-in-alt"></i></a>
                     <a href="#" class="search-toggler"><i class="icon-magnifying-glass"></i></a>
-                   
-
                     <a href="cart.html" class="main-menu__cart"><i class="icon-shopping-cart"></i></a>
                 </div>
                 <div class="main-header-four__social">
@@ -152,7 +146,6 @@
             </div>
         </nav>
     </header>
-
     <div class="stricky-header stricked-menu main-menu main-header-four">
         <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
     </div><!-- /.stricky-header -->
@@ -345,10 +338,11 @@ debugger
                     });
                 },
                 onApprove: function(data, actions) {
+                    debugger
                     // Capture the PayPal order
                     return actions.order.capture().then(async function(details) {
                         alert('Transaction completed by ' + details.payer.name.given_name);
-
+debugger
                         // Send captured order info to backend to finalize the order
                         const captureResponse = await fetch(`https://localhost:7084/api/Payments/capture-order/${data.orderID}`, {
                             method: 'POST',
@@ -656,6 +650,8 @@ document.querySelectorAll('.checkout__payment__item').forEach(item => {
     <script src="assets/js/delogis.js"></script>
     <script src="API-JS/checkout.js"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AWoQADMAX_vx7WgYgVwr-SiD03yiKLNGdEqcAAJVWhoxvD1UIHRwIsi3O7Ha4RgxaOORA5ZCocdcfTMI"></script>
+    <script src="API-JS/login-register.js"></script>
+
 </body>
 
 

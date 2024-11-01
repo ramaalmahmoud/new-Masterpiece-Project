@@ -161,6 +161,39 @@ namespace master_piece_project.Controllers
 
             return Ok(orders);
         }
+        [HttpGet("api/orders/{id}")]
+        public async Task<IActionResult> GetOrderDetails(int id)
+        {
+            var order = await _db.Orders
+                .Include(o => o.OrderProducts)
+                .ThenInclude(op => op.Product) // Assuming OrderProduct has a Product reference
+                .FirstOrDefaultAsync(o => o.OrderId == id);
+
+            if (order == null)
+            {
+                return NotFound("Order not found.");
+            }
+
+            var orderDetails = new
+            {
+                order.OrderId,
+                order.UserId,
+                CustomerName = order.User != null ? order.User.FullName : "N/A", // Assuming User has a Name property
+                order.OrderDate,
+                order.TotalAmount,
+                order.OrderStatus,
+                Items = order.OrderProducts.Select(op => new
+                {
+                    op.ProductId,
+                    op.Quantity,
+                    op.Price,
+                    ProductName = op.Product.Title // Assuming Product has a Name property
+                }).ToList()
+            };
+
+            return Ok(orderDetails);
+        }
+
 
     }
 }

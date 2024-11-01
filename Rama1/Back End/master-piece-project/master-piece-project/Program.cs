@@ -36,6 +36,9 @@ config["clientId"] = builder.Configuration["PayPal:ClientId"]; // from appsettin
 config["clientSecret"] = builder.Configuration["PayPal:ClientSecret"]; // from appsettings.json
 config["mode"] = "sandbox"; // or "live" depending on environment
 
+// In Program.cs or Startup.cs
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 
 // Register PayPalService with DI container
