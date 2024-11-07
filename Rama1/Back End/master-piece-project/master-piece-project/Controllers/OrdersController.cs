@@ -126,15 +126,39 @@ namespace master_piece_project.Controllers
         [HttpGet("GetOrder")]
         public IActionResult GetOrder()
         {
-            var order = _db.Orders.ToList();
+            var orders = _db.Orders
+                .Select(order => new
+                {
+                    order.OrderId,
+                    order.OrderDate,
+                    order.TotalAmount,
+                    order.ShippingAddress,
+                    order.OrderStatus,
+                    UserName = order.User != null ? order.User.FullName : "Guest",
+                    OrderProducts = order.OrderProducts.Select(op => new
+                    {
+                        op.ProductId,
+                        op.Product.Title,
+                        op.Quantity
+                    }).ToList(),
+                    Payments = order.Payments.Select(payment => new
+                    {
+                        payment.PaymentId,
+                        payment.Amount,
+                        payment.PaymentMethod,
+                        payment.PaymentStatus
+                    }).ToList()
+                })
+                .ToList();
 
-            if (order == null)
+            if (!orders.Any())
             {
-                return NotFound();
+                return NotFound(new { Message = "No orders found." });
             }
 
-            return Ok(order);
+            return Ok(orders);
         }
+
 
         // PUT: api/orders/{id}
         [HttpPut("{id}")]

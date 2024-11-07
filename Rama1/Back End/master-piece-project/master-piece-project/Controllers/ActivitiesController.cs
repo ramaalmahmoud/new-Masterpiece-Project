@@ -68,6 +68,7 @@ namespace master_piece_project.Controllers
             {
                 Title = activity.Title,
                 Image = activity.Image,
+                Duration = activity.Duration,
                 Materials = activity.Materials?.Select(m => m.Name).ToList() ?? new List<string>(), // Ensure it returns a list, even if null
                 Instructions = activity.Instructions?.Select(i => new InstructionDto
                 {
@@ -208,11 +209,53 @@ namespace master_piece_project.Controllers
             return Ok(userActivities);
         }
 
+        // In your ActivitiesController (or create a separate SavedActivitiesController if preferred)
+
+        [HttpPost("saveActivity")]
+        public IActionResult SaveActivity([FromBody] SavedActivityDTO savedActivity)
+        {
+            var existingAction = _db.SavedPrintedActivities
+                .FirstOrDefault(a => a.UserId == savedActivity.UserId && a.ActivityId == savedActivity.ActivityId);
+
+            if (existingAction == null)
+            {
+                // Save the activity if it's not already saved
+                var newAction = new SavedPrintedActivity
+                {
+                    UserId = savedActivity.UserId,
+                    ActivityId = savedActivity.ActivityId,
+                    ActionType = "Save",
+                    ActionDate = DateTime.Now
+                };
+                _db.SavedPrintedActivities.Add(newAction);
+                _db.SaveChanges();
+                return Ok(new { message = "Activity saved.", status = "saved" });
+            }
+            else
+            {
+                // Unsave the activity if it is already saved
+                _db.SavedPrintedActivities.Remove(existingAction);
+                _db.SaveChanges();
+                return Ok(new { message = "Activity unsaved.", status = "unsaved" });
+            }
+        }
+        [HttpGet("checkActivityStatus/{userId}/{activityId}")]
+        public IActionResult CheckActivityStatus(int userId, int activityId)
+        {
+            // Check if the activity is saved by the user
+            var isSaved = _db.SavedPrintedActivities
+                .Any(a => a.UserId == userId && a.ActivityId == activityId);
+
+            return Ok(new { isSaved = isSaved });
+        }
+
 
         public class ActivityWithMaterialsDto
         {
             public string Title { get; set; }
             public string Image { get; set; }
+            public string? Duration { get; set; }
+
             public List<string> Materials { get; set; }
             public List<InstructionDto> Instructions { get; set; }
         }

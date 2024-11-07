@@ -306,7 +306,9 @@ debugger
 function renderBlogPost(post) {
     // Populate the blog details with the fetched data
     document.querySelector('.blog-details__img img').src = `../Back End/master-piece-project/master-piece-project/Uploads/Blogs/${post.image}`;
-    document.querySelector('.blog-details__date p').innerHTML = formatDate(new Date(post.createdAt).getDate(),new Date(post.createdAt).toLocaleString('default', { month: 'short' }));
+    document.querySelector('.blog-details__date p').innerHTML = 
+    `${new Date(post.createdAt).getDate()} ${new Date(post.createdAt).toLocaleString('default', { month: 'short' })}`;
+
     document.querySelector('.blog-details__meta li:first-child a').innerText = `by ${post.authorName}`;
    document.querySelector('.blog-details__meta li:nth-child(2) a').innerText = `${post.commentCount} Comments`;
     document.querySelector('.blog-details__title').innerText = post.title;

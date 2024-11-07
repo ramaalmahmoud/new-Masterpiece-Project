@@ -67,7 +67,7 @@ function renderActivities(activities) {
                 <div class="services-two__content">
                     <div class="services-two__title-box">
                         <h3 class="services-two__title">
-                            <a href="activity-details.html?id=${activity.id}">${activity.title}</a>
+                            <a onclick="storeID(${activity.activityId})" href="activity-details.html?id=${activity.activityId}">${activity.title}</a>
                         </h3>
                     </div>
                 </div>
@@ -75,8 +75,11 @@ function renderActivities(activities) {
         `;
         activitiesContainer.insertAdjacentHTML('beforeend', activityHTML);
     });
+  
 }
-
+function storeID(ID){
+localStorage.setItem("activityID",ID);
+}
 
 function filterActivitiesByCategory(selectedCategoryIds) {
     const activities = document.querySelectorAll('.services-two__single');

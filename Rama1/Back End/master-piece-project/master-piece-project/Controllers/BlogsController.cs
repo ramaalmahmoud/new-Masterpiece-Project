@@ -155,6 +155,7 @@ namespace master_piece_project.Controllers
                 blogPost.Title,
                 blogPost.Image,
                 blogPost.Content,
+                blogPost.CreatedAt,
                 AuthorName = blogPost.Author.FullName, // Adjust based on your User model
                 CommentCount = blogPost.Comments.Count(comment => comment.IsApproved == true) // Count of approved comments
 

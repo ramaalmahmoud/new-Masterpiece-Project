@@ -43,10 +43,10 @@ document.addEventListener("DOMContentLoaded", function() {
             data.forEach(activity => {
                 const listItem = `
                     <li>
-                        <a href="/activities/${activity.id}" class="profile__link">
-                            <h4>${activity.title}</h4>
-                            <p><strong>Steps:</strong> ${activity.steps}</p>
-                            <p><strong>Materials:</strong> ${activity.materials}</p>
+
+                        <a onclick="storeID(${activity.activityId})" href="activity-details.html?id=${activity.activityId}" class="profile__link">
+                            <h4>${activity.activityTitle}</h4>
+                           
                         </a>
                     </li>`;
                 activitiesContainer.insertAdjacentHTML("beforeend", listItem);
@@ -61,8 +61,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const ordersContainer = document.getElementById("orders");
             ordersContainer.innerHTML = ""; // Clear existing content
             data.forEach(order => {
-                const statusClass = order.status === "Completed" ? "completed" : "in-progress";
-                const listItem = `<li>Order #${order.id} - <span class="status ${statusClass}">${order.status}</span></li>`;
+                const statusClass = order.orderStatus === "Completed" ? "completed" : "in-progress";
+                const listItem = `<li>Order #${order.orderId} - <span class="status ${statusClass}">${order.orderStatus}</span></li>`;
                 ordersContainer.insertAdjacentHTML("beforeend", listItem);
             });
         })

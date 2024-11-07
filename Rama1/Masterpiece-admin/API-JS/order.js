@@ -27,7 +27,7 @@ function populateOrdersTable(orders) {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${order.orderId}</td>
-            <td>${order.customerName}</td>
+            <td>${order.userName}</td>
             <td>${new Date(order.orderDate).toLocaleDateString()}</td>
             <td>$${order.totalAmount.toFixed(2)}</td>
             <td>${order.orderStatus}</td>
