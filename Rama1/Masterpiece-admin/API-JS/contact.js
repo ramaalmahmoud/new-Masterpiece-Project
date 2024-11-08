@@ -21,6 +21,7 @@
 
 // Respond by email and hide the button
 async function respondToMessage(id, button) {
+    debugger
     const responseMessage = prompt("Enter your response message:");
 
     if (responseMessage) {
@@ -93,7 +94,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <td>${message.message}</td>
                 <td>${message.submittedAt ? new Date(message.submittedAt).toLocaleString() : "N/A"}</td>
                 <td>
-                    <button class="btn btn-primary btn-sm" onclick="viewMessage(${message.id})">View</button>
                     <button class="btn btn-danger btn-sm" onclick="deleteMessage(${message.id})">Delete</button>
                 <button class="btn btn-warning btn-sm" onclick="respondToMessage(${message.id}, this)" ${responded ? 'style="display:none;"' : ''}>Respond</button>
                 </td>

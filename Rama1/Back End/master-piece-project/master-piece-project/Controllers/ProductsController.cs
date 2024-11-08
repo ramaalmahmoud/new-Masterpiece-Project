@@ -31,7 +31,7 @@ namespace master_piece_project.Controllers
                 Title = p.Title,
                 Price = p.Price,
                 Image = p.Image,
-                categoryID=p.CategoryId,
+                categoryID = p.CategoryId,
                 Stars = GetAverageRating(p.ProductId) // Method to calculate the average rating
             }).ToList();
 
@@ -151,7 +151,7 @@ namespace master_piece_project.Controllers
             };
 
             _db.Products.Add(product);
-             _db.SaveChanges();
+            _db.SaveChanges();
 
             return Ok(new { message = "Product added successfully!" });
         }

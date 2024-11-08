@@ -186,6 +186,7 @@ public partial class MyDbContext : DbContext
 
             entity.HasOne(d => d.Product).WithMany(p => p.CartItems)
                 .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__CartItems__Produ__6A30C649");
         });
 
@@ -325,7 +326,6 @@ public partial class MyDbContext : DbContext
 
             entity.HasOne(d => d.Product).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__OrderProd__Produ__2FCF1A8A");
         });
 
@@ -396,7 +396,6 @@ public partial class MyDbContext : DbContext
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CategoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Products__Catego__5EBF139D");
         });
 
@@ -442,8 +441,7 @@ public partial class MyDbContext : DbContext
 
             entity.HasOne(d => d.Product).WithMany(p => p.Reviews)
                 .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Reviews__Product__2B0A656D");
+                .HasConstraintName("FK_Reviews_Products");
 
             entity.HasOne(d => d.User).WithMany(p => p.Reviews)
                 .HasForeignKey(d => d.UserId)
@@ -513,6 +511,10 @@ public partial class MyDbContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.ResetToken).HasMaxLength(100);
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasDefaultValue("Active");
             entity.Property(e => e.TokenExpiration).HasColumnType("datetime");
             entity.Property(e => e.UserRole)
                 .HasMaxLength(255)

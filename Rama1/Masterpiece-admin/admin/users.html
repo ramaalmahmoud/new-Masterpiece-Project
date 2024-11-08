@@ -184,134 +184,51 @@
 <!-- End Sidebar -->
 
 
-       <!-- Main Content -->
-    <div class="main-content">
-        <div class="container mt-5">
-            <!-- Page Header -->
-            <div class="page-header">
-              <h1>Admin User Management</h1>
-              <p>Manage and oversee admin user accounts and roles.</p>
-            </div>
-        
-            <!-- Admin Search and Filter -->
-            <div class="mb-4">
-              <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search by name, email, or ID" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                <div class="form-group ml-3">
-                  <select class="form-control">
-                    <option>Status</option>
-                    <option>Active</option>
-                    <option>Inactive</option>
-                    <option>Pending</option>
-                  </select>
-                </div>
-                <div class="form-group ml-3">
-                  <input type="date" class="form-control" placeholder="From Date">
-                  <input type="date" class="form-control ml-2" placeholder="To Date">
-                </div>
-              </form>
-            </div>
-        
-            <!-- Admin User List Table -->
-            <div class="table-responsive">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Profile Picture</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                    <th>Date Joined</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- Example Row -->
-                  <tr>
-                    <td><img src="admin-pic.jpg" alt="Profile" class="img-thumbnail" style="width: 50px;"></td>
-                    <td>John Admin</td>
-                    <td>john.admin@example.com</td>
-                    <td>Super Admin</td>
-                    <td>Active</td>
-                    <td>2024-01-01</td>
-                    <td>
-                      <button class="btn btn-primary btn-sm">View</button>
-                      <button class="btn btn-warning btn-sm">Edit</button>
-                      <button class="btn btn-success btn-sm">Deactivate</button>
-                      <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                  </tr>
-                  <!-- Add more rows as needed -->
-                </tbody>
-              </table>
-            </div>
-        
-            <!-- Action Buttons -->
-            <div class="mb-4">
-              <button class="btn btn-primary">Add New Admin</button>
-              <button class="btn btn-info">Activate Selected Admins</button>
-              <button class="btn btn-warning">Deactivate Selected Admins</button>
-              <button class="btn btn-danger">Delete Selected Admins</button>
-            </div>
-        
-            <!-- Admin User Creation Form (Optional - can be in a modal) -->
-            <div class="card">
-              <div class="card-header">
-                <h4>Add New Admin</h4>
-              </div>
-              <div class="card-body">
-                <form>
-                  <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter admin name">
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter admin email">
-                  </div>
-                  <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter admin password">
-                  </div>
-                  <div class="form-group">
-                    <label for="role">Role</label>
-                    <select class="form-control" id="role">
-                      <option>Super Admin</option>
-                      <option>Admin</option>
-                    </select>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Create Admin</button>
-                </form>
-              </div>
-            </div>
-        
-            <!-- Pagination (if needed) -->
-            <nav aria-label="Page navigation">
-              <ul class="pagination mt-4">
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        
-          
-  </div>
-  <!-- End Main Content -->
+    <!-- Main Content -->
+<div class="main-content">
+  <div class="container mt-5">
+      <!-- Page Header -->
+      <div class="page-header">
+          <h1>Admin User Management</h1>
+          <p>Manage and oversee admin user accounts and roles.</p>
+      </div>
 
-     
+      <!-- Admin Search and Filter -->
+      <div class="mb-4">
+          <form class="form-inline" id="userSearchForm">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search by name, email, or ID" aria-label="Search" id="searchInput">
+              <div class="form-group ml-3">
+                  <select class="form-control" id="statusSelect">
+                      <option value="">Status</option>
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                  </select>
+              </div>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+      </div>
+
+      <!-- Admin User List Table -->
+      <div class="table-responsive">
+          <table class="table table-bordered" id="userTable">
+              <thead>
+                  <tr>
+                      <th>Profile Picture</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <!-- Rows will be dynamically added here -->
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
     </div>
     <!--   Core JS Files   -->
     <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
@@ -325,6 +242,8 @@
     <script src="../assets/js/kaiadmin.min.js"></script>
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="../assets/js/setting-demo2.js"></script>
+
+    <script src="../API-JS/user.js"></script>
   
   </body>
 </html>

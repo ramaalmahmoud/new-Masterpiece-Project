@@ -211,7 +211,9 @@ namespace master_piece_project.Controllers
                     op.ProductId,
                     op.Quantity,
                     op.Price,
-                    ProductName = op.Product.Title // Assuming Product has a Name property
+                    ProductName = op.Product.Title, // Assuming Product has a Name property
+                               TotalPrice = op.Quantity * op.Price
+
                 }).ToList()
             };
 

@@ -25,6 +25,8 @@ public partial class User
 
     public DateTime? TokenExpiration { get; set; }
 
+    public string Status { get; set; } = null!;
+
     public virtual ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
 
     public virtual ICollection<BlogPost> BlogPosts { get; set; } = new List<BlogPost>();

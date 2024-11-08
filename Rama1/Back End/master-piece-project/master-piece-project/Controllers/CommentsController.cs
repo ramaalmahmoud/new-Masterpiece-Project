@@ -28,7 +28,8 @@ namespace master_piece_project.Controllers
                     comment.CommentText,
                     comment.CreatedAt,
                     PostTitle = comment.Post.Title,
-                    UserName = comment.User.FullName
+                    UserName = comment.User.FullName,
+                    IsApproved=true
                 })
                 .ToList();
 

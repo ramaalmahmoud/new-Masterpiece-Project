@@ -191,6 +191,41 @@ namespace master_piece_project.Controllers
 
             return Ok("Volunteer application submitted successfully.");
         }
+        // Get users with optional search and status filter
+        [HttpGet("getUsers")]
+        public async Task<IActionResult> GetUsers([FromQuery] string search = "", [FromQuery] string status = "")
+        {
+            var query = _db.Users.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                query = query.Where(u => u.FullName.Contains(search) || u.Email.Contains(search) || u.UserId.ToString().Contains(search));
+            }
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(u => u.Status == status);
+            }
+
+            var users = await query.ToListAsync();
+            return Ok(users);
+        }
+
+        // Update user status
+        [HttpPost("updateStatus/{id}")]
+        public async Task<IActionResult> UpdateUserStatus(int id, [FromBody] string newStatus)
+        {
+            var user = await _db.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            user.Status = newStatus;
+            await _db.SaveChangesAsync();
+
+            return Ok("User status updated.");
+        }
 
 
     }

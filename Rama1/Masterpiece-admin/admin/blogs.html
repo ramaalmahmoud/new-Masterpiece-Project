@@ -189,16 +189,16 @@
       <!-- Header -->
       <header class="header">
           <h1>Blog Management</h1>
-          <button class="btn btn-primary" onclick="showAddPostForm()">Add New Post</button>
-      </header>
+          <div class="text-center">
+            <button id="addPostButton" class="btn btn-primary">Add New Post</button>
+        </div>      </header>
 
       <!-- Blog Management Content -->
       <section id="view-posts">
           <h2>Manage Blog Posts</h2>
-          <input type="text" id="search-posts" placeholder="Search posts..." onkeyup="searchPosts()" />
           
           <!-- Blog Posts Table -->
-          <table id="posts-table">
+          <table id="posts-table" class="table table-striped">
               <thead>
                   <tr id="post-1">
                       <th>Title</th>
@@ -242,7 +242,7 @@
       <!-- Manage Comments -->
       <section id="manage-comments">
           <h2>Manage Comments</h2>
-          <table id="comments-table">
+          <table id="comments-table" class="table table-striped">
               <thead>
                   <tr>
                       <th>Post Title</th>
@@ -259,9 +259,42 @@
       </section>
   </div>
   <!-- End Main Content -->
-
+<!-- Modal for Adding a Post -->
+<div id="addPostModal" class="modal">
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Add New Post</h2>
+      <form id="addPostForm">
+          <div class="post-creation-area">
+              <!-- Title Input -->
+              <div class="form-group">
+                  <label for="title">Title:</label>
+                  <input type="text" id="title" name="Title" placeholder="Enter the title of your post" required>
+              </div>
+              <textarea id="content" name="Content" placeholder="What's on your mind?" required></textarea>
+              <div class="form-group image-upload">
+                  <label for="image" class="image-label">Attach an Image</label>
+                  <input type="file" id="image" name="Image" required>
+              </div>
+              <div class="form-group">
+                  <label for="category">Category:</label>
+                  <select id="category" name="Category">
+                      <option value="Creative Play">Creative Play</option>
+                      <option value="Outdoor Activities">Outdoor Activities</option>
+                      <option value="Screen Time Management">Screen Time Management</option>
+                      <option value="Skill Development">Skill Development</option>
+                      <option value="Parenting Tips">Parenting Tips</option>
+                  </select>
+              </div>
+              <button type="submit" class="thm-btn">Post</button>
+          </div>
+      </form>
+  </div>
+</div>
      
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!--   Core JS Files   -->
     <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
     <script src="../assets/js/core/popper.min.js"></script>
