@@ -275,192 +275,94 @@
             </div>
         </div>
 
-        <!-- Activities Table -->
-        <div class="card">
-            <div class="card-header">
-                <h5>Activities List</h5>
-            </div>
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Date Added</th>
-                            <th>Category</th>
-                            <th>Duration</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Example Row -->
-                        <tr>
-                            <td>Activity Title</td>
-                            <td>2024-09-14</td>
-                            <td>Category 1</td>
-                            <td>30 mins</td>
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                            </td>
-                        </tr>
-                        <!-- More rows can be added dynamically -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+      <!-- Activities Table -->
+<div class="card">
+  <div class="card-header">
+      <h5>Activities List</h5>
+  </div>
+  <div class="card-body">
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                <th>Image</th>
+                  <th>Title</th>
+                 
+                  <th>Category</th>
+                  <th>Duration</th>
+                  <th>Actions</th>
+              </tr>
+          </thead>
+          <tbody id="activityTableBody">
+              <!-- Rows will be added here dynamically -->
+          </tbody>
+      </table>
+  </div>
+</div>
     </div>
+  
+  <!-- Update Activity Modal -->
+  <div class="modal fade" id="updateActivityModal" tabindex="-1" aria-labelledby="updateActivityModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="updateActivityModalLabel">Update Activity</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form id="updateActivityForm">
+                  <input type="hidden" id="activityId">
+                  <div class="form-group">
+                    <label for="activityTitle">Activity Title</label>
+                    <input name="Title" type="text" class="form-control" id="activityTitle" required>
+                </div>
 
+                 <div class="form-group">
+                    <label for="activityImage">Update Image (Optional)</label>
+                    <input name="Image" type="file" class="form-control-file" id="activityImage">
+                </div>
 
-    <!-- Script for Adding More Components and Steps -->
-    <script>
-    //     document.getElementById('addComponentButton').addEventListener('click', function() {
-    //         var componentsContainer = document.getElementById('componentsContainer');
-    //         var newComponent = document.createElement('div');
-    //         newComponent.className = 'component mb-2';
-    //         newComponent.innerHTML = '<input type="text" class="form-control" placeholder="Enter component">';
-    //         componentsContainer.appendChild(newComponent);
-    //     });
+                <div class="form-group">
+                    <label for="activityCategory">Category</label>
+                    <select name="CategoryId" class="form-control" id="activityCategory" required>
+                        <!-- Categories will be dynamically populated here -->
+                    </select>
+                </div>
 
-    //     document.getElementById('addInstructionButton').addEventListener('click', function() {
-    //         var instructionsContainer = document.getElementById('instructionsContainer');
-    //         var stepCount = instructionsContainer.children.length + 1;
-    //         var newInstruction = document.createElement('div');
-    //         newInstruction.className = 'instruction mb-3';
-    //         newInstruction.innerHTML = `
-    //             <div class="form-group">
-    //                 <label for="instructionDetails${stepCount}">Step ${stepCount} Instructions</label>
-    //                 <textarea class="form-control" id="instructionDetails${stepCount}" rows="2" placeholder="Enter step instructions"></textarea>
-    //             </div>
-    //             <div class="form-group">
-    //                 <label for="instructionImage${stepCount}">Step ${stepCount} Image</label>
-    //                 <input type="file" class="form-control-file" id="instructionImage${stepCount}">
-    //             </div>
-    //         `;
-    //         instructionsContainer.appendChild(newInstruction);
-    //     });
+                <div class="form-group">
+                    <label for="activityDuration">Duration</label>
+                    <input name="Duration" type="text" class="form-control" id="activityDuration" required>
+                </div>
 
-    //     // Handle Category Form Submission
-    //     document.getElementById('categoryForm').addEventListener('submit', function(event) {
-    //         event.preventDefault();
-    //         var categoryName = document.getElementById('categoryName').value;
-    //         var categorySelect = document.getElementById('activityCategory');
+                <!-- Materials Section -->
+                <div class="form-group">
+                    <label for="activityMaterials">Materials</label>
+                    <div id="materialsContainer"></div>
+                    <button type="button" class="btn btn-secondary mt-2" id="addMaterialButton">Add Material</button>
+                </div>
 
-    //         // Add new category to select options
-    //         var newOption = document.createElement('option');
-    //         newOption.value = categoryName;
-    //         newOption.text = categoryName;
-    //         categorySelect.add(newOption);
+                <!-- Instructions Section -->
+                <div class="form-group">
+                    <label for="activityInstructions">Instructions</label>
+                    <div id="instructionsContainer"></div>
+                    <button type="button" class="btn btn-secondary mt-2" id="addInstructionButton">Add Step</button>
+                </div>
 
-    //         // Clear the input field
-    //         document.getElementById('categoryName').value = '';
-    //     });
-    // 
-    // Initialize counters for dynamic material and instruction additions
-let materialCount = 1;
-let instructionCount = 1;
+                <div class="form-group">
+                    <label for="suggestions">Additional Suggestions</label>
+                    <textarea name="Suggestions" class="form-control" id="suggestions" rows="3"></textarea>
+                </div>
 
-// Add Material Button Click Event
-document.getElementById('addMaterialButton').addEventListener('click', function() {
-    const materialsContainer = document.getElementById('materialsContainer');
-    const newMaterial = document.createElement('div');
-    newMaterial.classList.add('material');
-    newMaterial.innerHTML = `
-        <input type="text" name="Materials[${materialCount}].Name" class="form-control mb-2" placeholder="Enter material name">
-    `;
-    materialsContainer.appendChild(newMaterial);
-    materialCount++;
-});
+                <button type="submit" class="btn btn-primary">Update Activity</button>              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" form="updateActivityForm">Save Changes</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          </div>
+      </div>
+  </div>
+</div>
 
-// Add Instruction Button Click Event
-document.getElementById('addInstructionButton').addEventListener('click', function() {
-    const instructionsContainer = document.getElementById('instructionsContainer');
-    const newInstruction = document.createElement('div');
-    newInstruction.classList.add('instruction');
-    newInstruction.innerHTML = `
-        <div class="form-group">
-            <label for="instructionDetails${instructionCount}">Step ${instructionCount + 1} Instructions</label>
-            <textarea class="form-control" name="Instructions[${instructionCount}].InstructionText" rows="2" placeholder="Enter step instructions"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="instructionImage${instructionCount}">Step ${instructionCount + 1} Image</label>
-            <input type="file" name="Instructions[${instructionCount}].ImageUrl" class="form-control-file">
-        </div>
-    `;
-    instructionsContainer.appendChild(newInstruction);
-    instructionCount++;
-});
-
-// Fetch and Populate Categories
-function loadCategories() {
-  debugger
-    fetch('https://localhost:7084/api/Activities/get-activityCategory') // Adjust API endpoint for fetching categories
-        .then(response => response.json())
-        .then(categories => {
-            const categorySelect = document.getElementById('activityCategory');
-            categorySelect.innerHTML = ''; // Clear existing options
-            categories.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category.categoryId;
-                option.textContent = category.categoryName;
-                categorySelect.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error fetching categories:', error));
-}
-
-// Call loadCategories on page load
-document.addEventListener('DOMContentLoaded', loadCategories);
-
-// Handle Category Form Submission
-document.getElementById('categoryForm').addEventListener('submit', function(e) {
-  debugger
-    e.preventDefault(); // Prevent default form submission
-
-    // const categoryName = document.getElementById('categoryName').value;
-var form=document.getElementById("categoryForm");
-const formdata=new FormData(form);
-
-    fetch('https://localhost:7084/api/Activities/add-category', { // Adjust API endpoint for adding categories
-        method: 'POST',
-        
-        // body: JSON.stringify({ name: categoryName })
-        body: formdata
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        loadCategories(); // Reload categories after adding a new one
-        document.getElementById('categoryForm').reset();
-    })
-    .catch(error => console.error('Error adding category:', error));
-});
-
-// Handle Activity Form Submission
-document.getElementById('activityForm').addEventListener('submit', function(e) {
-  debugger
-    e.preventDefault(); // Prevent default form submission
-
-    const form = document.getElementById('activityForm');
-    const formData = new FormData(form); // Collect all form data, including files
-
-    fetch('https://localhost:7084/api/Activities/add-activity', { // Adjust API endpoint for adding activities
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-      debugger
-        if (data.message) {
-            alert(data.message); // Show success message
-            form.reset(); // Reset form after submission
-            materialCount = 1; // Reset material counter
-            instructionCount = 1; // Reset instruction counter
-        }
-   debugger })
-    .catch(error => console.error('Error adding activity:', error));
-});
-
-    </script>
+   
 
     <!-- Modal for Adding New Category -->
     <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
@@ -505,6 +407,7 @@ document.getElementById('activityForm').addEventListener('submit', function(e) {
     <script src="../assets/js/kaiadmin.min.js"></script>
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="../assets/js/setting-demo2.js"></script>
-  
+  <script src="../API-JS/activity.js"></script>
+
   </body>
 </html>

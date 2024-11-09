@@ -200,6 +200,7 @@
               <thead>
                   <tr>
                       <th scope="col">Product ID</th>
+                      <th>Image</th>
                       <th scope="col">Name</th>
                       <th scope="col">Price</th>
                       <th scope="col">Stock</th>
@@ -273,7 +274,57 @@
           </div>
       </div>
   </div>
-  
+  <!-- Edit Product Modal -->
+<div id="editProductModal" class="modal fade" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form id="editProductForm" enctype="multipart/form-data">
+                  <input type="hidden" name="productId" id="editProductId" />
+                  <div class="mb-3">
+                      <label for="editProductTitle" class="form-label">Title</label>
+                      <input type="text" class="form-control" id="editProductTitle" name="title" required />
+                  </div>
+                  <div class="mb-3">
+                      <label for="editProductPrice" class="form-label">Price</label>
+                      <input type="number" class="form-control" id="editProductPrice" name="price" required />
+                  </div>
+                  <div class="mb-3">
+                      <label for="editProductStock" class="form-label">Stock</label>
+                      <input type="number" class="form-control" id="editProductStock" name="stock" required />
+                  </div>
+                     <!-- Product Category -->
+                          <div class="form-group mb-3">
+                              <label for="productCategory">Category</label>
+                              <select name="CategoryId" class="form-control" id="EditproductCategory" required>
+                                  <option value="">Select Category</option>
+                                  
+                              </select>
+                          </div>
+                  <div class="mb-3">
+                      <label for="editProductImage" class="form-label">Image</label>
+                      <input type="file" class="form-control" id="editProductImage" name="image" />
+                  </div>
+                   <!-- Product Description -->
+                   <div class="form-group mb-3">
+                    <label for="productDescription">Description</label>
+                    <textarea name="Description" class="form-control" id="productDescription" rows="4" placeholder="Enter product description" required></textarea>
+                </div>
+              </form>
+          </div>
+          
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="updateProduct()">Save changes</button>
+          </div>
+      </div>
+  </div>
+</div>
+
   <!-- Add some basic CSS for form styling -->
   <style>
       .form-group label {

@@ -16,6 +16,26 @@ namespace master_piece_project.Controllers
         {
             _db = db;
         }
+        // GET: api/activities
+        [HttpGet("get-activities")]
+        public IActionResult GetActivities()
+        {
+            var activities = _db.Activities
+                .Select(a => new
+                {
+                    a.ActivityId,
+                    a.Title,
+                    a.Image,
+                    CategoryName = a.Category.CategoryName,
+                    a.Duration,
+                    a.Suggestions,
+                    Materials = a.Materials.Select(m => new { m.Name }).ToList(),
+                    Instructions = a.Instructions.Select(i => new { i.StepNumber, i.InstructionText, i.ImageUrl }).ToList()
+                })
+                .ToList();
+
+            return Ok(activities);
+        }
         [HttpGet("GetAllActivities")]
         public async Task<ActionResult<IEnumerable<Activity>>> GetAllActivities()
         {
@@ -247,6 +267,98 @@ namespace master_piece_project.Controllers
                 .Any(a => a.UserId == userId && a.ActivityId == activityId);
 
             return Ok(new { isSaved = isSaved });
+        }
+
+        [HttpPut("update-activity/{id}")]
+        public IActionResult UpdateActivity(int id, [FromForm] AddActivityDto activityDto)
+        {
+            var activity = _db.Activities.Include(a => a.Materials).Include(a => a.Instructions).FirstOrDefault(a => a.ActivityId == id);
+            if (activity == null)
+            {
+                return NotFound(new { Message = "Activity not found." });
+            }
+
+            var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads/Activity");
+
+            // Update Title and Duration if provided
+            activity.Title = activityDto.Title ?? activity.Title;
+            activity.Duration = activityDto.Duration ?? activity.Duration;
+            activity.Suggestions = activityDto.Suggestions ?? activity.Suggestions;
+            activity.CategoryId = activityDto.CategoryId != 0 ? activityDto.CategoryId : activity.CategoryId;
+
+            // Update Image if a new file is provided
+            if (activityDto.Image != null && activityDto.Image.Length > 0)
+            {
+                var filePath = Path.Combine(uploadsFolderPath, activityDto.Image.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    activityDto.Image.CopyTo(stream);
+                }
+                activity.Image = activityDto.Image.FileName;
+            }
+
+            // Remove existing materials and add updated ones
+            _db.Materials.RemoveRange(activity.Materials);
+            foreach (var materialDto in activityDto.Materials)
+            {
+                var material = new Material
+                {
+                    ActivityId = activity.ActivityId,
+                    Name = materialDto.Name
+                };
+                _db.Materials.Add(material);
+            }
+
+            // Remove existing instructions and add updated ones
+            _db.Instructions.RemoveRange(activity.Instructions);
+            foreach (var instructionDto in activityDto.Instructions)
+            {
+                var instruction = new Instruction
+                {
+                    ActivityId = activity.ActivityId,
+                    StepNumber = instructionDto.StepNumber,
+                    InstructionText = instructionDto.InstructionText
+                };
+
+                // Update instruction image if provided
+                if (instructionDto.ImageUrl != null && instructionDto.ImageUrl.Length > 0)
+                {
+                    var instructionFilePath = Path.Combine(uploadsFolderPath, instructionDto.ImageUrl.FileName);
+                    using (var stream = new FileStream(instructionFilePath, FileMode.Create))
+                    {
+                        instructionDto.ImageUrl.CopyTo(stream);
+                    }
+                    instruction.ImageUrl = instructionDto.ImageUrl.FileName;
+                }
+
+                _db.Instructions.Add(instruction);
+            }
+
+            _db.SaveChanges();
+
+            return Ok(new { Message = "Activity updated successfully" });
+        }
+        [HttpDelete("DeleteActivity/{id}")]
+        public IActionResult DeleteActivity(int id)
+        {
+            // Retrieve the activity with its related materials
+            var activity = _db.Activities.Include(a => a.Materials).FirstOrDefault(a => a.ActivityId == id);
+
+            if (activity == null)
+            {
+                return NotFound(); // Return 404 if the activity is not found
+            }
+
+            // Delete all related materials
+            _db.Materials.RemoveRange(activity.Materials);
+
+            // Now delete the activity
+            _db.Activities.Remove(activity);
+
+            // Save the changes to the database
+            _db.SaveChanges();
+
+            return NoContent(); // Return 204 No Content to indicate successful deletion
         }
 
 

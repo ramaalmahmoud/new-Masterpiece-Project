@@ -31,6 +31,7 @@ namespace master_piece_project.Controllers
                 Title = p.Title,
                 Price = p.Price,
                 Image = p.Image,
+                Stock=p.Stock,
                 categoryID = p.CategoryId,
                 Stars = GetAverageRating(p.ProductId) // Method to calculate the average rating
             }).ToList();
@@ -125,7 +126,7 @@ namespace master_piece_project.Controllers
         [HttpPost]
         public IActionResult AddProduct([FromForm] addProductDto productDto)
         {
-            var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+            var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads/Shop");
             if (productDto.Image != null && productDto.Image.Length > 0)
             {
                 if (!Directory.Exists(uploadsFolderPath))
@@ -155,6 +156,53 @@ namespace master_piece_project.Controllers
 
             return Ok(new { message = "Product added successfully!" });
         }
+
+        // PUT: api/products/edit/{id}
+        [HttpPut("edit/{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, [FromForm] addProductDto productDto)
+        {
+            var product = await _db.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound(); // Return 404 if the product is not found
+            }
+
+            product.Title = productDto.Title ?? product.Title;
+            product.Price = productDto.Price?? product.Price;
+            product.Stock = productDto.Stock ?? product.Stock;
+            product.CategoryId = productDto.CategoryId;
+            product.Description = productDto.Description ?? product.Description;
+            
+
+            // If an image is uploaded, handle it
+            if (productDto.Image != null)
+            {
+                // Save the new image (upload logic here)
+                product.Image = productDto.Image.FileName;
+            }
+
+            _db.Products.Update(product);
+            await _db.SaveChangesAsync();
+
+            return NoContent(); // Return 204 No Content after successful update
+        }
+        // DELETE: api/products/delete/{id}
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var product = await _db.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound(); // Return 404 if the product is not found
+            }
+
+            _db.Products.Remove(product);
+            await _db.SaveChangesAsync();
+
+            return NoContent(); // Return 204 No Content after successful deletion
+        }
+
+
     }
 }
 

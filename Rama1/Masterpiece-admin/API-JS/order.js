@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', fetchOrders);
 
 // Handling the form submission for updating the order status
 document.getElementById('updateOrderForm').addEventListener('submit', async function(event) {
+    debugger
     event.preventDefault();
 
     const updatedStatus = document.getElementById('orderStatus').value;

@@ -238,7 +238,35 @@
     </div>
   </div>
 </div>
-
+   <!-- Edit Category Modal -->
+   <div class="modal" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="editCategoryId">Category ID</label>
+                        <input type="text" id="editCategoryId" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCategoryName">Category Name</label>
+                        <input type="text" id="editCategoryName" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button onclick="updateCategory()" type="submit" id="saveEditCategoryBtn" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
   <!-- End Main Content -->
 </div>
 <script>
@@ -299,9 +327,9 @@ debugger
                             <td>${category.categoryID}</td>
                             <td>${category.categoryName}</td>
                             <td>
-                                <a href="/admin/edit-category/${category.categoryID}" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="/admin/delete-category/${category.categoryID}" class="btn btn-danger btn-sm">Delete</a>
-                            </td>
+                                 <button class="btn btn-warning" onclick="showEditCategoryModal(${category.categoryID})">Edit</button>
+                <button class="btn btn-danger" onclick="deleteCategory(${category.categoryID})">Delete</button>
+     </td>
                         </tr>
                     `;
                     tableBody.innerHTML += row; // Append each row to the table body
@@ -316,6 +344,69 @@ debugger
 
     // Call the function to load categories when the page loads
     document.addEventListener('DOMContentLoaded', loadCategories);
+    // Function to show the edit modal and populate the data
+function showEditCategoryModal(id) {
+    fetch(`https://localhost:7084/api/Categories/GetCategoryById/${id}`)
+        .then(response => response.json())
+        .then(category => {
+            document.getElementById('editCategoryId').value = category.categoryID;
+            document.getElementById('editCategoryName').value = category.categoryName;
+            $('#editCategoryModal').modal('show'); // Show the modal (assuming you're using Bootstrap)
+        })
+        .catch(error => {
+            console.error('Error fetching category details:', error);
+        });
+}
+
+// Function to update category
+async function updateCategory() {
+  debugger
+    const id = document.getElementById('editCategoryId').value;
+    const categoryName = document.getElementById('editCategoryName').value;
+
+    const data = {
+        CategoryName: categoryName
+    };
+
+    const response = await fetch(`https://localhost:7084/api/Categories/edit-category/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+        alert('Category updated successfully');
+        loadCategories(); // Refresh the categories list
+        $('#editCategoryModal').modal('hide'); // Close the modal
+    } else {
+        alert('Failed to update category');
+    }
+}
+
+// Function to delete a category
+async function deleteCategory(id) {
+    const confirmation = confirm("Are you sure you want to delete this category?");
+    if (!confirmation) {
+        return; // Abort if user cancels the deletion
+    }
+
+    const response = await fetch(`https://localhost:7084/api/Categories/delete-category/${id}`, {
+        method: 'DELETE',
+    });
+
+    if (response.ok) {
+        alert('Category deleted successfully');
+        loadCategories(); // Refresh the categories list
+    } else {
+        alert('Failed to delete category');
+    }
+}
+
+// Call the getCategories function when the page loads to populate the table
+
+
 </script>
 
  

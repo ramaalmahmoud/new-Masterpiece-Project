@@ -61,6 +61,61 @@ namespace master_piece_project.Controllers
 
             return Ok(new { Message = "Category added successfully" });
         }
+        // Edit an existing Category
+        [HttpPut("edit-category/{id}")]
+        public IActionResult EditCategory(int id, [FromBody] PrpductCategoryDto categoryDto)
+        {
+            var category = _db.ProductCategories.Find(id);
+            if (category == null)
+            {
+                return NotFound(new { Message = "Category not found" });
+            }
+
+            category.CategoryName = categoryDto.CategoryName;
+
+            _db.ProductCategories.Update(category);
+            _db.SaveChanges();
+
+            return Ok(new { Message = "Category updated successfully" });
+        }
+
+        // Delete a Category
+        [HttpDelete("delete-category/{id}")]
+        public IActionResult DeleteCategory(int id)
+        {
+            var category = _db.ProductCategories.Find(id);
+            if (category == null)
+            {
+                return NotFound(new { Message = "Category not found" });
+            }
+
+            _db.ProductCategories.Remove(category);
+            _db.SaveChanges();
+
+            return Ok(new { Message = "Category deleted successfully" });
+        }
+        // GET: api/categories/{id}
+        [HttpGet("GetCategoryById/{id}")]
+        public async Task<ActionResult<CategoryDto>> GetCategoryById(int id)
+        {
+            var category = await _db.ProductCategories
+                .Where(c => c.CategoryId == id)
+                .Select(c => new CategoryDto
+                {
+                    CategoryID = c.CategoryId,
+                    CategoryName = c.CategoryName
+                })
+                .FirstOrDefaultAsync();
+
+            if (category == null)
+            {
+                return NotFound(); // Return 404 if category not found
+            }
+
+            return Ok(category); // Return the category details
+        }
 
     }
+
 }
+
