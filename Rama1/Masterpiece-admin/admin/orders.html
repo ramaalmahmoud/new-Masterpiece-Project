@@ -157,12 +157,12 @@
           </li>
   
           <!-- System Settings -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="../admin/settings.html">
               <i class="fas fa-cogs"></i>
               <p>System Settings</p>
             </a>
-          </li>
+          </li> -->
   
           <!-- Analytics -->
           <li class="nav-item">
@@ -215,6 +215,8 @@
               </div>
               <div class="modal-body">
                   <form id="updateOrderForm">
+                    <input type="hidden" id="order-id" name="orderId"> <!-- Hidden field for storing order ID -->
+
                       <div class="mb-3">
                           <label for="orderStatus" class="form-label">Order Status</label>
                           <select class="form-select" id="orderStatus" required>

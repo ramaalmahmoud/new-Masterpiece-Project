@@ -25,6 +25,7 @@ function populateOrdersTable(orders) {
 
     orders.forEach(order => {
         const row = document.createElement('tr');
+        console.log("orderid",order.orderId)
         row.innerHTML = `
             <td>${order.orderId}</td>
             <td>${order.userName}</td>
@@ -44,15 +45,21 @@ function populateOrdersTable(orders) {
 }
 
 function attachModalTrigger() {
+    debugger
     document.querySelectorAll('.btn-warning').forEach(button => {
         button.addEventListener('click', function (event) {
             event.preventDefault();
             const orderId = this.getAttribute('data-orderid');
+
+            // Set the orderId in the hidden input field
+            document.getElementById('order-id').value = orderId;
+
+            // Optionally update the modal title for confirmation
             document.querySelector('#updateOrderModalLabel').textContent = `Update Status for Order #${orderId}`;
-            document.querySelector('#updateOrderModal').setAttribute('data-orderid', orderId);
         });
     });
 }
+
 
 
 // Call fetchOrders when the page loads
@@ -60,11 +67,15 @@ document.addEventListener('DOMContentLoaded', fetchOrders);
 
 // Handling the form submission for updating the order status
 document.getElementById('updateOrderForm').addEventListener('submit', async function(event) {
-    debugger
     event.preventDefault();
-
+debugger
     const updatedStatus = document.getElementById('orderStatus').value;
-    const orderId = document.querySelector('#updateOrderModal').getAttribute('data-orderid');
+    const orderId = document.getElementById('order-id').value;
+
+    if (!orderId) {
+        console.error("Order ID is missing from the form.");
+        return;
+    }
 
     try {
         const response = await fetch(`https://localhost:7084/api/Orders/${orderId}`, {
@@ -73,14 +84,14 @@ document.getElementById('updateOrderForm').addEventListener('submit', async func
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem("jwtToken")}`
             },
-            body: JSON.stringify(updatedStatus) // Ensure the status is sent as a JSON string
+            body: JSON.stringify({ status: updatedStatus }) // Send updatedStatus as part of an object
         });
 
         if (!response.ok) {
             throw new Error("Failed to update order status");
         }
 
-        // Optionally, refresh the table data after updating
+        // Refresh the table data after updating
         await fetchOrders();
 
         // Hide the modal after submission
@@ -90,6 +101,8 @@ document.getElementById('updateOrderForm').addEventListener('submit', async func
         console.error("Error updating order status:", error);
     }
 });
+
+
 
 // Function to attach event listeners to "View" buttons after table rendering
 function attachModalTrigger() {
