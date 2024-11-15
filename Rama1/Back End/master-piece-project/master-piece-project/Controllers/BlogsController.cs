@@ -287,6 +287,57 @@ namespace master_piece_project.Controllers
 
             return Ok(blogPosts);
         }
+        [HttpGet("api/Blogs/filterByCategory")]
+        public IActionResult FilterByCategory(string category)
+        {
+            var filteredPosts = _db.BlogPosts
+                .Where(post => post.IsConfirmed == true && post.Category == category) // Filter by confirmed posts and category
+                .Select(post => new
+                {
+                    PostId = post.PostId,
+                    Title = post.Title,
+                    Content = post.Content,
+                    CreatedAt = post.CreatedAt,
+                    Image = post.Image,
+                    Category = post.Category,
+                    AuthorName = post.Author.FullName, // Assuming 'UserName' is the author's name in the 'Users' table
+                    CommentCount = post.Comments.Count(comment => comment.IsApproved == true) // Count of approved comments
+                })
+                .ToList();
+
+            if (filteredPosts == null || !filteredPosts.Any())
+            {
+                return NotFound("No posts found for the selected category.");
+            }
+
+            return Ok(filteredPosts);
+        }
+        [HttpGet("api/Blogs/search")]
+        public IActionResult SearchPosts([FromQuery] string searchTerm)
+        {
+            var searchedPosts = _db.BlogPosts
+                .Where(post => post.IsConfirmed == true &&
+                               (post.Title.Contains(searchTerm) || post.Content.Contains(searchTerm))) // Search by title or content
+                .Select(post => new
+                {
+                    PostId = post.PostId,
+                    Title = post.Title,
+                    Content = post.Content,
+                    CreatedAt = post.CreatedAt,
+                    Image = post.Image,
+                    Category = post.Category,
+                    AuthorName = post.Author.FullName, // Assuming 'UserName' is the author's name in the 'Users' table
+                    CommentCount = post.Comments.Count(comment => comment.IsApproved == true) // Count of approved comments
+                })
+                .ToList();
+
+            if (searchedPosts == null || !searchedPosts.Any())
+            {
+                return NotFound("No posts found for the search term.");
+            }
+
+            return Ok(searchedPosts);
+        }
 
 
     }

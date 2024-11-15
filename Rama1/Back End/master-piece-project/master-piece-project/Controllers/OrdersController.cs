@@ -162,7 +162,7 @@ namespace master_piece_project.Controllers
 
         // PUT: api/orders/{id}
         [HttpPut("{id}")]
-        public IActionResult UpdateOrderStatus(int id, [FromBody] string newStatus)
+        public IActionResult UpdateOrderStatus(int id, [FromBody] UpdateOrderStatusRequest request)
         {
             var order = _db.Orders.Find(id);
             if (order == null)
@@ -170,7 +170,7 @@ namespace master_piece_project.Controllers
                 return NotFound();
             }
 
-            order.OrderStatus = newStatus;
+            order.OrderStatus = request.NewStatus;
             _db.SaveChanges();
 
             return NoContent();
@@ -185,7 +185,8 @@ namespace master_piece_project.Controllers
 
             return Ok(orders);
         }
-        [HttpGet("api/orders/{id}")]
+        // GET: api/orders/{id}
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetOrderDetails(int id)
         {
             var order = await _db.Orders
@@ -212,8 +213,7 @@ namespace master_piece_project.Controllers
                     op.Quantity,
                     op.Price,
                     ProductName = op.Product.Title, // Assuming Product has a Name property
-                               TotalPrice = op.Quantity * op.Price
-
+                    TotalPrice = op.Quantity * op.Price
                 }).ToList()
             };
 

@@ -205,42 +205,42 @@
             </tbody>
         </table>
     </div>
-    <!-- Update Order Modal -->
-    <div class="modal fade" id="updateOrderModal" tabindex="-1" aria-labelledby="updateOrderModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="updateOrderModalLabel">Update Status for Order</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                  <form id="updateOrderForm">
-                    <input type="hidden" id="order-id" name="orderId"> <!-- Hidden field for storing order ID -->
-
-                      <div class="mb-3">
-                          <label for="orderStatus" class="form-label">Order Status</label>
-                          <select class="form-select" id="orderStatus" required>
-                              <option value="Pending">Pending</option>
-                              <option value="Processing">Processing</option>
-                              <option value="Shipped">Shipped</option>
-                              <option value="Delivered">Delivered</option>
-                              <option value="Cancelled">Cancelled</option>
-                          </select>
-                      </div>
-                      <button type="submit" class="btn btn-primary">Update</button>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  </form>
-              </div>
-          </div>
-      </div>
-  </div>
+  
   
     <!-- Modal and other HTML code remains unchanged -->
 </div>
 
 
  
+  <!-- Update Order Modal -->
+  <div class="modal fade" id="updateOrderModal" tabindex="-1" aria-labelledby="updateOrderModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateOrderModalLabel">Update Status for Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateOrderForm">
+                  <input type="hidden" id="order-id" name="orderId"> <!-- Hidden field for storing order ID -->
 
+                    <div class="mb-3">
+                        <label for="orderStatus" class="form-label">Order Status</label>
+                        <select class="form-select" id="orderStatus" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
      
     </div>
   <!-- View Order Modal -->

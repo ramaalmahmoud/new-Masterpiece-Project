@@ -100,8 +100,8 @@
                                 <ul class="sub-menu">
                                     <li><a href="blog.html">Screen Risks</a></li>
                                     <li><a href="activities.html">Activities</a></li>
-                                    <li><a href="parent-platform.html">Parent Platform</a></li>
-                                    <li><a href="family-psychology.html">Psychological Support</a></li>
+                                    <!-- <li><a href="parent-platform.html">Parent Platform</a></li>
+                                    <li><a href="family-psychology.html">Psychological Support</a></li> -->
                                 </ul>
                             </li>
                             <li>
@@ -277,148 +277,191 @@
                             <div id="paypal-button-container" style="display:none;"></div> <!-- PayPal button will appear here -->
                         
                             <div class="text-right d-flex justify-content-end">
-                                <a href="#" class="thm-btn" id="place-order-button">Place your Order</a>
+                                <a href="#" class="thm-btn" id="place-order-button" disabled>Place your Order</a>
+                                <div id="cart-message" style="color: red;"></div>
                             </div>
                         </div>
-                        
-                        
                         <script>
-                           document.getElementById('place-order-button').addEventListener('click', async function(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    // Get the active payment method
-    const activePaymentMethod = document.querySelector('.checkout__payment__item--active').getAttribute('data-method');
-
-    // Gather form data
-    const address = document.getElementById('address').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-
-    if (activePaymentMethod === 'paypal') {
-        // Create the order request payload
-        const createOrderRequest = {
-            amount: 22, // This will be recalculated in the backend based on the cart items
-            shippingAddress: address,
-            paymentMethod: 'paypal'
-        };
-
-        try {
-            // Create order on the backend
-            const orderResponse = await fetch('https://localhost:7084/api/Payments/create-order', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include auth token if needed
-                },
-                body: JSON.stringify(createOrderRequest),
-            });
-
-            if (!orderResponse.ok) {
-                const error = await orderResponse.json();
-                alert(`Error creating order: ${error.message}`);
-                return;
-            }
-
-            const orderData = await orderResponse.json();
-            const totalAmount = orderData.OrderId; // Backend-generated orderId
-            const paypalOrderId = orderData.PayPalOrderId; // PayPal order ID
-
-            // Show PayPal button and initiate the PayPal payment
-            document.getElementById('paypal-button-container').style.display = 'block';
-debugger
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    // Use the PayPal order ID created by the backend
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: totalAmount.toString(), // Ensure total amount is correct
+                            async function fetchWithAuth(url, options = {}) {
+                                debugger
+                                const token = localStorage.getItem('jwtToken');
+                                const headers = {
+                                    ...options.headers,
+                                    'Authorization': `Bearer ${token}`
+                                };
+                        
+                                const response = await fetch(url, { ...options, headers });
+                        
+                                if (response.status === 401) {
+                                    alert('Your session has expired. Please log in again.');
+                                    localStorage.removeItem('jwtToken');
+                                    window.location.href = './login.html'; // Adjust the path to your login page
+                                    return null;
+                                }
+                        
+                                return response;
                             }
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    debugger
-                    // Capture the PayPal order
-                    return actions.order.capture().then(async function(details) {
-                        alert('Transaction completed by ' + details.payer.name.given_name);
-debugger
-                        // Send captured order info to backend to finalize the order
-                        const captureResponse = await fetch(`https://localhost:7084/api/Payments/capture-order/${data.orderID}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include auth token if needed
-                            },
-                            body: JSON.stringify({
-                                orderId: data.orderID,
-                                details: details, // Additional PayPal details if needed
-                            }),
-                        });
-debugger
-                        if (!captureResponse.ok) {
-                            alert('Error capturing payment');
-                        } else {
-                            alert('Payment captured successfully');
-                            // Optionally redirect to a success page or display order summary
-                        }
-                    });
-                },
-                onError: function(err) {
-                    console.error('PayPal error:', err);
-                    alert('There was an error with your payment. Please try again.');
-                }
-            }).render('#paypal-button-container'); // Render the PayPal button
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    } else {
-        // Handle Cash on Delivery (COD)
-        try {
-            const codRequest = {
-                amount: 22, // Adjust this amount as necessary
-                shippingAddress: address,
-                paymentMethod: 'Cash On Delivery'
-            };
-
-            const codResponse = await fetch('https://localhost:7084/api/Payments/create-order', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
-                },
-                body: JSON.stringify(codRequest),
-            });
-
-            if (!codResponse.ok) {
-                const error = await codResponse.json();
-                alert(`Error placing order: ${error.message}`);
-            } else {
-                alert('Order placed successfully with Cash on Delivery');
-                // Optionally redirect to a success page or order summary
-            }
-        } catch (error) {
-            console.error('Error placing COD order:', error);
-        }
-    }
-});
-
-// Toggle between payment methods
-document.querySelectorAll('.checkout__payment__item').forEach(item => {
-    item.addEventListener('click', function() {
-        document.querySelectorAll('.checkout__payment__item').forEach(i => i.classList.remove('checkout__payment__item--active'));
-        this.classList.add('checkout__payment__item--active');
-
-        // Show/hide the PayPal button container based on the selected payment method
-        if (this.getAttribute('data-method') === 'paypal') {
-            document.getElementById('paypal-button-container').style.display = 'block';
-        } else {
-            document.getElementById('paypal-button-container').style.display = 'none';
-        }
-    });
-});
-      </script>
-
+                        
+                            async function checkCartAndUpdateButton() {
+                                debugger
+                                const userId = localStorage.getItem("UserID");
+                        
+                                try {
+                                    const cartResponse = await fetchWithAuth(`https://localhost:7084/api/Cart/GetCartByUserId/${userId}`);
+                        
+                                    if (!cartResponse) return;
+                        
+                                    if (!cartResponse.ok) {
+                                        const error = await cartResponse.json();
+                                        console.error('Error fetching cart items:', error.message);
+                                        return;
+                                    }
+                        
+                                    const cartItems = await cartResponse.json();
+                        
+                                    if (cartItems.cartItems.length === 0) {
+                                        document.getElementById('place-order-button').disabled = true;
+                                        document.getElementById('cart-message').innerText = 'Your cart is empty. Please add items before checking out.';
+                                    } else {
+                                        document.getElementById('place-order-button').disabled = false;
+                                        document.getElementById('cart-message').innerText = '';
+                                    }
+                                } catch (error) {
+                                    console.error('Error checking cart:', error);
+                                }
+                            }
+                        debugger
+                            checkCartAndUpdateButton();
+                        
+                            document.getElementById('place-order-button').addEventListener('click', async function(event) {
+                                event.preventDefault();
+                        
+                                await checkCartAndUpdateButton();
+                        
+                                if (this.disabled) {
+                                    return;
+                                }
+                        
+                                const activePaymentMethod = document.querySelector('.checkout__payment__item--active').getAttribute('data-method');
+                                const address = document.getElementById('address').value;
+                                const email = document.getElementById('email').value;
+                                const phone = document.getElementById('phone').value;
+                        
+                                if (activePaymentMethod === 'paypal') {
+                                    debugger
+                                    const createOrderRequest = {
+                                        amount: 22,
+                                        shippingAddress: address,
+                                        paymentMethod: 'paypal'
+                                    };
+                        
+                                    try {
+                                        debugger
+                                        const orderResponse = await fetchWithAuth('https://localhost:7084/api/Payments/create-order', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify(createOrderRequest),
+                                        });
+                        
+                                        if (!orderResponse || !orderResponse.ok) {
+                                            debugger
+                                            const error = await orderResponse.json();
+                                            alert(`Error creating order: ${error.message}`);
+                                            return;
+                                        }
+                        
+                                        const orderData = await orderResponse.json();
+                                        const totalAmount = orderData.orderId;
+                                        const paypalOrderId = orderData.payPalOrderId;
+                        
+                                        document.getElementById('paypal-button-container').style.display = 'block';
+                        
+                                        paypal.Buttons({
+                                            createOrder: function(data, actions) {
+                                                debugger
+                                                return actions.order.create({
+                                                    purchase_units: [{
+                                                        amount: {
+                                                            value: totalAmount.toString(),
+                                                        }
+                                                    }]
+                                                });
+                                            },
+                                            onApprove: function(data, actions) {
+                                                debugger
+                                                return actions.order.capture().then(async function(details) {
+                                                    alert('Transaction completed by ' + details.payer.name.given_name);
+                        
+                                                    const captureResponse = await fetchWithAuth(`https://localhost:7084/api/Payments/capture-order/${data.orderID}`, {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        },
+                                                        body: JSON.stringify({
+                                                            orderId: data.orderID,
+                                                            details: details,
+                                                        }),
+                                                    });
+                        
+                                                    if (!captureResponse || !captureResponse.ok) {
+                                                        alert('Error capturing payment');
+                                                    } else {
+                                                        alert('Payment captured successfully');
+                                                    }
+                                                });
+                                            },
+                                            onError: function(err) {
+                                                debugger
+                                                console.error('PayPal error:', err);
+                                                alert('There was an error with your payment. Please try again.');
+                                            }
+                                        }).render('#paypal-button-container');
+                                    } catch (error) {
+                                        console.error('Error:', error);
+                                    }
+                                } else {
+                                    try {
+                                        const codRequest = {
+                                            amount: 22,
+                                            shippingAddress: address,
+                                            paymentMethod: 'Cash On Delivery'
+                                        };
+                        
+                                        const codResponse = await fetchWithAuth('https://localhost:7084/api/Payments/create-order', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify(codRequest),
+                                        });
+                        
+                                        if (!codResponse || !codResponse.ok) {
+                                            const error = await codResponse.json();
+                                            alert(`Error placing order: ${error.message}`);
+                                        } else {
+                                            alert('Order placed successfully with Cash on Delivery');
+                                        }
+                                    } catch (error) {
+                                        console.error('Error placing COD order:', error);
+                                    }
+                                }
+                            });
+                        
+                            document.querySelectorAll('.checkout__payment__item').forEach(item => {
+                                item.addEventListener('click', function() {
+                                    document.querySelectorAll('.checkout__payment__item').forEach(i => i.classList.remove('checkout__payment__item--active'));
+                                    this.classList.add('checkout__payment__item--active');
+                        
+                                    if (this.getAttribute('data-method') === 'paypal') {
+                                        document.getElementById('paypal-button-container').style.display = 'block';
+                                    } else {
+                                        document.getElementById('paypal-button-container').style.display = 'none';
+                                    }
+                                });
+                            });
+                        </script>
 
                     </div>
                 </div>

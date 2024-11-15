@@ -20,7 +20,6 @@ namespace master_piece_project.Controllers
             _payPalService = payPalService;
             _db = db;
         }
-
         [HttpPost("create-order")]
         [Authorize]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
@@ -30,28 +29,30 @@ namespace master_piece_project.Controllers
                 return BadRequest("Invalid order details.");
             }
 
-            // Retrieve the current user's ID as an integer
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!int.TryParse(userIdClaim, out int userId))
             {
                 return BadRequest("Invalid user ID.");
             }
 
-            // Retrieve the cart items for the current user
+            // Retrieve cart items for the user
             var cartItems = await _db.CartItems
                 .Include(ci => ci.Product)
                 .Where(ci => ci.Cart.UserId == userId)
                 .ToListAsync();
 
-            // Calculate the total amount based on the cart items
-            decimal totalAmount = 0; // Initialize totalAmount as a non-nullable decimal
-            foreach (var item in cartItems)
+            if (!cartItems.Any())
             {
-                if (item.Product != null)
-                {
-                    // Use null-coalescing operator to provide a default value for Price if it's null
-                    totalAmount += (item.Product.Price ?? 0) * (item.Quantity ?? 0); // Ensure Price and Quantity are not null
-                }
+                return BadRequest("Cart is empty.");
+            }
+
+            // Calculate total amount and create the order
+            decimal totalAmount = cartItems.Sum(item => (item.Product.Price ?? 0) * (item.Quantity ?? 0));
+
+            // Ensure we have a valid total amount
+            if (totalAmount <= 0)
+            {
+                return BadRequest("Total amount must be greater than zero.");
             }
 
             // Create the order
@@ -65,7 +66,24 @@ namespace master_piece_project.Controllers
             };
 
             _db.Orders.Add(order);
-            await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync(); // Save to generate OrderId
+
+            // Create OrderProduct entries and remove from cart
+            foreach (var item in cartItems)
+            {
+                var orderProduct = new OrderProduct
+                {
+                    OrderId = order.OrderId,
+                    ProductId = item.Product.ProductId,
+                    Quantity = item.Quantity ?? 0
+                };
+
+                _db.OrderProducts.Add(orderProduct);
+            }
+
+            // Remove items from the cart after creating order products
+            _db.CartItems.RemoveRange(cartItems);
+            await _db.SaveChangesAsync(); // Commit changes to remove items from cart
 
             // Create the payment record
             var payment = new Payment
@@ -92,7 +110,6 @@ namespace master_piece_project.Controllers
                 Links = paypalOrder.Links
             });
         }
-
         [HttpPost("capture-order/{orderId}")]
         [Authorize]
         public async Task<IActionResult> CaptureOrder(string orderId)

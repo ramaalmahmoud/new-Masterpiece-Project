@@ -116,8 +116,8 @@
                                     <ul class="sub-menu">
                                         <li><a href="blog.html">Screen Risks</a></li>
                                         <li><a href="activities.html">Activities</a></li>
-                                        <li><a href="parent-platform.html">Parent Platform</a></li>
-                                        <li><a href="family-psychology.html">Psychological Support</a></li>
+                                        <!-- <li><a href="parent-platform.html">Parent Platform</a></li>
+                                        <li><a href="family-psychology.html">Psychological Support</a></li> -->
                                     </ul>
                                 </li>
                                 <li>
@@ -1192,44 +1192,44 @@
 
 <!-- Mirrored from bracketweb.com/delogis-html/main-html/index4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Aug 2024 22:31:43 GMT -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
+    debugger
+    const isLoggedIn = localStorage.getItem('isLoggedIn'); // Check login status from local storage
+    const stickySignupLoginBtn = document.getElementById('sticky-signup-login-btn');
+    const stickyProfileLogoutBtns = document.getElementById('sticky-profile-logout-btns');
+
+    // Function to update sticky header buttons based on login status
+    function updateStickyHeaderButtons(isLoggedIn) {
         debugger
-const isLoggedIn = localStorage.getItem('isLoggedIn'); // Check login status from local storage
+        if (isLoggedIn === 'true') {
+            // Logged in: Change Sign Up to Discover Activities and show Profile/Logout
+            stickySignupLoginBtn.innerText = "Discover Activities";
+            stickySignupLoginBtn.href = "activities.html";
+            stickyProfileLogoutBtns.style.display = 'block';
+        } else {
+            // Not logged in: Show Sign Up button and hide Profile/Logout
+            stickySignupLoginBtn.innerText = "Sign up";
+            stickySignupLoginBtn.href = "login.html";
+            stickyProfileLogoutBtns.style.display = 'none';
+        }
+    }
 debugger
-// Sticky header elements
-const stickySignupLoginBtn = document.getElementById('sticky-signup-login-btn');
-const stickyProfileLogoutBtns = document.getElementById('sticky-profile-logout-btns');
+    // Initial update on page load
+    updateStickyHeaderButtons(isLoggedIn);
 
-// Function to update sticky header buttons based on login status
-function updateStickyHeaderButtons(isLoggedIn) {
-if (isLoggedIn === 'true') {
-    // Logged in: Change Sign Up to Discover Activities and show Profile/Logout
-    stickySignupLoginBtn.innerText = "Discover Activities";
-    stickySignupLoginBtn.href = "activities.html";
-    stickyProfileLogoutBtns.style.display = 'block';
-} else {
-    // Not logged in: Show Sign Up button and hide Profile/Logout
-    stickySignupLoginBtn.innerText = "Sign up";
-    stickySignupLoginBtn.href = "login.html";
-    stickyProfileLogoutBtns.style.display = 'none';
-}
-}
+    // Handle logout functionality for sticky header
+    const stickyLogoutBtn = document.getElementById('sticky-logout-btn');
 
-// Initial update on page load
-updateStickyHeaderButtons(isLoggedIn);
+    function handleStickyLogout() {
+        debugger
+        localStorage.setItem('isLoggedIn', 'false');
+        window.location.href = 'login.html';
+    }
 
-// Handle logout functionality for sticky header
-const stickyLogoutBtn = document.getElementById('sticky-logout-btn');
-
-function handleStickyLogout() {
-localStorage.setItem('isLoggedIn', 'false');
-window.location.href = 'login.html';
-}
-
-stickyLogoutBtn.addEventListener('click', function(e) {
-e.preventDefault();
-handleStickyLogout();
-});
+    stickyLogoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        handleStickyLogout();
+    });
 });
 
 </script>

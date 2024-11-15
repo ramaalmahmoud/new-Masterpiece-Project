@@ -4,7 +4,7 @@ async function fetchOrders() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("jwtToken")}` // Adjust if needed
+                "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`
             }
         });
 
@@ -20,52 +20,43 @@ async function fetchOrders() {
 }
 
 function populateOrdersTable(orders) {
+    console.log("Orders received:", orders); // Log the orders received
     const tbody = document.querySelector('#ordersTable tbody');
     tbody.innerHTML = ''; // Clear existing rows
 
     orders.forEach(order => {
+        const totalAmount = order.totalAmount != null ? order.totalAmount.toFixed(2) : '0.00';
         const row = document.createElement('tr');
-        console.log("orderid",order.orderId)
+        console.log("Order ID:", order.orderId); // Log each order ID
         row.innerHTML = `
             <td>${order.orderId}</td>
             <td>${order.userName}</td>
             <td>${new Date(order.orderDate).toLocaleDateString()}</td>
-            <td>$${order.totalAmount.toFixed(2)}</td>
+            <td>$${totalAmount}</td>
             <td>${order.orderStatus}</td>
             <td>
-<a href="#" class="btn btn-primary btn-sm view-order-btn" data-orderid="${order.orderId}" data-bs-toggle="modal" data-bs-target="#viewOrderModal">View</a>
-                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#updateOrderModal" data-orderid="${order.orderId}">Update Status</button>
+                <a href="#" class="btn btn-primary btn-sm view-order-btn" data-bs-toggle="modal" data-bs-target="#viewOrderModal">View</a>
+                <button class="btn btn-warning btn-sm update-order-btn" data-bs-toggle="modal" data-bs-target="#updateOrderModal">Update Status</button>
             </td>
         `;
+        debugger
+        row.querySelector('.view-order-btn').addEventListener('click', () => fetchOrderDetails(order.orderId));
+        row.querySelector('.update-order-btn').addEventListener('click', () => setOrderId(order.orderId));
         tbody.appendChild(row);
     });
-
-    // Re-attach click event listener for dynamic buttons
-    attachModalTrigger();
 }
-
-function attachModalTrigger() {
+function setOrderId(orderId) {
     debugger
-    document.querySelectorAll('.btn-warning').forEach(button => {
-        button.addEventListener('click', function (event) {
-            event.preventDefault();
-            const orderId = this.getAttribute('data-orderid');
+    // Set the order ID in the hidden input field
+    document.getElementById('order-id').value = orderId;
 
-            // Set the orderId in the hidden input field
-            document.getElementById('order-id').value = orderId;
-
-            // Optionally update the modal title for confirmation
-            document.querySelector('#updateOrderModalLabel').textContent = `Update Status for Order #${orderId}`;
-        });
-    });
+    // Optionally update the modal title for confirmation
+    document.querySelector('#updateOrderModalLabel').textContent = `Update Status for Order #${orderId}`;
 }
-
-
 
 // Call fetchOrders when the page loads
 document.addEventListener('DOMContentLoaded', fetchOrders);
 
-// Handling the form submission for updating the order status
 document.getElementById('updateOrderForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 debugger
@@ -81,10 +72,9 @@ debugger
         const response = await fetch(`https://localhost:7084/api/Orders/${orderId}`, {
             method: 'PUT', // Use PUT instead of POST
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem("jwtToken")}`
+                'Content-Type': 'application/json' // Add the Content-Type header
             },
-            body: JSON.stringify({ status: updatedStatus }) // Send updatedStatus as part of an object
+            body: JSON.stringify({ newStatus: updatedStatus }) // Send updatedStatus as part of a JSON object
         });
 
         if (!response.ok) {
@@ -92,7 +82,7 @@ debugger
         }
 
         // Refresh the table data after updating
-        await fetchOrders();
+        fetchOrders();
 
         // Hide the modal after submission
         const updateOrderModal = bootstrap.Modal.getInstance(document.getElementById('updateOrderModal'));
@@ -104,21 +94,9 @@ debugger
 
 
 
-// Function to attach event listeners to "View" buttons after table rendering
-function attachModalTrigger() {
-    debugger
-    document.querySelectorAll('.view-order-btn').forEach(button => {
-        button.addEventListener('click', async function (event) {
-            event.preventDefault();
-            const orderId = this.getAttribute('data-orderid');
-            await fetchOrderDetails(orderId);
-        });
-    });
-}
-
 // Function to fetch and display order details in the modal
 async function fetchOrderDetails(orderId) {
-    debugger
+
     try {
         // Fetch order details from the API
         const response = await fetch(`https://localhost:7084/api/orders/${orderId}`);
@@ -128,21 +106,24 @@ async function fetchOrderDetails(orderId) {
 
         // Populate modal fields with order data
         document.getElementById('modal-order-id').textContent = order.orderId;
-        document.getElementById('modal-user-name').textContent = order.userName;
+        document.getElementById('modal-user-name').textContent = order.customerName;
         document.getElementById('modal-order-date').textContent = new Date(order.orderDate).toLocaleDateString();
         document.getElementById('modal-total-amount').textContent = order.totalAmount.toFixed(2);
-
+debugger
         // Populate the product list in the modal
         const productList = document.getElementById('modal-product-list');
         productList.innerHTML = ''; // Clear existing products
 
-        order.orderProducts.forEach(product => {
+        order.items.forEach(product => {
+            const Price = product.price != null ? product.price.toFixed(2) : '0.00';
+            const totalPrice = product.totalPrice != null ? product.totalPrice.toFixed(2) : '0.00';
+
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${product.productName}</td>
                 <td>${product.quantity}</td>
-                <td>$${product.price.toFixed(2)}</td>
-                <td>$${(product.price * product.quantity).toFixed(2)}</td>
+                <td>$${Price}</td>
+                <td>$${totalPrice}</td>
             `;
             productList.appendChild(row);
         });
@@ -155,8 +136,4 @@ async function fetchOrderDetails(orderId) {
         alert('Could not load order details.');
     }
 }
-
-// Run the initial function to attach triggers
-attachModalTrigger();
-
 
