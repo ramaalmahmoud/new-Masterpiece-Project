@@ -141,10 +141,10 @@ async function searchBlogPosts(searchTerm) {
     debugger
     try {
         // Encode the search term to ensure it's safe for use in a URL
-        const encodedSearchTerm = encodeURIComponent(searchTerm);
+        // const encodedSearchTerm = encodeURIComponent(searchTerm);
 
         // Fetch the search results from the server
-        const response = await fetch(`https://localhost:7084/api/Blogs/search?searchTerm=${encodedSearchTerm}`, {
+        const response = await fetch(`https://localhost:7084/api/Blogs/api/Blogs/search?searchTerm=${searchTerm}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -159,6 +159,28 @@ async function searchBlogPosts(searchTerm) {
         displayBlogPosts(posts);
     } catch (error) {
         console.error('Error searching blog posts:', error);
+    }
+}
+
+async function filterByCategory(category) {
+    debugger
+    try {
+        // Fetch the filtered posts from the server
+        const response = await fetch(`https://localhost:7084/api/Blogs/api/Blogs/filterByCategory?category=${category}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const posts = await response.json();
+        displayBlogPosts(posts);
+    } catch (error) {
+        console.error('Error filtering blog posts by category:', error);
     }
 }
 

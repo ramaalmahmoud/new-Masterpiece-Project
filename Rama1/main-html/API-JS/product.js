@@ -32,6 +32,81 @@ debugger
 //     fetchSortedProducts(sortBy);   // Fetch sorted products based on the selected option
 // });
 
+document.getElementById('search-form').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const searchTerm = document.getElementById('search-input').value;
+    await searchProducts(searchTerm); // Fetch products with the search term
+});
+
+async function searchProducts(searchTerm) {
+    
+    try {
+        // Encode the search term to ensure it's safe for use in a URL
+        const encodedSearchTerm = encodeURIComponent(searchTerm);
+
+        // Fetch the search results from the server
+        const response = await fetch(`https://localhost:7084/api/products/search?query=${encodedSearchTerm}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const products = await response.json();
+        displayProducts(products);
+    } catch (error) {
+        console.error('Error searching products:', error);
+    }
+}
+document.getElementById('apply-filter').addEventListener('click', function() {
+    debugger
+    // Get the min and max price values from the input fields
+    let minPrice = document.getElementById('min-price').value;
+    let maxPrice = document.getElementById('max-price').value;
+
+    // Remove any non-numeric characters (e.g., currency symbols)
+    minPrice = minPrice.replace(/[^0-9.]/g, '');
+    maxPrice = maxPrice.replace(/[^0-9.]/g, '');
+
+    // Convert to numbers
+    minPrice = parseFloat(minPrice);
+    maxPrice = parseFloat(maxPrice);
+
+    // Check if the parsed values are valid numbers
+    if (!isNaN(minPrice) && !isNaN(maxPrice)) {
+        filterProducts(minPrice, maxPrice);
+    } else {
+        console.error('Invalid price range');
+    }
+});
+
+async function filterProducts(minPrice, maxPrice) {
+    debugger
+    try {
+        // Fetch the filtered products from the server
+        const response = await fetch(`https://localhost:7084/api/products/filter?minPrice=${minPrice}&maxPrice=${maxPrice}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const products = await response.json();
+        displayProducts(products);
+    } catch (error) {
+        console.error('Error filtering products:', error);
+    }
+}
+
 // Function to display products (You can modify this function based on your page structure)
 function displayProducts(products) {
     debugger
@@ -46,7 +121,7 @@ function displayProducts(products) {
                 <div class="product__all-single">
                     <div class="product__all-single-inner">
                         <div class="product__all-img">
-                            <img src="${product.image}" alt="${product.title}">
+                            <img src="../Back End/master-piece-project/master-piece-project/Uploads/Shop/${product.image}" alt="${product.title}">
                         </div>
                         <div class="product__all-content">
                             <div class="product__all-review">
@@ -127,7 +202,7 @@ fetchProductsByCategories(selectedCategories);
                             <div class="product__all-single">
                                 <div class="product__all-single-inner">
                                     <div class="product__all-img">
-                                        <img src="${product.image}" alt="${product.title}">
+                                        <img src="../Back End/master-piece-project/master-piece-project/Uploads/Shop/${product.image}" alt="${product.title}">
                                     </div>
                                     <div class="product__all-content">
                                         <div class="product__all-review">
@@ -230,7 +305,7 @@ async function fetchProductDetails(productId) {
 // Function to display product details on the page
 function displayProductDetails(product) {
     debugger
-    document.querySelector('.product-details__img img').src = product.image;
+    document.querySelector('.product-details__img img').src =`../Back End/master-piece-project/master-piece-project/Uploads/Shop/${product.image}`;
     document.querySelector('.product-details__title').innerHTML = `${product.title} <span>$${product.price}</span>`;
     document.querySelector('.product-details__reveiw span').textContent = `${product.reviewsCount} customer reviews`;
     document.querySelector('.product-details__content-text1').textContent = product.description;

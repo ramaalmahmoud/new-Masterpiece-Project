@@ -180,25 +180,28 @@
             <!-- Sidebar for Categories and Filters -->
             <div class="col-xl-3 col-lg-3">
                 <div class="product__sidebar">
-                    <!-- Search Bar -->
-                    <div class="shop-search product__sidebar-single">
-                        <form action="#">
-                            <input type="text" id="search-input" placeholder="Search Products...">
-                        </form>
-                    </div>
+                 <!-- Search Bar -->
+<div class="shop-search product__sidebar-single">
+    <form id="search-form">
+        <input type="text" id="search-input" placeholder="Search Products...">
+    </form>
+</div>
+
                     <!-- Price Range Filter -->
                     <div class="product__price-ranger product__sidebar-single">
                         <h3 class="product__sidebar-title">Price Range</h3>
                         <div class="price-ranger">
                             <div id="slider-range"></div>
                             <div class="ranger-min-max-block">
-                                <input type="text" readonly class="min">
+                                <input type="text" id="min-price" readonly class="min">
                                 <span>-</span>
-                                <input type="text" readonly class="max">
-                                <input type="submit" value="Apply Filter">
+                                <input type="text" id="max-price" readonly class="max">
+                                <input type="submit" id="apply-filter" value="Apply Filter">
                             </div>
                         </div>
                     </div>
+                    <div id="products-container"></div>
+                    
                     <!-- Dynamic Categories -->
                     <div class="shop-category product__sidebar-single">
                         <h3 class="product__sidebar-title">Categories</h3>
@@ -242,7 +245,6 @@
 <!--Product Section End-->
 
 
-        
         </body>
         
 <!--Site Footer Start-->
