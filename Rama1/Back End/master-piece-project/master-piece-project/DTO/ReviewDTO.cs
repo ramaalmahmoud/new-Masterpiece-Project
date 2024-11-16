@@ -3,6 +3,7 @@
     public class ReviewDTO
     {
         public int ProductID { get; set; }  // The ID of the product being reviewed
+        public int UserId { get; set; }
         public int Rating { get; set; }      // Rating provided by the user
         public string Comment { get; set; }  // The review comment
         public string Email { get; set; }    // Email of the user

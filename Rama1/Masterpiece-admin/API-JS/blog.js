@@ -92,8 +92,8 @@ console.log("posts",posts)
                 <td>${post.category}</td>
                 <td class="actions">
                     ${!post.isConfirmed ? `
-                        <button class="btn btn-primary mb-2" onclick="approvePost(${post.postId})">Approve</button>
-                        <button class="btn btn-danger btn-sm" onclick="rejectPost(${post.postId})">Delete</button>
+                        <button class="btn btn-primary btn-sm" onclick="approvePost(${post.postId})">Approve</button>
+                        <button class="btn btn-danger btn-sm" onclick="rejectPost(${post.postId})">Reject</button>
                     ` : ''}
                 </td>
                 <td class="status">${post.isConfirmed ? 'Approved' : 'Pending'}</td>
@@ -157,7 +157,7 @@ async function fetchComments() {
     try {
         const response = await fetch('https://localhost:7084/api/Comments/GetComments');
         const comments = await response.json();
-
+console.log("comments",comments)
         const tableBody = document.querySelector('#comments-table tbody');
         tableBody.innerHTML = ''; // Clear any existing rows
 
@@ -170,7 +170,7 @@ async function fetchComments() {
                 <td>${new Date(comment.createdAt).toLocaleDateString()}</td>
                 <td class="actions">
                     ${!comment.isApproved ? `
-                        <button class="btn btn-primary mb-2" onclick="approveComment(${comment.commentId})">Approve</button>
+                        <button class="btn btn-primary btn-sm" onclick="approveComment(${comment.commentId})">Approve</button>
                         <button class="btn btn-danger btn-sm" onclick="rejectComment(${comment.commentId})">Delete</button>
                     ` : ''}
                 </td>

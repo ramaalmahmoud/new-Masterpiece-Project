@@ -27,22 +27,22 @@ namespace master_piece_project.Controllers
             }
 
             // Retrieve UserID by Email
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == reviewDto.Email);
+            //var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == reviewDto.Email);
 
-            if (user == null)
-            {
-                return NotFound("User not found.");
-            }
+            //if (user == null)
+            //{
+            //    return NotFound("User not found.");
+            //}
 
             // Check if the user has purchased the product
             // Step 3: Check if the user has purchased this product
             var hasPurchased = await _context.OrderProducts
-                .AnyAsync(op => op.Order.UserId == user.UserId && op.ProductId == reviewDto.ProductID);
+                .AnyAsync(op => op.Order.UserId == reviewDto.UserId && op.ProductId == reviewDto.ProductID);
 
            
             if (!hasPurchased)
             {
-                return NotFound("You must purchase this product before reviewing it.");
+                return NotFound(new { message = "You must purchase this product before reviewing it" });
             }
 
             // Create a new Review instance
@@ -51,7 +51,7 @@ namespace master_piece_project.Controllers
                 ProductId = reviewDto.ProductID,
                 Rating = reviewDto.Rating,
                 Comment = reviewDto.Comment,
-                UserId = user.UserId, // Use UserID from the retrieved user
+                UserId = reviewDto.UserId, // Use UserID from the retrieved user
                 CreatedAt = DateTime.UtcNow
             };
 
@@ -59,7 +59,7 @@ namespace master_piece_project.Controllers
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetReview", new { id = review.ReviewId }, review);
+            return Ok(new { message = "Review Submited successfully." });
         }
     }
 }

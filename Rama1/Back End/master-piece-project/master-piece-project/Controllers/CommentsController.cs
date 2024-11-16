@@ -29,7 +29,8 @@ namespace master_piece_project.Controllers
                     comment.CreatedAt,
                     PostTitle = comment.Post.Title,
                     UserName = comment.User.FullName,
-                    IsApproved=true
+                    comment.IsApproved
+
                 })
                 .ToList();
 
@@ -52,7 +53,7 @@ namespace master_piece_project.Controllers
             // Save the changes to the database
             _db.SaveChanges();
 
-            return Ok(new { message = "Post approved successfully." });
+            return Ok(new { message = "Post approved successfully.", isApproved = post.IsApproved });
         }
         [HttpPut("reject/{id}")]
         public IActionResult RejectComment(int id)
@@ -69,7 +70,7 @@ namespace master_piece_project.Controllers
 
             _db.SaveChanges();
 
-            return Ok(new { message = "Post rejected successfully." });
+            return Ok(new { message = "Post rejected successfully.", isApproved = post.IsApproved });
         }
 
         [HttpPost("submitComment")]

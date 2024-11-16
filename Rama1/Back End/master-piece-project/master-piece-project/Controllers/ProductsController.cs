@@ -110,17 +110,31 @@ namespace master_piece_project.Controllers
         }
 
 
-        // Get product by ID
+        // Get product by ID with review count
         [HttpGet("GetProductById/{id}")]
         public IActionResult GetProductById(int id)
         {
-            var product = _db.Products.FirstOrDefault(p => p.ProductId == id);
+            var product = _db.Products
+                .Where(p => p.ProductId == id)
+                .Select(p => new
+                {
+                    p.ProductId,
+                    p.Title,
+                    p.Description,
+                    p.Price,
+                    p.Image,
+                    ReviewCount = _db.Reviews.Count(r => r.ProductId == p.ProductId)
+                })
+                .FirstOrDefault();
+
             if (product == null)
             {
                 return NotFound();
             }
+
             return Ok(product);
         }
+
 
 
 

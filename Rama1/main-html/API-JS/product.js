@@ -307,7 +307,7 @@ function displayProductDetails(product) {
     debugger
     document.querySelector('.product-details__img img').src =`../Back End/master-piece-project/master-piece-project/Uploads/Shop/${product.image}`;
     document.querySelector('.product-details__title').innerHTML = `${product.title} <span>$${product.price}</span>`;
-    document.querySelector('.product-details__reveiw span').textContent = `${product.reviewsCount} customer reviews`;
+    // document.querySelector('.product-details__reveiw span').textContent = `${product.reviewsCount} customer reviews`;
     document.querySelector('.product-details__content-text1').textContent = product.description;
     document.querySelector('.product-details__content-text2').innerHTML = `REF. ${product.reference} <br> Available in store`;
     document.getElementById("addToCartbtn").innerHTML=`    <a href="#" class="thm-btn" data-product-id="1" onclick="saveProductId(${product.productId})" >Add to Cart</a>`
@@ -315,12 +315,11 @@ debugger
     // Adjust stars based on product rating
     const starsContainer = document.querySelector('.product-details__reveiw');
     debugger
-    starsContainer.innerHTML = '';
     debugger
     for (let i = 0; i < product.stars; i++) {
         starsContainer.innerHTML += '<i class="fa fa-star"></i>';
     }
-    starsContainer.innerHTML += `<span>${product.reviewsCount} customer reviews</span>`;
+    starsContainer.innerHTML += `<span>${product.reviewCount} customer reviews</span>`;
 }
 
 // Assuming you are getting the productId from the URL parameters
@@ -354,36 +353,47 @@ stars.forEach((star, index) => {
 reviewForm.addEventListener('submit', async function (event) {
     event.preventDefault(); // Prevent the default form submission
 
+    // Get the UserID and ProductID from localStorage
+    const userId = localStorage.getItem('UserID'); // Assuming these are stored in localStorage
+    
+
     // Create a FormData object from the form
     const formData = new FormData(reviewForm);
 
-    // Append the selected rating to FormData
-    formData.append('Rating', selectedRating); // Use selectedRating variable
+    // Append the UserID and ProductID to the FormData
+    formData.append('UserId', userId);
+    formData.append('ProductID', productId);
+    formData.append('Rating', selectedRating); // Use selectedRating variable from the form
 
-    // Convert FormData to a plain object
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
-
-    // Make a fetch call to your API endpoint (replace with your actual URL)
+    // Make a fetch call to your API endpoint
     const response = await fetch('https://localhost:7084/api/Reviews/PostReview', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data), // Convert data to JSON
+        body: formData,
     });
 
-    // Handle response
+    // Handle the response from the server
+    const result = await response.json();
+
+    console.log("Response:", result); // Log the response
+
     if (response.ok) {
-        const result = await response.json();
-        document.querySelector('.result').textContent = 'Review submitted successfully!';
+        // Success alert with SweetAlert
+        Swal.fire({
+            icon: 'success',
+            title: 'Review submitted successfully!',
+            text: result.message, // Use the message from the backend
+        });
     } else {
-        const error = await response.text();
-        document.querySelector('.result').textContent = `Error: ${error}`;
+        // Error alert with SweetAlert
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: result.message, // Use the message from the backend
+        });
     }
 });
+
+
 
 ////////////////////////////////////////////////////////////
 // add to cart 
