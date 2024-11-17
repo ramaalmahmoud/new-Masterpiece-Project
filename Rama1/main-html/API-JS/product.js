@@ -142,6 +142,19 @@ function displayProducts(products) {
             </div>
         `;
         productList.insertAdjacentHTML('beforeend', productHtml);
+              // Assuming this stock level data comes from your backend
+       const stockLevel = product.stock;  // You should dynamically fetch this value from your server for the product
+       const addToCartButton = document.getElementById("addToCartbtn1");
+    
+   
+       // Check if the product is in stock
+       if (stockLevel <= 0) {
+           // If out of stock, update the button
+         // If in stock, show the normal Add to Cart button
+         addToCartButton.innerHTML = `<button class="btn btn-danger" disabled>Out of Stock</button>`;
+   
+          
+       }
     });
 }
 
@@ -211,7 +224,7 @@ fetchProductsByCategories(selectedCategories);
                                         <h4 class="product__all-title"><a href="product-details.html?id=${product.productID}">${product.title}</a></h4>
                                         <p class="product__all-price">$${product.price}</p>
                                       <!-- All Products Page Button -->
-<div class="product__all-btn-box">
+<div class="product__all-btn-box" id="addToCartbtn1">
     <a href="#" class="thm-btn product__all-btn" id="btn1" onclick="saveProductId(${product.productID})">Add to Cart</a>
 </div>
                                     </div>
@@ -224,12 +237,27 @@ fetchProductsByCategories(selectedCategories);
                         </div>
                     `;
                     productList.insertAdjacentHTML('beforeend', productHtml);
+                    // Assuming this stock level data comes from your backend
+       const stockLevel = product.stock;  // You should dynamically fetch this value from your server for the product
+       const addToCartButton = document.getElementById("addToCartbtn1");
+    
+   
+       // Check if the product is in stock
+       if (stockLevel <= 0) {
+           // If out of stock, update the button
+         // If in stock, show the normal Add to Cart button
+         addToCartButton.innerHTML = `<button class="btn btn-danger" disabled>Out of Stock</button>`;
+   
+          
+       }
                 });
 
                 // Update product count
                 document.getElementById('product-count').textContent = `Showing ${products.length} Products`;
             })
             .catch(error => console.error('Error fetching products:', error));
+
+            
     }
 // Async function to fetch products by category IDs
 async function fetchProductsByCategories(selectedCategoryIds) {
@@ -304,12 +332,13 @@ async function fetchProductDetails(productId) {
 
 // Function to display product details on the page
 function displayProductDetails(product) {
+
+     
     debugger
     document.querySelector('.product-details__img img').src =`../Back End/master-piece-project/master-piece-project/Uploads/Shop/${product.image}`;
     document.querySelector('.product-details__title').innerHTML = `${product.title} <span>$${product.price}</span>`;
     // document.querySelector('.product-details__reveiw span').textContent = `${product.reviewsCount} customer reviews`;
     document.querySelector('.product-details__content-text1').textContent = product.description;
-    document.querySelector('.product-details__content-text2').innerHTML = `REF. ${product.reference} <br> Available in store`;
     document.getElementById("addToCartbtn").innerHTML=`    <a href="#" class="thm-btn" data-product-id="1" onclick="saveProductId(${product.productId})" >Add to Cart</a>`
 debugger
     // Adjust stars based on product rating
@@ -320,6 +349,26 @@ debugger
         starsContainer.innerHTML += '<i class="fa fa-star"></i>';
     }
     starsContainer.innerHTML += `<span>${product.reviewCount} customer reviews</span>`;
+       // Assuming this stock level data comes from your backend
+       const stockLevel = product.stock;  // You should dynamically fetch this value from your server for the product
+       const addToCartButton = document.getElementById("addToCartbtn");
+       const quantityInput = document.getElementById("quantity");
+       const btnSub=document.getElementById("btnSub")
+       const btnAdd=document.getElementById("btnAdd")
+   
+       // Check if the product is in stock
+       if (stockLevel <= 0) {
+           // If out of stock, update the button
+           addToCartButton.innerHTML = '<button class="btn btn-danger" disabled>Out of Stock</button>';
+           quantityInput.disabled = true;  // Disable quantity input when out of stock
+           btnSub.disabled=true
+           btnAdd.disabled=true
+       } else {
+           // If in stock, show the normal Add to Cart button
+           addToCartButton.innerHTML = `<a href="#" class="thm-btn" data-product-id="1" onclick="saveProductId(${product.productId})" >Add to Cart</a>`;
+   
+          
+       }
 }
 
 // Assuming you are getting the productId from the URL parameters
@@ -354,7 +403,7 @@ reviewForm.addEventListener('submit', async function (event) {
     event.preventDefault(); // Prevent the default form submission
 
     // Get the UserID and ProductID from localStorage
-    const userId = localStorage.getItem('UserID'); // Assuming these are stored in localStorage
+    const userId = sessionStorage.getItem('UserID'); // Assuming these are stored in localStorage
     
 
     // Create a FormData object from the form
@@ -396,19 +445,25 @@ reviewForm.addEventListener('submit', async function (event) {
 
 
 ////////////////////////////////////////////////////////////
-// add to cart 
-debugger
-async function addToCart(productId, quantity = 1) {
+// Add to cart function
+async function addToCart(productId) {
     debugger
-    const userId = localStorage.getItem("UserID"); // Replace this with the actual logged-in user ID if applicable
+    const userId = sessionStorage.getItem("UserID"); // Get the user ID from session storage
+
+    const quantityInput = document.getElementById("quantity"); // Get the quantity input element
+    let quantity = quantityInput ? parseInt(quantityInput.value) : 1; // Default to 1 if the input is empty or invalid
+
+    if (isNaN(quantity) || quantity <= 0) {
+        quantity = 1; // Set default quantity to 1 if invalid
+    }
 
     const url = 'https://localhost:7084/api/Cart/AddToCart'; // Adjust the URL to match your API endpoint
     const payload = {
         ProductId: productId,
-        Quantity: quantity,
+        Quantity: quantity, // Use the quantity from the input
         UserId: userId
     };
-debugger
+
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -421,7 +476,7 @@ debugger
         if (!response.ok) {
             throw new Error('Failed to add item to cart');
         }
-debugger
+
         const data = await response.json();
         console.log('Item added to cart successfully:', data);
         alert('Item added to cart successfully!');
@@ -430,9 +485,87 @@ debugger
         alert('Error adding item to cart. Please try again.');
     }
 }
+
+
 function saveProductId(pId){
     debugger
-    localStorage.ProductId=pId
-    const productId= localStorage.getItem("ProductId");
+    sessionStorage.ProductId=pId
+    const productId= sessionStorage.getItem("ProductId");
     addToCart(productId); 
 }
+
+
+async function fetchReviews(productId) {
+    try {
+        // Fetch the reviews from the server
+        const response = await fetch(`https://localhost:7084/api/Reviews/Reviews/${productId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const reviews = await response.json();
+        displayReviews(reviews);
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+    }
+}
+
+function displayReviews(reviews) {
+    const reviewsContainer = document.getElementById('reviews-container');
+    const reviewsCount = document.getElementById('reviews-count');
+
+    // Update reviews count
+    reviewsCount.textContent = `${reviews.length} Reviews`;
+
+    // Clear existing content
+    reviewsContainer.innerHTML = '';
+
+    reviews.forEach(review => {
+        const reviewElement = document.createElement('div');
+        reviewElement.classList.add('comment-box');
+
+        reviewElement.innerHTML = `
+            <div class="comment">
+                <div class="author-thumb">
+                    <figure class="thumb"><img src="${review.userPicture}" alt="User Picture"></figure>
+                </div>
+                <div class="review-one__content">
+                    <div class="review-one__content-top">
+                        <div class="info">
+                            <h2>${review.userName} <span>${new Date(review.createdAt).toLocaleDateString()} . ${new Date(review.createdAt).toLocaleTimeString()}</span></h2>
+                        </div>
+                        <div class="reply-btn">
+                            ${generateStars(review.rating)}
+                        </div>
+                    </div>
+                    <div class="review-one__content-bottom">
+                        <p>${review.comment}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        reviewsContainer.appendChild(reviewElement);
+    });
+}
+
+function generateStars(rating) {
+    let starsHtml = '';
+    for (let i = 0; i < 5; i++) {
+        if (i < rating) {
+            starsHtml += '<i class="fa fa-star"></i>';
+        } else {
+            starsHtml += '<i class="fa fa-star-o"></i>'; // For empty stars
+        }
+    }
+    return starsHtml;
+}
+
+// Example usage: fetch reviews for a post with ID 1
+fetchReviews(productId);

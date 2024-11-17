@@ -61,5 +61,30 @@ namespace master_piece_project.Controllers
 
             return Ok(new { message = "Review Submited successfully." });
         }
+
+        [HttpGet("Reviews/{postId}")]
+        public IActionResult GetReviews(int postId)
+        {
+            var reviews = _context.Reviews
+                .Where(review => review.ProductId == postId)
+                .Select(review => new
+                {
+                    ReviewId = review.ReviewId,
+                    Rating = review.Rating,
+                    Comment = review.Comment,
+                    CreatedAt = review.CreatedAt,
+                    UserName = review.User.FullName, // Assuming User has a FullName property
+                    UserPicture = review.User.ProfilePicture // Assuming User has a ProfilePictureUrl property
+                })
+                .ToList();
+
+            if (reviews == null || !reviews.Any())
+            {
+                return NotFound("No reviews found for this post.");
+            }
+
+            return Ok(reviews);
+        }
+
     }
 }

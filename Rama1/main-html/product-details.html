@@ -151,7 +151,11 @@
     </header>
 
     <div class="stricky-header stricked-menu main-menu main-header-four">
-        <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        <div class="sticky-header__content">
+            <!-- Add your dynamic buttons here -->
+            <!-- Sign Up/Discover Activities Button -->
+           
+        </div><!-- /.sticky-header__content -->
     </div><!-- /.stricky-header -->
 
         <!--Page Header Start-->
@@ -201,16 +205,15 @@
                             <p class="product-details__content-text1"></p>
                             <p class="product-details__content-text2"> </p>
                         </div>
-
                         <div class="product-details__quantity">
                             <h3 class="product-details__quantity-title">Quantity</h3>
                             <div class="quantity-box">
-                                <button type="button" class="sub"><i class="fa fa-minus"></i></button>
-                                <input type="number" id="1" value="1" />
-                                <button type="button" class="add"><i class="fa fa-plus"></i></button>
+                                <button type="button" id="btnSub" class="sub"><i class="fa fa-minus"></i></button>
+                                <input type="number" id="quantity" value="1" min="1" />
+                                <button type="button" id="btnAdd" class="add"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
-
+                        
 
                         <div class="product-details__buttons">
                             <!-- <div class="product-details__buttons-1">
@@ -240,84 +243,19 @@
 
        
 
-        <!--Review One Start-->
-        <section class="review-one">
-            <div class="container">
-                <div class="comments-area">
-                    <div class="review-one__title">
-                        <h3>2 Reviews</h3>
-                    </div>
-                    <!--Start Comment Box-->
-                    <div class="comment-box">
-                        <div class="comment">
-                            <div class="author-thumb">
-                                <figure class="thumb"><img src="assets/images/shop/review-1-1.jpg" alt="">
-                                </figure>
-                            </div>
-
-                            <div class="review-one__content">
-                                <div class="review-one__content-top">
-                                    <div class="info">
-                                        <h2>Kevin Martin <span>20 Mar, 2023 . 4:00 pm</span></h2>
-                                    </div>
-                                    <div class="reply-btn">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-
-                                <div class="review-one__content-bottom">
-                                    <p>It has survived not only five centuries, but also the leap into electronic
-                                        typesetting unchanged. It was popularised in the sheets containing lorem ipsum
-                                        is simply free text. Class aptent taciti sociosqu ad litora torquent per conubia
-                                        nostra, per inceptos himenaeos. Vestibulum sollicitudin varius mauris non
-                                        dignissim.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End Comment Box-->
-
-                    <!--Start Comment Box-->
-                    <div class="comment-box">
-                        <div class="comment">
-                            <div class="author-thumb">
-                                <figure class="thumb"><img src="assets/images/shop/review-1-2.jpg" alt="">
-                                </figure>
-                            </div>
-
-                            <div class="review-one__content">
-                                <div class="review-one__content-top">
-                                    <div class="info">
-                                        <h2>Sarah Albert <span>20 Mar, 2023 . 4:00 pm</span></h2>
-                                    </div>
-                                    <div class="reply-btn">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-
-                                <div class="review-one__content-bottom">
-                                    <p>It has survived not only five centuries, but also the leap into electronic
-                                        typesetting unchanged. It was popularised in the sheets containing lorem ipsum
-                                        is simply free text. Class aptent taciti sociosqu ad litora torquent per conubia
-                                        nostra, per inceptos himenaeos. Vestibulum sollicitudin varius mauris non
-                                        dignissim.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End Comment Box-->
-                </div>
+       <!--Review One Start-->
+<section class="review-one">
+    <div class="container">
+        <div class="comments-area" id="reviews-container">
+            <div class="review-one__title">
+                <h3 id="reviews-count">0 Reviews</h3>
             </div>
-        </section>
-        <!--Review One End-->
+            <!-- Reviews will be dynamically inserted here -->
+        </div>
+    </div>
+</section>
+<!--Review One End-->
+
 <style>
     .review-form-one__rate i.fa-star {
     color: var(--delogis-extra); /* Default color */

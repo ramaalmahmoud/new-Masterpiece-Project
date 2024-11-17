@@ -1,7 +1,7 @@
 // Fetch Cart Items
 async function fetchCartItems() {
     debugger
-    const userId = localStorage.getItem("UserID");
+    const userId = sessionStorage.getItem("UserID");
     debugger
     try {
       const response = await fetch(`https://localhost:7084/api/Cart/GetCartByUserId/${userId}`); // Adjust with your API endpoint
@@ -36,10 +36,11 @@ async function fetchCartItems() {
           <td>$${item.price.toFixed(2)}</td>
           <td>
             <div class="quantity-box">
-              <button type="button" class="sub" onclick="updateQuantity(${item.cartItemId}, -1)"><i class="fa fa-minus"></i></button>
-              <input type="number" id="product-${item.cartItemId}" value="${item.quantity}" min="1" />
-              <button type="button" class="add" onclick="updateQuantity(${item.cartItemId}, 1)"><i class="fa fa-plus"></i></button>
-            </div>
+    <button type="button" class="sub" onclick="updateQuantity(${item.cartItemId}, -1)"><i class="fa fa-minus"></i></button>
+    <input type="number" id="product-${item.cartItemId}" value="${item.quantity}" min="1" />
+    <button type="button" class="add" onclick="updateQuantity(${item.cartItemId}, 1)"><i class="fa fa-plus"></i></button>
+</div>
+
           </td>
           <td>$${(item.price * item.quantity).toFixed(2)}</td>
           <td>
@@ -52,30 +53,36 @@ async function fetchCartItems() {
   }
   
   // Update Quantity
-  async function updateQuantity(cartItemId, change) {
-    debugger
-    const quantityInput = document.getElementById(`product-${cartItemId}`);
-    let newQuantity = parseInt(quantityInput.value) + change;
+async function updateQuantity(cartItemId, change) {
   debugger
-    if (newQuantity < 1) {
+  const quantityInput = document.getElementById(`product-${cartItemId}`);
+  let newQuantity = parseInt(quantityInput.value) + change;
+
+  if (newQuantity < 1) {
       newQuantity = 1; // Minimum quantity is 1
-    }
-  debugger
-    quantityInput.value = newQuantity; // Update the input field with the new quantity
-  
-    try {
-      await fetch(`https://localhost:7084/api/Cart/UpdateCartItem/${cartItemId}`, {
-        method: 'PUT', // Use PUT method
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({newQuantity }), // Send the new quantity as an object
-      });
-  
-    //   await fetchCartItems(); // Re-fetch cart items to reflect updates
-    } catch (error) {
-      console.error('Error updating quantity:', error);
-    }
   }
-  
+
+  quantityInput.value = newQuantity; // Update the input field with the new quantity
+
+  try {
+      const response = await fetch(`https://localhost:7084/api/Cart/UpdateCartItem/${cartItemId}`, {
+          method: 'PUT', // Use PUT method to update cart item
+          headers: { 'Content-Type': 'application/json' },
+          body: newQuantity // Send updated quantity as JSON
+      });
+
+      if (response.ok) {
+          // After successfully updating the quantity, fetch the updated cart items
+          const cartItems = await response.json(); // Assuming the backend sends back updated cart items
+          renderCartItems(cartItems); // Re-render the cart items with the updated data
+          
+          // Optionally, you can update the total price or any other UI elements here.
+      } 
+  } catch (error) {
+      console.error('Error updating quantity:', error);
+  }
+}
+
   // Remove Item
   async function removeItem(cartItemId) {
     debugger

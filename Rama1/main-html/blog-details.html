@@ -163,9 +163,12 @@
                 </div>
             </nav>
         </header>
-
         <div class="stricky-header stricked-menu main-menu main-header-four">
-            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+            <div class="sticky-header__content">
+                <!-- Add your dynamic buttons here -->
+                <!-- Sign Up/Discover Activities Button -->
+               
+            </div><!-- /.sticky-header__content -->
         </div><!-- /.stricky-header -->
 
         <!--Page Header Start-->
@@ -340,7 +343,7 @@ function formatDate(dateString) {
 }
 
 // Call fetchBlogPost with the ID of the post you want to display
-const postId = localStorage.getItem("PostID");// Implement this function to get the post ID from the URL
+const postId = sessionStorage.getItem("PostID");// Implement this function to get the post ID from the URL
 fetchBlogPost(postId);
 async function fetchSidebarData() {
     try {

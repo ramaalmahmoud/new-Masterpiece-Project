@@ -1,4 +1,5 @@
 
+
 async function register(params) {
     debugger
     
@@ -44,13 +45,13 @@ async function login() {
     });
     var result= await response.json();
 
-    let token = localStorage.jwtToken = result.token;
-    localStorage.UserID = result.userId;
+    let token = sessionStorage.jwtToken = result.token;
+    sessionStorage.UserID = result.userId;
     console.log("token", token)
 
     if(response.ok){
         window.alert("User logged in successfully");
-        localStorage.setItem('isLoggedIn', 'true'); // Set login status
+        sessionStorage.setItem('isLoggedIn', 'true'); // Set login status
         window.location.href ='index.html';
     } else {
         window.alert("Email or password wrong");
@@ -58,30 +59,62 @@ async function login() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn'); // Check login status from local storage
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn'); // Check login status from local storage
+    
+    // Regular header elements
     const signupLoginBtn = document.getElementById('signup-login-btn');
     const profileLogoutBtns = document.getElementById('profile-logout-btns');
 
-    if (isLoggedIn === 'true') {
-        // Hide Sign up/Login button, show Profile/Logout buttons
-        signupLoginBtn.innerText = "Discover Activities"; // Change text to "Discover Activities"
-        signupLoginBtn.href = "activities.html"; // Change the link to activities page
-        profileLogoutBtns.style.display = 'block'; // Show profile/logout buttons
-    } else {
-        // Show Sign up/Login button, hide Profile/Logout buttons
-        signupLoginBtn.style.display = 'block';
-        profileLogoutBtns.style.display = 'none';
+    // Sticky header container (we'll use this to apply classes/changes to the sticky header)
+    const stickyHeaderContent = document.querySelector('.sticky-header__content');
+
+    // Function to update header buttons based on login status
+    function updateHeaderButtons(isLoggedIn) {
+        if (isLoggedIn === 'true') {
+            // Logged in: Change Sign Up to Discover Activities and show Profile/Logout
+            signupLoginBtn.innerText = "Discover Activities";
+            signupLoginBtn.href = "activities.html";
+            profileLogoutBtns.style.display = 'block';
+            
+            // Apply the same changes to the sticky header
+            stickyHeaderContent.querySelector('.thm-btn').innerText = "Discover Activities";
+            stickyHeaderContent.querySelector('.thm-btn').href = "activities.html";
+            stickyHeaderContent.querySelector('.main-header-four__right__btn').style.display = 'block';
+        } else {
+            // Not logged in: Show Sign Up button and hide Profile/Logout
+            signupLoginBtn.innerText = "Sign up";
+            signupLoginBtn.href = "login.html";
+            profileLogoutBtns.style.display = 'none';
+
+            // Apply the same changes to the sticky header
+            stickyHeaderContent.querySelector('.thm-btn').innerText = "Sign up";
+            stickyHeaderContent.querySelector('.thm-btn').href = "login.html";
+            stickyHeaderContent.querySelector('.main-header-four__right__btn').style.display = 'none';
+        }
     }
 
-    // Handle logout functionality
-    const logoutBtn = document.getElementById('logout-btn');
-    logoutBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        // Remove login status from localStorage
-        localStorage.setItem('isLoggedIn', 'false');
-        localStorage.clear();
-        // Optionally redirect to login page or refresh
+    // Initial update on page load
+    updateHeaderButtons(isLoggedIn);
+
+    // Handle logout functionality for both headers
+    function handleLogout() {
+        sessionStorage.setItem('isLoggedIn', 'false');
         window.location.href = 'login.html';
+    }
+
+    // Add event listener to logout buttons
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            handleLogout();
+        });
+    }
+
+    // Add event listener to sticky logout button
+    stickyHeaderContent.querySelector('.fas.fa-sign-out-alt').addEventListener('click', function(e) {
+        e.preventDefault();
+        handleLogout();
     });
 });
 

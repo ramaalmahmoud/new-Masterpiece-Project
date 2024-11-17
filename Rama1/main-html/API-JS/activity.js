@@ -78,7 +78,7 @@ function renderActivities(activities) {
   
 }
 function storeID(ID){
-localStorage.setItem("activityID",ID);
+    sessionStorage.setItem("activityID",ID);
 }
 
 function filterActivitiesByCategory(selectedCategoryIds) {

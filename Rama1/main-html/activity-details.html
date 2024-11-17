@@ -298,9 +298,12 @@
         </header>
 
         <div class="stricky-header stricked-menu main-menu main-header-four">
-            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+            <div class="sticky-header__content">
+                <!-- Add your dynamic buttons here -->
+                <!-- Sign Up/Discover Activities Button -->
+               
+            </div><!-- /.sticky-header__content -->
         </div><!-- /.stricky-header -->
-        <!-- Include your header navigation here -->
     </header>
 
     <div class="activity-details">
@@ -421,12 +424,12 @@ async function fetchActivityDetails(activityId) {
         alert('There was an error loading the activity details. Please try again.');
     }
 }
-id=localStorage.getItem("activityID")
+id=sessionStorage.getItem("activityID")
 // Example usage: Call this function with the desired activity ID
 fetchActivityDetails(id); // Replace 1 with the actual activity ID
 async function saveActivity() {
-    const userId = localStorage.getItem("UserID"); // Replace with actual user ID
-    const activityId = localStorage.getItem("activityID");
+    const userId = sessionStorage.getItem("UserID"); // Replace with actual user ID
+    const activityId = sessionStorage.getItem("activityID");
 
     try {
         const response = await fetch('https://localhost:7084/api/Activities/saveActivity', {
@@ -473,8 +476,8 @@ async function saveActivity() {
     }
 }
 async function initializeSaveButton() {
-    const userId = localStorage.getItem("UserID");
-    const activityId = localStorage.getItem("activityID");
+    const userId = sessionStorage.getItem("UserID");
+    const activityId = sessionStorage.getItem("activityID");
 
     try {
         const response = await fetch(`https://localhost:7084/api/Activities/checkActivityStatus/${userId}/${activityId}`);

@@ -71,6 +71,8 @@ namespace master_piece_project.Controllers
             // Create OrderProduct entries and remove from cart
             foreach (var item in cartItems)
             {
+                var product = item.Product;
+
                 var orderProduct = new OrderProduct
                 {
                     OrderId = order.OrderId,
@@ -79,6 +81,9 @@ namespace master_piece_project.Controllers
                 };
 
                 _db.OrderProducts.Add(orderProduct);
+                // Decrease the stock for the product
+                product.Stock -= item.Quantity ?? 0;
+
             }
 
             // Remove items from the cart after creating order products

@@ -5,7 +5,7 @@ document.getElementById('addPostForm').addEventListener('submit', async function
     
     event.preventDefault(); // Prevent default button action
     
-    const authorId = localStorage.getItem('UserID');
+    const authorId = sessionStorage.getItem('UserID');
     
 
     // Gather form data
@@ -125,7 +125,7 @@ debugger
 }
 
 function storePostID(postId){
-localStorage.PostID=postId;
+    sessionStorage.PostID=postId;
 }
 // Call the function to fetch posts on page load
 document.addEventListener('DOMContentLoaded', fetchBlogPosts);
@@ -241,7 +241,7 @@ function displayBlogPosts(posts) {
 }
 
 function storePostID(postId) {
-    localStorage.PostID = postId;
+    sessionStorage.PostID = postId;
 }
 
 // Event listener for the search form

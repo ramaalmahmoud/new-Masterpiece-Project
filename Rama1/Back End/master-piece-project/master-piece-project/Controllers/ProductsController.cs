@@ -123,6 +123,7 @@ namespace master_piece_project.Controllers
                     p.Description,
                     p.Price,
                     p.Image,
+                    p.Stock,
                     ReviewCount = _db.Reviews.Count(r => r.ProductId == p.ProductId)
                 })
                 .FirstOrDefault();

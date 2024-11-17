@@ -167,13 +167,7 @@
             <div class="sticky-header__content">
                 <!-- Add your dynamic buttons here -->
                 <!-- Sign Up/Discover Activities Button -->
-                <a class="thm-btn thm-btn--two" id="sticky-signup-login-btn" href="login.html">Sign up</a>
-                
-                <!-- Profile and Logout (hidden by default) -->
-                <div id="sticky-profile-logout-btns" style="display: none;">
-                    <a href="profile.html" class="login-toggler"><i class="fas fa-user"></i> Profile</a>
-                    <a href="#" id="sticky-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </div>
+               
             </div><!-- /.sticky-header__content -->
         </div><!-- /.stricky-header -->
         
@@ -1191,46 +1185,5 @@
 
 
 <!-- Mirrored from bracketweb.com/delogis-html/main-html/index4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Aug 2024 22:31:43 GMT -->
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    debugger
-    const isLoggedIn = localStorage.getItem('isLoggedIn'); // Check login status from local storage
-    const stickySignupLoginBtn = document.getElementById('sticky-signup-login-btn');
-    const stickyProfileLogoutBtns = document.getElementById('sticky-profile-logout-btns');
 
-    // Function to update sticky header buttons based on login status
-    function updateStickyHeaderButtons(isLoggedIn) {
-        debugger
-        if (isLoggedIn === 'true') {
-            // Logged in: Change Sign Up to Discover Activities and show Profile/Logout
-            stickySignupLoginBtn.innerText = "Discover Activities";
-            stickySignupLoginBtn.href = "activities.html";
-            stickyProfileLogoutBtns.style.display = 'block';
-        } else {
-            // Not logged in: Show Sign Up button and hide Profile/Logout
-            stickySignupLoginBtn.innerText = "Sign up";
-            stickySignupLoginBtn.href = "login.html";
-            stickyProfileLogoutBtns.style.display = 'none';
-        }
-    }
-debugger
-    // Initial update on page load
-    updateStickyHeaderButtons(isLoggedIn);
-
-    // Handle logout functionality for sticky header
-    const stickyLogoutBtn = document.getElementById('sticky-logout-btn');
-
-    function handleStickyLogout() {
-        debugger
-        localStorage.setItem('isLoggedIn', 'false');
-        window.location.href = 'login.html';
-    }
-
-    stickyLogoutBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        handleStickyLogout();
-    });
-});
-
-</script>
 </html>

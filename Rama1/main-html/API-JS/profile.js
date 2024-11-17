@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     debugger
-    const userId = localStorage.getItem("UserID"); // Use the actual user ID from session or context
+    const userId = sessionStorage.getItem("UserID"); // Use the actual user ID from session or context
 debugger
     fetch(`https://localhost:7084/api/Profile/api/user/${userId}`)
         .then(response => response.json())
@@ -19,7 +19,7 @@ debugger
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    const userId = localStorage.getItem("UserID"); // Replace with actual user ID (you can get this from a logged-in user session or token)
+    const userId = sessionStorage.getItem("UserID"); // Replace with actual user ID (you can get this from a logged-in user session or token)
     
     // Fetch Blog Posts
     fetch(`https://localhost:7084/api/Blogs/user/${userId}/blogposts`)

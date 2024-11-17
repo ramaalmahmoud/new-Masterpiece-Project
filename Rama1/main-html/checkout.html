@@ -147,7 +147,11 @@
         </nav>
     </header>
     <div class="stricky-header stricked-menu main-menu main-header-four">
-        <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        <div class="sticky-header__content">
+            <!-- Add your dynamic buttons here -->
+            <!-- Sign Up/Discover Activities Button -->
+           
+        </div><!-- /.sticky-header__content -->
     </div><!-- /.stricky-header -->
     
         <!--Page Header Start-->
@@ -284,7 +288,7 @@
                         <script>
                             async function fetchWithAuth(url, options = {}) {
                                 debugger
-                                const token = localStorage.getItem('jwtToken');
+                                const token = sessionStorage.getItem('jwtToken');
                                 const headers = {
                                     ...options.headers,
                                     'Authorization': `Bearer ${token}`
@@ -294,7 +298,7 @@
                         
                                 if (response.status === 401) {
                                     alert('Your session has expired. Please log in again.');
-                                    localStorage.removeItem('jwtToken');
+                                    sessionStorage.removeItem('jwtToken');
                                     window.location.href = './login.html'; // Adjust the path to your login page
                                     return null;
                                 }
@@ -304,7 +308,7 @@
                         
                             async function checkCartAndUpdateButton() {
                                 debugger
-                                const userId = localStorage.getItem("UserID");
+                                const userId = sessionStorage.getItem("UserID");
                         
                                 try {
                                     const cartResponse = await fetchWithAuth(`https://localhost:7084/api/Cart/GetCartByUserId/${userId}`);
