@@ -28,7 +28,7 @@ async function fetchCartItems() {
           <td>
             <div class="product-box">
               <div class="img-box">
-                <img src="${item.productImage}" alt="${item.productName}">
+                <img src= "../Back End/master-piece-project/master-piece-project/Uploads/Shop/${item.productImage}" alt="${item.productName}">
               </div>
               <h3><a href="product-details.html">${item.productName}</a></h3>
             </div>

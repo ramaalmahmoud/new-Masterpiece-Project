@@ -52,7 +52,62 @@
     <link rel="stylesheet" href="assets/css/delogis.css" />
     <link rel="stylesheet" href="assets/css/delogis-color-1.css" />
 </head>
+<style>
+    .hidden {
+    display: none;
+}
+.toggle-btn {
+    background: #AE005F;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 30px;
+    margin: 0 5px;
+    transition: background 0.3s ease;
+    flex: 1;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
 
+.toggle-btn.active {
+    background: #fff;
+    /* color: #007bff; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.toggle-btn:hover {
+    color: #fff;
+}
+
+.toggle-btn:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    border-radius: 30px;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.toggle-btn.active:before {
+    opacity: 1;
+    background: #fff;
+}
+.form-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+</style>
 <body class="custom-cursor">
 
     <section class="main-header-topbar">
@@ -100,7 +155,7 @@
                             <li class="dropdown">
                                 <a href="#">Services</a>
                                 <ul class="sub-menu">
-                                    <li><a href="blog.html">Screen Risks</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
                                     <li><a href="activities.html">Activities</a></li>
                                     <!-- <li><a href="parent-platform.html">Parent Platform</a></li>
                                     <li><a href="family-psychology.html">Psychological Support</a></li> -->
@@ -175,67 +230,87 @@
         </section>
         <!--Page Header End-->
 
-        <!--Login Page Start-->
-        <section class="login-page">
-            <div class="container">
-                <div class="login-page__top">
-                    <p>We have a demo account setup. <span>Username:</span> <a href="#">demo</a> and <span>
-                            Password:</span> <a href="#">demo</a></p>
-                </div>
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6">
-                        <div class="login-page__single">
-                            <h3 class="login-page__title">Login</h3>
-                            <form class="login-page__form" id="forml">
-                                <div class="login-page__form-input-box">
-                                    <input name="Email" type="email" placeholder="Username or Email *">
-                                </div>
-                                <div class="login-page__form-input-box">
-                                    <input name="Password" type="password" placeholder="Password *">
-                                </div>
-                                <div class="checked-box">
-                                    <input type="checkbox" name="skipper2" id="skipper2" checked="">
-                                    <label for="skipper2"><span></span>Remember Me?</label>
-                                </div>
-                                <div class="login-page__form-btn-box">
-                                    <button onclick="login()" type="submit" class="thm-btn login-page__form-btn">Login</button>
-                                    <div class="login-page__form-forgot-password">
-                                        <a href="#">Forgot your Password?</a>
-                                    </div>
-                                </div>
-                            </form>
+  <!--Login Page Start-->
+<section class="login-page">
+    <div class="container">
+        <div class="login-page__top">
+            <p>We have a demo account setup. <span>Username:</span> <a href="#">demo</a> and <span>Password:</span> <a href="#">demo</a></p>
+        </div>
+        <div class="form-toggle">
+            <button id="show-login" class="toggle-btn active">Login</button>
+            <button id="show-register" class="toggle-btn">Register</button>
+        </div>
+        <div class="form-container">
+            <div class="login-page__single" id="login-form">
+                <h3 class="login-page__title">Login</h3>
+                <form class="login-page__form" id="forml">
+                    <div class="login-page__form-input-box">
+                        <input name="Email" type="email" placeholder="Username or Email *">
+                    </div>
+                    <div class="login-page__form-input-box">
+                        <input name="Password" type="password" placeholder="Password *">
+                    </div>
+                    <div class="checked-box">
+                        <input type="checkbox" name="skipper2" id="skipper2" checked="">
+                        <label for="skipper2"><span></span>Remember Me?</label>
+                    </div>
+                    <div class="login-page__form-btn-box">
+                        <button onclick="login()" type="submit" class="thm-btn login-page__form-btn">Login</button>
+                        <div class="login-page__form-forgot-password">
+                            <a href="#">Forgot your Password?</a>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6">
-                        <div class="login-page__single">
-                            <h3 class="login-page__title">Register</h3>
-                            <form class="login-page__form" id="form">
-                                <div class="login-page__form-input-box">
-                                    <input name="FullName" type="text" placeholder="Username *">
-                                </div>
-                                <div class="login-page__form-input-box">
-                                    <input name="Email" type="text" placeholder=" Email *">
-                                </div>
-                                <div class="login-page__form-input-box">
-                                    <input name="Password" type="Password" placeholder="Password *" id="password">
-                                </div>
-                                <div class="login-page__form-input-box">
-                                    <input name="RepeatedPassword" type="Password" placeholder="Repeat Password *" id="repeatPass">
-                                </div>
-                                <div class="checked-box">
-                                    <input type="checkbox" name="skipper3" id="skipper3" checked="">
-                                    <label for="skipper3"><span></span>I accept company privay policy.</label>
-                                </div>
-                                <div class="login-page__form-btn-box">
-                                    <button onclick="register()" type="submit" class="thm-btn login-page__form-btn">Register</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
-        </section>
-        <!--Login Page End-->
+            <div class="login-page__single hidden" id="register-form">
+                <h3 class="login-page__title">Register</h3>
+                <form class="login-page__form" id="form">
+                    <div class="login-page__form-input-box">
+                        <input name="FullName" type="text" placeholder="Username *">
+                    </div>
+                    <div class="login-page__form-input-box">
+                        <input name="Email" type="text" placeholder="Email *">
+                    </div>
+                    <div class="login-page__form-input-box">
+                        <input name="Password" type="Password" placeholder="Password *" id="password">
+                    </div>
+                    <div class="login-page__form-input-box">
+                        <input name="RepeatedPassword" type="Password" placeholder="Repeat Password *" id="repeatPass">
+                    </div>
+                    <div class="checked-box">
+                        <input type="checkbox" name="skipper3" id="skipper3" checked="">
+                        <label for="skipper3"><span></span>I accept company privacy policy.</label>
+                    </div>
+                    <div class="login-page__form-btn-box">
+                        <button onclick="register()" type="submit" class="thm-btn login-page__form-btn">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Login Page End-->
+
+
+
+<script>
+   document.getElementById('show-login').addEventListener('click', function() {
+    document.getElementById('login-form').classList.remove('hidden');
+    document.getElementById('register-form').classList.add('hidden');
+    document.getElementById('show-login').classList.add('active');
+    document.getElementById('show-register').classList.remove('active');
+});
+
+document.getElementById('show-register').addEventListener('click', function() {
+    document.getElementById('login-form').classList.add('hidden');
+    document.getElementById('register-form').classList.remove('hidden');
+    document.getElementById('show-login').classList.remove('active');
+    document.getElementById('show-register').classList.add('active');
+});
+
+
+</script>
+
 <!--Site Footer Start-->
 <footer class="site-footer-two">
     <div class="site-footer-two__shape-one float-bob-y">

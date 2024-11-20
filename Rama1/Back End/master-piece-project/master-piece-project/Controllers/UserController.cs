@@ -57,18 +57,17 @@ namespace master_piece_project.Controllers
         {
             var user = _db.Users.FirstOrDefault(x => x.Email == model.Email);
 
-
             if (user == null || !PasswordHasher.VerifyPasswordHash(model.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return Unauthorized("Invalid username or password.");
             }
 
             var roles = _db.Users.Where(r => r.UserId == user.UserId).Select(r => r.UserRole).ToList();
-            var token = _tokenGenerator.GenerateToken(user.FullName, roles,user.UserId);
-            // Generate a token or return a success response
+            var token = _tokenGenerator.GenerateToken(user.FullName, roles, user.UserId);
 
-            return Ok(new { Token = token, UserId = user.UserId });
+            return Ok(new { Token = token, UserId = user.UserId, UserRole = user.UserRole });
         }
+
         [HttpPost("addDoctors")]
         public IActionResult AddDoctors([FromForm] DoctorRequestDTO model)
         {
@@ -225,6 +224,30 @@ namespace master_piece_project.Controllers
             await _db.SaveChangesAsync();
 
             return Ok("User status updated.");
+        }
+        [HttpPost("change-password")]
+        public IActionResult ChangePassword([FromBody] ChangePasswordDTO model)
+        {
+            var user = _db.Users.FirstOrDefault(x => x.UserId == model.UserId);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            if (!PasswordHasher.VerifyPasswordHash(model.CurrentPassword, user.PasswordHash, user.PasswordSalt))
+            {
+                return Unauthorized("Current password is incorrect.");
+            }
+
+            // Generate new password hash and salt
+            PasswordHasher.CreatePasswordHash(model.NewPassword, out byte[] newPasswordHash, out byte[] newPasswordSalt);
+
+            user.PasswordHash = newPasswordHash;
+            user.PasswordSalt = newPasswordSalt;
+            _db.SaveChanges();
+
+            return Ok("Password changed successfully.");
         }
 
 

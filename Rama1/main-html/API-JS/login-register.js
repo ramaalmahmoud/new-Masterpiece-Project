@@ -34,29 +34,38 @@ window.alert("The email you entered is already in use. Please try a different on
 
 async function login() {
     debugger
-    const url ="https://localhost:7084/api/User/login";
-    var form=document.getElementById("forml");
+    const url = "https://localhost:7084/api/User/login";
+    var form = document.getElementById("forml");
     event.preventDefault();
    
-    var formData=new FormData(form);
-    let response=await fetch(url,{
-        method:'POST',
-        body:formData,
+    var formData = new FormData(form);
+    let response = await fetch(url, {
+        method: 'POST',
+        body: formData,
     });
-    var result= await response.json();
 
-    let token = sessionStorage.jwtToken = result.token;
-    sessionStorage.UserID = result.userId;
-    console.log("token", token)
+    if (response.ok) {
+        var result = await response.json();
+        let token = sessionStorage.jwtToken = result.token;
+        sessionStorage.UserID = result.userId;
+        sessionStorage.UserRole = result.userRole; // Store user role in session storage
 
-    if(response.ok){
-        window.alert("User logged in successfully");
+        console.log("token", token);
+
+        // window.alert("User logged in successfully");
         sessionStorage.setItem('isLoggedIn', 'true'); // Set login status
-        window.location.href ='index.html';
+
+        // Redirect based on user role
+        if (result.userRole === 'admin') {
+            window.location.href = '../Masterpiece-admin/admin/dashboard.html'; // Redirect to admin dashboard
+        } else {
+            window.location.href = 'index.html'; // Redirect to user index page
+        }
     } else {
         window.alert("Email or password wrong");
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const isLoggedIn = sessionStorage.getItem('isLoggedIn'); // Check login status from local storage

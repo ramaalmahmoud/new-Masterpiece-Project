@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    debugger
+    
     const userId = sessionStorage.getItem("UserID"); // Use the actual user ID from session or context
-debugger
+
     fetch(`https://localhost:7084/api/Profile/api/user/${userId}`)
         .then(response => response.json())
         .then(data => {
@@ -70,16 +70,16 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.querySelector('#editProfileForm').addEventListener('submit', function(event) {
-    debugger
+    
     event.preventDefault();
 
-    const userId = 1; // Use the actual user ID
+    const userId = sessionStorage.getItem("UserId"); // Use the actual user ID
     const formData = {
         fullName: document.querySelector('#fullName').value,
         phoneNumber: document.querySelector('#phoneNumber').value,
         phoneNumber: document.querySelector('#profilePicture').value
     };
-debugger
+
     fetch(`https://localhost:7084/api/Profile/api/user/${userId}`, {
         method: 'PUT',
         headers: {
@@ -92,4 +92,43 @@ debugger
         alert('Profile updated successfully!');
     })
     .catch(error => console.error('Error:', error));
+});
+
+
+document.getElementById('changePasswordForm').addEventListener('submit', async function(event) {
+    debugger
+    event.preventDefault();
+
+    const url = "https://localhost:7084/api/User/change-password";
+    const userId = sessionStorage.getItem('UserID');
+
+    const formData = {
+        userId: userId,
+        currentPassword: document.getElementById('currentPassword').value,
+        newPassword: document.getElementById('newPassword').value,
+        confirmNewPassword: document.getElementById('confirmNewPassword').value
+    };
+
+    if (formData.newPassword !== formData.confirmNewPassword) {
+        window.alert("New password and confirm new password do not match.");
+        return;
+    }
+
+    let response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    });
+
+    if (response.ok) {
+        window.alert("Password changed successfully.");
+        document.getElementById('changePasswordForm').reset();
+        var modal = bootstrap.Modal.getInstance(document.getElementById('changePasswordModal'));
+        modal.hide();
+    } else {
+        const error = await response.text();
+        window.alert(`Error: ${error}`);
+    }
 });

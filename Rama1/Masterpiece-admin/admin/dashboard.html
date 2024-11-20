@@ -43,7 +43,7 @@
   </head>
   <body>
     <div class="wrapper">
-   <!-- Sidebar -->
+<!-- Sidebar -->
 <div class="sidebar" data-background-color="dark">
   <div class="sidebar-logo">
     <!-- Logo Header -->
@@ -89,18 +89,10 @@
         <!-- Blog Management -->
         <li class="nav-item">
           <a href="../admin/blogs.html">
-            <i class="fas fa-newspaper"></i> <!-- Changed Icon -->
+            <i class="fas fa-newspaper"></i>
             <p>Blog Management</p>
           </a>
         </li>
-
-        <!-- Volunteer & Doctor Management -->
-        <!-- <li class="nav-item">
-          <a href="../admin/volunteers.html">
-            <i class="fas fa-user-md"></i> 
-            <p>Volunteers & Doctors</p>
-          </a>
-        </li> -->
 
         <!-- Activity Management -->
         <li class="nav-item">
@@ -110,14 +102,6 @@
           </a>
         </li>
 
-        <!-- Appointment Management -->
-        <!-- <li class="nav-item">
-          <a href="../admin/appointments.html">
-            <i class="fas fa-calendar-alt"></i>
-            <p>Appointments</p>
-          </a>
-        </li> -->
-
         <!-- Feedback & Rating Management -->
         <li class="nav-item">
           <a href="../admin/feedback.html">
@@ -126,49 +110,25 @@
           </a>
         </li>
 
-        <!-- Chat Management -->
-        <!-- <li class="nav-item">
-          <a href="../admin/chat.html">
-            <i class="fas fa-comments"></i>
-            <p>Chat Management</p>
-          </a>
-        </li> -->
-
         <!-- Shop Management -->
         <li class="nav-item">
           <a href="../admin/products.html">
-            <i class="fas fa-box"></i> <!-- Icon for Products -->
+            <i class="fas fa-box"></i>
             <p>Products</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="../admin/categories.html">
-            <i class="fas fa-tags"></i> <!-- Icon for Categories -->
+            <i class="fas fa-tags"></i>
             <p>Categories</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="../admin/orders.html">
-            <i class="fas fa-shopping-cart"></i> <!-- Icon for Orders -->
+            <i class="fas fa-shopping-cart"></i>
             <p>Orders</p>
           </a>
         </li>
-
-        <!-- System Settings -->
-        <!-- <li class="nav-item">
-          <a href="../admin/settings.html">
-            <i class="fas fa-cogs"></i>
-            <p>System Settings</p>
-          </a>
-        </li> -->
-
-        <!-- Analytics -->
-        <!-- <li class="nav-item">
-          <a href="../admin/analytics.html">
-            <i class="fas fa-chart-line"></i>
-            <p>Analytics</p>
-          </a>
-        </li> -->
 
         <!-- Security & Backup -->
         <li class="nav-item">
@@ -177,11 +137,31 @@
             <p>Security & Backup</p>
           </a>
         </li>
+
+        <!-- Logout -->
+        <li class="nav-item">
+          <a href="../logout.html" onclick="handleLogout(event)">
+            <i class="fas fa-sign-out-alt"></i> <!-- Logout Icon -->
+            <p>Logout</p>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 </div>
 <!-- End Sidebar -->
+
+<script>
+   // Handle logout functionality for both headers
+   function handleLogout() {
+        sessionStorage.setItem('isLoggedIn', 'false');
+        window.location.href = 'login.html';
+    }
+
+ 
+    
+
+</script>
 
 
         <!-- End Sidebar -->
